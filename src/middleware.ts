@@ -37,6 +37,11 @@ export async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl
 
+  // Public pages viewable without authentication
+  if (pathname.startsWith('/legal')) {
+    return supabaseResponse
+  }
+
   if (pathname === '/' || pathname === '/login') {
     if (user) {
       const { data: profile } = await supabase

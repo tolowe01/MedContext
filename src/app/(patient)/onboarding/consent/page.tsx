@@ -55,12 +55,12 @@ export default function ConsentPage() {
             <p className="font-body text-sm text-dialogue-textMuted">
               For our full privacy policy, visit{' '}
               <a
-                href="https://medcontext.ca/privacy"
+                href="/legal/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-dialogue-accent underline underline-offset-2"
               >
-                medcontext.ca/privacy
+                our privacy policy
               </a>
               .
             </p>
