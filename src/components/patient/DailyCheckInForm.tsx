@@ -197,6 +197,38 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
       className="flex flex-col gap-6"
       noValidate
     >
+      <details open className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile p-5 group">
+        <summary className="font-body font-semibold text-cta text-mc-neutral-600 uppercase tracking-wide cursor-pointer list-none flex items-center justify-between">
+          How to measure correctly
+          <span className="text-mc-neutral-400 text-xs normal-case tracking-normal group-open:hidden">Show</span>
+          <span className="text-mc-neutral-400 text-xs normal-case tracking-normal hidden group-open:inline">Hide</span>
+        </summary>
+        <div className="mt-4 flex flex-col gap-5">
+          <figure>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/guides/bp-technique.png"
+              alt="Optimal blood pressure measuring technique: sit with back supported, bare arm supported at heart level, feet flat on the floor, rest before measuring, and take three readings a minute apart then average them."
+              className="w-full rounded-card border border-mc-neutral-200"
+            />
+            <figcaption className="mt-2 font-body text-sm text-mc-neutral-400">
+              How to measure your blood pressure.
+            </figcaption>
+          </figure>
+          <figure>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/guides/pulse-check.png"
+              alt="Take your own pulse: find your pulse, count your heartbeat for 30 seconds, then double it to get your heart rate."
+              className="w-full rounded-card border border-mc-neutral-200"
+            />
+            <figcaption className="mt-2 font-body text-sm text-mc-neutral-400">
+              How to take your pulse for heart rate.
+            </figcaption>
+          </figure>
+        </div>
+      </details>
+
       <fieldset className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile p-5 flex flex-col gap-4">
         <legend className="font-body font-semibold text-cta text-mc-neutral-600 uppercase tracking-wide">
           Your reading
