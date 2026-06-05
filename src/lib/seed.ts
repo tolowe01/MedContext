@@ -117,6 +117,19 @@ function dateDaysAgo(daysAgo: number): string {
 function getErrorMessage(error: unknown): string {
   if (error instanceof Error) return error.message
   if (typeof error === 'string') return error
+  if (error && typeof error === 'object') {
+    const e = error as { message?: string; details?: string; hint?: string; code?: string }
+    if (e.message) {
+      return [e.message, e.code && `(code ${e.code})`, e.details, e.hint]
+        .filter(Boolean)
+        .join(' ')
+    }
+    try {
+      return JSON.stringify(error)
+    } catch {
+      return 'Unexpected error'
+    }
+  }
   return 'Unexpected error'
 }
 

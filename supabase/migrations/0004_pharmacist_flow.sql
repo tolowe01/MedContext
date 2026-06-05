@@ -378,3 +378,22 @@ alter publication supabase_realtime add table monitoring_periods;
 alter publication supabase_realtime add table critical_alerts;
 alter publication supabase_realtime add table consultations;
 alter publication supabase_realtime add table physician_escalations;
+
+-- =====================================================================
+-- Privileges for Supabase API roles. The dashboard/CLI grant these via
+-- default privileges automatically; a raw psql apply (as the postgres role)
+-- does not, so grant explicitly. RLS still gates anon/authenticated;
+-- service_role bypasses RLS and needs table access for the seed + admin paths.
+-- =====================================================================
+grant all on table
+  public.monitoring_periods,
+  public.medication_lists,
+  public.medications,
+  public.side_effects,
+  public.consultations,
+  public.physician_escalations,
+  public.critical_alerts
+to anon, authenticated, service_role;
+
+grant execute on function public.physician_patient_ids() to service_role;
+grant execute on function public.physician_monitoring_period_ids() to service_role;
