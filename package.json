@@ -11,7 +11,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:all": "vitest run && playwright test",
-    "seed": "NODE_OPTIONS=--no-experimental-webstorage npx tsx --env-file=.env.local src/lib/seed.ts"
+    "seed": "NODE_OPTIONS=--no-experimental-webstorage npx tsx --env-file=.env.local src/lib/seed.ts",
+    "reset": "NODE_OPTIONS=--no-experimental-webstorage npx tsx --env-file=.env.local src/lib/reset.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.40.0",

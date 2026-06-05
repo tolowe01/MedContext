@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
+import Link from 'next/link'
 import { login } from '@/actions/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -95,6 +96,13 @@ export default function LoginPage() {
               {isSubmitting ? 'Signing in…' : 'Sign in'}
             </Button>
           </form>
+
+          <p className="text-center text-sm text-dialogue-textMuted font-body mt-6">
+            New to MedContext?{' '}
+            <Link href="/signup" className="text-dialogue-accent underline underline-offset-2">
+              Create an account
+            </Link>
+          </p>
         </div>
       </div>
     </main>

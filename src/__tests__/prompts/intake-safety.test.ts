@@ -9,9 +9,10 @@ import { SYNTHESIS_SYSTEM_PROMPT } from '@/prompts/synthesis-system'
  */
 describe('intake system prompt safety rails', () => {
   it('forbids evaluative language', () => {
-    expect(INTAKE_SYSTEM_PROMPT).toMatch(/not.*medical professional/i)
+    expect(INTAKE_SYSTEM_PROMPT).toMatch(/not.*(medical|healthcare) professional/i)
     expect(INTAKE_SYSTEM_PROMPT).toMatch(/do not interpret/i)
     expect(INTAKE_SYSTEM_PROMPT.toLowerCase()).toContain('never say')
+    expect(INTAKE_SYSTEM_PROMPT.toLowerCase()).toMatch(/evaluative|diagnostic/)
   })
 
   it('includes the 911 emergency escalation for severe symptoms', () => {

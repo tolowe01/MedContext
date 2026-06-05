@@ -23,7 +23,12 @@ export async function login(
   if (role === 'pharmacist') {
     await page.waitForURL('**/dashboard', { timeout: 15_000 })
   } else {
-    await page.waitForURL(/\/(tracking|onboarding)/, { timeout: 15_000 })
+    // Patient lands on an authenticated screen (/home), or is routed into
+    // onboarding if the baseline questionnaire is incomplete. Either way,
+    // we just wait until we've left the login page.
+    await page.waitForURL((url) => !url.pathname.startsWith('/login'), {
+      timeout: 15_000,
+    })
   }
 }
 

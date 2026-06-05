@@ -21,9 +21,11 @@ test.describe('Authentication and routing', () => {
     await expect(page.getByRole('button', { name: /sign in/i })).toBeVisible()
   })
 
-  test('patient can sign in and lands on tracking', async ({ page }) => {
+  test('patient can sign in and lands on an authenticated screen', async ({ page }) => {
     await login(page, 'patient')
-    await expect(page).toHaveURL(/\/(tracking|onboarding)/)
+    // Patient lands on /home, or is routed into onboarding if the baseline
+    // questionnaire is incomplete — never back on /login.
+    await expect(page).toHaveURL(/\/(home|tracking|onboarding|progress)/)
   })
 
   test('pharmacist can sign in and lands on dashboard', async ({ page }) => {

@@ -25,7 +25,7 @@ export async function login({ email, password }: LoginCredentials) {
   if (profile?.role === 'pharmacist') {
     redirect('/dashboard')
   }
-  redirect('/tracking')
+  redirect('/home')
 }
 
 export async function logout() {
