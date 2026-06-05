@@ -3,6 +3,8 @@ import { format, subDays } from 'date-fns'
 import { redirect } from 'next/navigation'
 import { DailyLog, BaselineQuestionnaire } from '@/lib/types'
 import ChatIntake from '@/components/patient/ChatIntake'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 /** Count consecutive days with a log, ending today (if logged) or yesterday. */
 function computeStreak(logs: DailyLog[]): number {
@@ -96,6 +98,13 @@ export default async function TrackingPage() {
 
   return (
     <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
+      <Link
+        href="/home"
+        className="inline-flex items-center gap-2 text-sm font-body text-dialogue-textMuted hover:text-dialogue-text mb-6 transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Dashboard
+      </Link>
       <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-6">
         Evening check-in
       </h1>

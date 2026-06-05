@@ -1,5 +1,7 @@
 import { recordConsent } from '@/actions/consent'
+import { logout } from '@/actions/auth'
 import { Button } from '@/components/ui/button'
+import { ArrowLeft } from 'lucide-react'
 
 const CONSENT_PARAGRAPHS = [
   {
@@ -31,6 +33,15 @@ const CONSENT_PARAGRAPHS = [
 export default function ConsentPage() {
   return (
     <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
+      <form action={logout}>
+        <button
+          type="submit"
+          className="inline-flex items-center gap-2 text-sm font-body text-dialogue-textMuted hover:text-dialogue-text mb-6 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Signup
+        </button>
+      </form>
       <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2">
         Your data, your rights
       </h1>

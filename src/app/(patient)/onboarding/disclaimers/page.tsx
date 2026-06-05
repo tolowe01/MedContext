@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
-import { Bot, Info, PhoneCall } from 'lucide-react'
+import { Bot, Info, PhoneCall, ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 
 interface DisclaimerCard {
   id: string
@@ -56,6 +57,13 @@ export default function DisclaimersPage() {
 
   return (
     <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
+      <Link
+        href="/onboarding/consent"
+        className="inline-flex items-center gap-2 text-sm font-body text-dialogue-textMuted hover:text-dialogue-text mb-6 transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back
+      </Link>
       <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2">
         Before we start
       </h1>

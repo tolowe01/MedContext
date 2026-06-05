@@ -12,7 +12,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Slider } from '@/components/ui/slider'
-import { Check } from 'lucide-react'
+import { Check, ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface QuestionnaireWizardProps {
   sexe: Sexe
@@ -20,6 +21,7 @@ interface QuestionnaireWizardProps {
 }
 
 export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireWizardProps) {
+  const router = useRouter()
   const [answers, setAnswers] = useState<WizardAnswers>({ weight_change: 0 })
   const [currentId, setCurrentId] = useState<QuestionnaireStep['id']>(
     QUESTIONNAIRE_STEPS[0].id
@@ -104,7 +106,10 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
 
   function handleBack() {
     setError(null)
-    if (currentIndex <= 0) return
+    if (currentIndex <= 0) {
+      router.push('/onboarding/disclaimers')
+      return
+    }
     setCurrentId(visibleSteps[currentIndex - 1].id)
   }
 
@@ -235,16 +240,15 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
       )}
 
       {/* Back */}
-      {currentIndex > 0 && (
-        <button
-          type="button"
-          onClick={handleBack}
-          disabled={isSubmitting}
-          className="mt-5 font-body text-body text-dialogue-textMuted hover:text-dialogue-text transition-colors disabled:opacity-50"
-        >
-          Back
-        </button>
-      )}
+      <button
+        type="button"
+        onClick={handleBack}
+        disabled={isSubmitting}
+        className="mt-5 font-body text-body text-dialogue-textMuted hover:text-dialogue-text transition-colors disabled:opacity-50 flex items-center gap-1.5"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back
+      </button>
     </div>
   )
 }

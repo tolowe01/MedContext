@@ -3,6 +3,7 @@ import { format, subDays } from 'date-fns'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { DailyLog, BaselineQuestionnaire } from '@/lib/types'
+import { logout } from '@/actions/auth'
 import StreakBadge from '@/components/patient/StreakBadge'
 import DataEntryTimeline from '@/components/patient/DataEntryTimeline'
 
@@ -149,10 +150,19 @@ export default async function HomePage() {
 
       <Link
         href="/progress"
-        className="block w-full text-center bg-dialogue-chip border border-dialogue-border text-dialogue-text font-cta text-cta rounded-button py-4 transition-opacity hover:opacity-80"
+        className="block w-full text-center bg-dialogue-chip border border-dialogue-border text-dialogue-text font-cta text-cta rounded-button py-4 transition-opacity hover:opacity-80 mb-4"
       >
         View progress
       </Link>
+
+      <form action={logout}>
+        <button
+          type="submit"
+          className="block w-full text-center bg-transparent border border-dialogue-border text-dialogue-textMuted font-cta text-cta rounded-button py-4 transition-opacity hover:bg-dialogue-chip"
+        >
+          Log out
+        </button>
+      </form>
     </main>
   )
 }
