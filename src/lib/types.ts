@@ -1,6 +1,20 @@
-export type UserRole = 'patient' | 'pharmacist'
+export type UserRole = 'patient' | 'pharmacist' | 'physician'
 export type SubmissionStatus = 'submitted' | 'reviewed' | 'follow_up'
 export type InterventionKind = 'approval' | 'phone_call' | 'in_person' | 'clinical_note'
+
+export type MonitoringStatus =
+  | 'invited'
+  | 'active'
+  | 'submitted'
+  | 'critical_alert'
+  | 'approved'
+  | 'consultation_scheduled'
+  | 'consultation_completed'
+  | 'monitor_extended'
+  | 'escalated'
+
+export type ConsultationOutcome = 'monitor_extended' | 'escalated_to_physician'
+export type SideEffectSeverity = 'mild' | 'moderate' | 'severe'
 
 export type Sexe = 'female' | 'male' | 'intersex' | 'prefer_not_to_say'
 
@@ -40,7 +54,7 @@ export interface BaselineQuestionnaire {
 
 export interface Profile {
   id: string
-  role: 'patient' | 'pharmacist'
+  role: UserRole
   pharmacy_id: string | null
   first_name: string
   last_name: string
@@ -73,6 +87,11 @@ export interface DailyLog {
   symptom_note: string | null
   entered_via: 'text' | 'voice'
   created_at: string
+  // Pharmacist-initiated flow additions (0004 migration)
+  monitoring_period_id: string | null
+  logged_at_local: string | null
+  adherence_skip_reason: string | null
+  is_critical: boolean
 }
 
 export interface PharmacistVerifiedReading {
@@ -143,4 +162,104 @@ export interface SubmissionWithPatientSummary {
   patient: Patient & { profile: Profile }
   logs: DailyLog[]
   flags: Flag[]
+}
+
+// =====================================================================
+// Pharmacist-initiated flow (0004 migration)
+// =====================================================================
+
+export interface MedicationList {
+  id: string
+  patient_id: string
+  uploaded_by: string | null
+  source_filename: string
+  source_storage_path: string
+  extraction_raw_text: string | null
+  status: 'extracted' | 'confirmed'
+  created_at: string
+}
+
+export interface Medication {
+  id: string
+  medication_list_id: string
+  name: string
+  dose: string
+  frequency: string
+  prescribing_physician_id: string | null
+  prescribing_physician_name: string | null
+  is_new: boolean
+  notes: string | null
+  created_at: string
+}
+
+/** A medication as extracted by Claude or hand-entered, before persistence. */
+export interface ExtractedMed {
+  name: string
+  dose: string
+  frequency: string
+  prescribing_physician_name: string
+  notes: string
+  is_new?: boolean
+}
+
+export interface MonitoringPeriod {
+  id: string
+  patient_id: string
+  pharmacist_id: string | null
+  medication_list_id: string | null
+  preferred_log_time: string
+  start_date: string
+  expected_end_date: string
+  status: MonitoringStatus
+  ai_synthesis_text: string | null
+  ai_synthesis_edited_text: string | null
+  pharmacist_decision_at: string | null
+  created_at: string
+}
+
+export interface SideEffect {
+  id: string
+  daily_log_id: string
+  patient_id: string
+  monitoring_period_id: string | null
+  effect_code: string
+  effect_text: string | null
+  severity: SideEffectSeverity | null
+  created_at: string
+}
+
+export interface Consultation {
+  id: string
+  monitoring_period_id: string
+  pharmacist_id: string | null
+  patient_id: string
+  scheduled_for: string
+  completed_at: string | null
+  outcome: ConsultationOutcome | null
+  notes: string | null
+  created_at: string
+}
+
+export interface PhysicianEscalation {
+  id: string
+  monitoring_period_id: string
+  pharmacist_id: string | null
+  physician_id: string | null
+  patient_id: string
+  reason: string | null
+  created_at: string
+}
+
+export interface CriticalAlert {
+  id: string
+  daily_log_id: string
+  monitoring_period_id: string | null
+  pharmacist_id: string | null
+  patient_id: string | null
+  patient_name: string | null
+  systolic: number
+  diastolic: number
+  acknowledged_at: string | null
+  acknowledged_by: string | null
+  created_at: string
 }

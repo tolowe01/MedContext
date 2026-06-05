@@ -5,17 +5,45 @@ import TrendSparkline from '@/components/pharmacist/TrendSparkline'
 import AISynthesisPanel from '@/components/pharmacist/AISynthesisPanel'
 import VerifiedReadingClientWrapper from './VerifiedReadingClientWrapper'
 import InterventionPanel from '@/components/pharmacist/InterventionPanel'
+import DecisionPanel from '@/components/pharmacist/DecisionPanel'
 import type {
   DailyLog,
   Patient,
   Profile,
   PharmacistVerifiedReading,
   WeeklySubmission,
+  MonitoringPeriod,
+  MonitoringStatus,
+  Medication,
+  CriticalAlert,
+  Consultation,
 } from '@/lib/types'
 import { questionnaireSchema } from '@/lib/questionnaire-schema'
 
 interface PatientPageProps {
   params: Promise<{ id: string }>
+  searchParams: Promise<{ highlight?: string }>
+}
+
+const STATUS_LABELS: Record<MonitoringStatus, string> = {
+  invited: 'Invited',
+  active: 'Monitoring active',
+  submitted: 'Awaiting decision',
+  critical_alert: 'Critical alert',
+  approved: 'Approved',
+  consultation_scheduled: 'Consultation scheduled',
+  consultation_completed: 'Consultation completed',
+  monitor_extended: 'Monitoring extended',
+  escalated: 'Escalated to physician',
+}
+
+function statusDotClass(status: MonitoringStatus): string {
+  if (status === 'critical_alert' || status === 'escalated') return 'bg-emergency'
+  if (status === 'submitted' || status === 'approved' || status === 'monitor_extended')
+    return 'bg-ln-primary'
+  if (status === 'consultation_scheduled' || status === 'consultation_completed')
+    return 'bg-ln-inkSubtle'
+  return 'bg-ln-inkTertiary'
 }
 
 function getAge(dateOfBirth: string): number {
@@ -35,8 +63,9 @@ const TELUS_MEDS = [
   { name: 'Ramipril', dose: '10 mg', frequency: 'once daily', timing: 'evening' },
 ]
 
-export default async function PatientPage({ params }: PatientPageProps) {
+export default async function PatientPage({ params, searchParams }: PatientPageProps) {
   const { id } = await params
+  const { highlight } = await searchParams
 
   const supabase = await createClient()
 
@@ -89,6 +118,55 @@ export default async function PatientPage({ params }: PatientPageProps) {
 
   const activeSubmission = activeSubmissionData as WeeklySubmission | null
 
+  // Most-recent monitoring period for this patient (drives the decision panel).
+  const { data: periodData } = await supabase
+    .from('monitoring_periods')
+    .select('*')
+    .eq('patient_id', id)
+    .order('start_date', { ascending: false })
+    .limit(1)
+    .maybeSingle()
+
+  const period = periodData as MonitoringPeriod | null
+
+  // Medications for the period (for the NEW flag + prescribing physician name).
+  let periodMedications: Medication[] = []
+  if (period?.medication_list_id) {
+    const { data: medsData } = await supabase
+      .from('medications')
+      .select('*')
+      .eq('medication_list_id', period.medication_list_id)
+      .order('created_at', { ascending: true })
+    periodMedications = (medsData ?? []) as Medication[]
+  }
+
+  // Unacknowledged critical alert for the period (gates the decision UI).
+  let unackedAlert: CriticalAlert | null = null
+  if (period) {
+    const { data: alertData } = await supabase
+      .from('critical_alerts')
+      .select('*')
+      .eq('monitoring_period_id', period.id)
+      .is('acknowledged_at', null)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    unackedAlert = (alertData as CriticalAlert | null) ?? null
+  }
+
+  // Latest consultation for the period (for the post-consultation branch).
+  let latestConsultation: Consultation | null = null
+  if (period) {
+    const { data: consultData } = await supabase
+      .from('consultations')
+      .select('*')
+      .eq('monitoring_period_id', period.id)
+      .order('created_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    latestConsultation = (consultData as Consultation | null) ?? null
+  }
+
   const age = getAge(patient.date_of_birth)
   const fullName = `${profile.first_name} ${profile.last_name}`
   const bq = patient.baseline_questionnaire ?? {}
@@ -105,113 +183,148 @@ export default async function PatientPage({ params }: PatientPageProps) {
   )
 
   const latestPatientLog = logs.length > 0 ? logs[0] : null
+  const highlightedLog = highlight ? logs.find((l) => l.id === highlight) ?? null : null
 
   return (
-    <main className="min-h-screen bg-dialogue-bg p-6">
-      <h1 className="font-display-bold text-sectionTitle text-dialogue-text mb-6">{fullName}</h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Panel 1 — Profile + Questionnaire */}
-        <div className="bg-dialogue-surface rounded-card p-5 space-y-4">
-          <div>
-            <h2 className="font-display-semi text-sectionTitle text-dialogue-text mb-1">Profile</h2>
-            <p className="text-dialogue-textMuted font-body text-sm">
-              Age {age} · {patient.diagnosis}
-            </p>
-          </div>
-
-          {allergies.length > 0 && (
-            <div>
-              <p className="text-dialogue-textMuted font-body text-xs mb-2">Allergies</p>
-              <div className="flex flex-wrap gap-1.5">
-                {allergies.map((allergy: string) => (
-                  <span
-                    key={allergy}
-                    className="bg-dialogue-chip text-dialogue-text text-xs font-body px-2 py-0.5 rounded-chip"
-                  >
-                    {allergy}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {otherFields.length > 0 && (
-            <div className="space-y-2">
-              {otherFields.map((field) => (
-                <div key={field.id}>
-                  <p className="text-dialogue-textMuted font-body text-xs">{field.label}</p>
-                  <p className="text-dialogue-text font-body text-body">{bq[field.id]}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* Panel 2 — Telus Health meds */}
-        <div className="bg-dialogue-surface rounded-card p-5 space-y-4">
-          <div className="flex items-center gap-2">
-            <h2 className="font-display-semi text-sectionTitle text-dialogue-text">Medications</h2>
-            <Badge className="bg-dialogue-chip text-dialogue-textMuted text-xs font-body px-2 py-0.5">
-              Pulled from Telus Health
+    <main className="min-h-screen bg-ln-canvas text-ln-ink font-ln-text p-6">
+      <div className="mx-auto max-w-5xl ln-rise">
+        <div className="flex items-center gap-3 mb-8 flex-wrap">
+          <h1 className="font-ln-display text-2xl font-semibold tracking-ln-display text-ln-ink">
+            {fullName}
+          </h1>
+          {period && (
+            <Badge className="bg-ln-surface2 text-ln-inkMuted rounded-full text-xs font-medium px-2.5 py-1 inline-flex items-center gap-1.5 normal-case tracking-normal border-0">
+              <span
+                className={`h-1.5 w-1.5 rounded-full ${statusDotClass(period.status)}`}
+                aria-hidden
+              />
+              {STATUS_LABELS[period.status]}
             </Badge>
-          </div>
-          <ul className="space-y-3">
-            {TELUS_MEDS.map((med) => (
-              <li key={med.name} className="flex flex-col gap-0.5">
-                <span className="text-dialogue-text font-body-bold text-cta">
-                  {med.name} {med.dose}
-                </span>
-                <span className="text-dialogue-textMuted font-body text-sm">
-                  {med.frequency}, {med.timing}
-                </span>
-              </li>
-            ))}
-          </ul>
+          )}
         </div>
 
-        {/* Panel 3 — AI Synthesis */}
-        <div className="bg-dialogue-surface rounded-card p-5">
-          {activeSubmission ? (
-            <AISynthesisPanel
-              submissionId={activeSubmission.id}
-              initialText={activeSubmission.ai_synthesis_text}
-              editedText={activeSubmission.ai_synthesis_edited_text}
-            />
-          ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Panel 1 - Profile + Questionnaire */}
+          <div className="ln-panel rounded-ln-lg p-6 space-y-4">
             <div>
-              <h2 className="font-display-semi text-sectionTitle text-dialogue-text mb-2">
-                AI Summary
+              <h2 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink mb-1">
+                Profile
               </h2>
-              <p className="text-dialogue-textMuted font-body text-sm">
-                No pending submission to review.
+              <p className="text-ln-inkSubtle text-sm">
+                Age {age} · {patient.diagnosis}
               </p>
             </div>
-          )}
-        </div>
 
-        {/* Panel 4 — 7-day Trends */}
-        <div className="bg-dialogue-surface rounded-card p-5 space-y-5">
-          <div>
-            <h2 className="font-display-semi text-sectionTitle text-dialogue-text mb-3">
-              7-Day Trends
-            </h2>
-            <TrendSparkline logs={logs} />
+            {allergies.length > 0 && (
+              <div>
+                <p className="ln-eyebrow mb-2">Allergies</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {allergies.map((allergy: string) => (
+                    <span
+                      key={allergy}
+                      className="bg-ln-surface2 border border-ln-hairline text-ln-inkMuted text-xs px-2 py-0.5 rounded-ln-sm"
+                    >
+                      {allergy}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {otherFields.length > 0 && (
+              <div className="space-y-2.5">
+                {otherFields.map((field) => (
+                  <div key={field.id}>
+                    <p className="text-ln-inkSubtle text-xs">{field.label}</p>
+                    <p className="text-ln-ink text-sm">{bq[field.id]}</p>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          <VerifiedReadingClientWrapper
-            patientId={id}
-            latestPatientLog={latestPatientLog}
-            initialVerifiedReading={latestVerified}
-          />
+          {/* Panel 2 - Telus Health meds */}
+          <div className="ln-panel rounded-ln-lg p-6 space-y-4">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h2 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink">
+                Medications
+              </h2>
+              <Badge className="bg-ln-surface2 text-ln-inkSubtle text-xs font-medium px-2 py-0.5 rounded-full normal-case tracking-normal border-0">
+                Pulled from Telus Health
+              </Badge>
+            </div>
+            <ul className="space-y-3">
+              {TELUS_MEDS.map((med) => (
+                <li key={med.name} className="flex flex-col gap-0.5">
+                  <span className="text-ln-ink text-sm font-medium">
+                    {med.name} {med.dose}
+                  </span>
+                  <span className="text-ln-inkSubtle text-sm">
+                    {med.frequency}, {med.timing}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {activeSubmission && (
-            <InterventionPanel
-              submissionId={activeSubmission.id}
-              currentStatus={activeSubmission.status}
+          {/* Panel 3 - AI Synthesis */}
+          <div className="ln-panel rounded-ln-lg p-6">
+            {activeSubmission ? (
+              <AISynthesisPanel
+                submissionId={activeSubmission.id}
+                initialText={activeSubmission.ai_synthesis_text}
+                editedText={activeSubmission.ai_synthesis_edited_text}
+              />
+            ) : (
+              <div>
+                <h2 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink mb-2">
+                  AI Summary
+                </h2>
+                <p className="text-ln-inkSubtle text-sm">No pending submission to review.</p>
+              </div>
+            )}
+          </div>
+
+          {/* Panel 4 - 7-day Trends */}
+          <div className="ln-panel rounded-ln-lg p-6 space-y-5">
+            <div>
+              <h2 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink mb-3">
+                7-Day Trends
+              </h2>
+              {highlightedLog && (
+                <p className="text-emergency text-sm mb-2">
+                  Flagged reading on {highlightedLog.log_date}: {highlightedLog.systolic}/
+                  {highlightedLog.diastolic}
+                </p>
+              )}
+              <TrendSparkline logs={logs} />
+            </div>
+
+            <VerifiedReadingClientWrapper
+              patientId={id}
+              latestPatientLog={latestPatientLog}
+              initialVerifiedReading={latestVerified}
             />
-          )}
+
+            {activeSubmission && (
+              <InterventionPanel
+                submissionId={activeSubmission.id}
+                currentStatus={activeSubmission.status}
+              />
+            )}
+          </div>
         </div>
+
+        {period && (
+          <div className="mt-4">
+            <DecisionPanel
+              period={period}
+              medications={periodMedications}
+              unackedAlert={unackedAlert}
+              consultation={latestConsultation}
+            />
+          </div>
+        )}
       </div>
     </main>
   )

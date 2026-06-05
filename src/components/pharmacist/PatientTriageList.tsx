@@ -14,6 +14,7 @@ export interface SubmissionWithPatientSummary {
 interface PatientTriageListProps {
   flagged: SubmissionWithPatientSummary[]
   stable: SubmissionWithPatientSummary[]
+  criticalPatientIds?: string[]
 }
 
 function getAge(dateOfBirth: string): number {
@@ -28,9 +29,9 @@ function getAge(dateOfBirth: string): number {
 }
 
 const SEVERITY_CHIP_CLASSES: Record<string, string> = {
-  high: 'bg-red-600 text-white text-xs px-2 py-0.5 rounded-chip font-body-bold',
-  medium: 'bg-dialogue-accent text-dialogue-bg text-xs px-2 py-0.5 rounded-chip font-body-bold',
-  low: 'bg-dialogue-chip text-dialogue-textMuted text-xs px-2 py-0.5 rounded-chip font-body',
+  high: 'bg-red-600 text-white text-xs px-2 py-0.5 rounded-ln-sm font-ln-text font-semibold',
+  medium: 'bg-ln-primary text-ln-canvas text-xs px-2 py-0.5 rounded-ln-sm font-ln-text font-semibold',
+  low: 'bg-ln-surface2 text-ln-inkMuted text-xs px-2 py-0.5 rounded-ln-sm font-ln-text',
 }
 
 const FLAG_LABELS: Record<string, string> = {
@@ -40,7 +41,13 @@ const FLAG_LABELS: Record<string, string> = {
   missing_data: 'Missing data',
 }
 
-function PatientRow({ item }: { item: SubmissionWithPatientSummary }) {
+function PatientRow({
+  item,
+  isCritical = false,
+}: {
+  item: SubmissionWithPatientSummary
+  isCritical?: boolean
+}) {
   const { submission, patient, logs, flags } = item
   const { profile } = patient
   const age = getAge(patient.date_of_birth)
@@ -50,14 +57,25 @@ function PatientRow({ item }: { item: SubmissionWithPatientSummary }) {
   return (
     <Link
       href={`/patient/${patient.id}`}
-      className="block rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dialogue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dialogue-bg"
+      className="block rounded-ln-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ln-primary focus-visible:ring-offset-2 focus-visible:ring-offset-ln-canvas"
     >
-      <div className="bg-dialogue-surface rounded-card p-4 flex items-center gap-4 hover:bg-dialogue-border transition-colors cursor-pointer">
+      <div
+        className={`bg-ln-surface1 rounded-ln-lg p-4 flex items-center gap-4 hover:bg-ln-hairline transition-colors cursor-pointer ${
+          isCritical ? 'animate-pulse-border' : ''
+        }`}
+      >
         <div className="flex-1 min-w-0">
-          <p className="font-body-bold text-cta text-dialogue-text truncate">
-            {name}, {age}
-          </p>
-          <p className="font-body text-sm text-dialogue-textMuted mt-0.5">{submittedAgo}</p>
+          <div className="flex items-center gap-2">
+            <p className="font-ln-text font-semibold text-cta text-ln-ink truncate">
+              {name}, {age}
+            </p>
+            {isCritical && (
+              <span className="bg-emergency text-white text-xs px-2 py-0.5 rounded-ln-sm font-ln-text font-semibold shrink-0">
+                CRITICAL
+              </span>
+            )}
+          </div>
+          <p className="font-ln-text text-sm text-ln-inkMuted mt-0.5">{submittedAgo}</p>
           {flags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mt-2">
               {flags.map((f) => (
@@ -76,33 +94,56 @@ function PatientRow({ item }: { item: SubmissionWithPatientSummary }) {
   )
 }
 
-export default function PatientTriageList({ flagged, stable }: PatientTriageListProps) {
+export default function PatientTriageList({
+  flagged,
+  stable,
+  criticalPatientIds = [],
+}: PatientTriageListProps) {
+  const criticalIdSet = new Set(criticalPatientIds)
+  const isCriticalItem = (item: SubmissionWithPatientSummary): boolean =>
+    criticalIdSet.has(item.patient.id)
+
+  // Pin critical patients to the top of the Flagged section without mutating
+  // the incoming array. Stable React keys keep ordering deterministic.
+  const sortedFlagged =
+    criticalIdSet.size === 0
+      ? flagged
+      : [...flagged].sort((a, b) => {
+          const aCritical = isCriticalItem(a) ? 1 : 0
+          const bCritical = isCriticalItem(b) ? 1 : 0
+          return bCritical - aCritical
+        })
+
   return (
     <div className="space-y-8">
       <section>
         <div className="flex items-center gap-2 mb-3">
-          <h2 className="font-display-semi text-sectionTitle text-dialogue-text">Flagged</h2>
-          {flagged.length > 0 && (
-            <span className="bg-dialogue-accent text-dialogue-bg text-xs font-body-bold px-2 py-0.5 rounded-chip">
-              {flagged.length}
+          <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">Flagged</h2>
+          {sortedFlagged.length > 0 && (
+            <span className="bg-ln-primary text-ln-canvas text-xs font-ln-text font-semibold px-2 py-0.5 rounded-ln-sm">
+              {sortedFlagged.length}
             </span>
           )}
         </div>
-        {flagged.length === 0 ? (
-          <p className="text-dialogue-textMuted font-body text-sm">No flagged patients.</p>
+        {sortedFlagged.length === 0 ? (
+          <p className="text-ln-inkMuted font-ln-text text-sm">No flagged patients.</p>
         ) : (
           <div className="space-y-3">
-            {flagged.map((item) => (
-              <PatientRow key={item.submission.id} item={item} />
+            {sortedFlagged.map((item) => (
+              <PatientRow
+                key={item.submission.id}
+                item={item}
+                isCritical={isCriticalItem(item)}
+              />
             ))}
           </div>
         )}
       </section>
 
       <section>
-        <h2 className="font-display-semi text-sectionTitle text-dialogue-text mb-3">Stable</h2>
+        <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink mb-3">Stable</h2>
         {stable.length === 0 ? (
-          <p className="text-dialogue-textMuted font-body text-sm">No stable patients.</p>
+          <p className="text-ln-inkMuted font-ln-text text-sm">No stable patients.</p>
         ) : (
           <div className="space-y-3">
             {stable.map((item) => (

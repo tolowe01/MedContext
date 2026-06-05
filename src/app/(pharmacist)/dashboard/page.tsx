@@ -1,10 +1,12 @@
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { flagSubmission } from '@/lib/flags'
 import PatientTriageList from '@/components/pharmacist/PatientTriageList'
 import type { SubmissionWithPatientSummary } from '@/components/pharmacist/PatientTriageList'
-import type { DailyLog, WeeklySubmission, Patient, Profile } from '@/lib/types'
+import type { CriticalAlert, DailyLog, WeeklySubmission, Patient, Profile } from '@/lib/types'
 import DashboardRealtimeListener from './DashboardRealtimeListener'
+import CriticalAlertBanner from './CriticalAlertBanner'
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -22,11 +24,11 @@ export default async function DashboardPage() {
 
   if (!profile?.pharmacy_id) {
     return (
-      <main className="min-h-screen bg-dialogue-bg p-6">
-        <h1 className="font-display-bold text-sectionTitle text-dialogue-text mb-4">
+      <main className="min-h-screen bg-ln-canvas p-6">
+        <h1 className="font-ln-display font-semibold text-sectionTitle text-ln-ink mb-4">
           Patient Dashboard
         </h1>
-        <p className="text-dialogue-textMuted font-body">No pharmacy associated with your account.</p>
+        <p className="text-ln-inkMuted font-ln-text">No pharmacy associated with your account.</p>
       </main>
     )
   }
@@ -74,13 +76,38 @@ export default async function DashboardPage() {
   const flagged = enriched.filter((s) => s.flags.length > 0)
   const stable = enriched.filter((s) => s.flags.length === 0)
 
+  const { data: alertRows } = await supabase
+    .from('critical_alerts')
+    .select('*')
+    .eq('pharmacist_id', user.id)
+    .is('acknowledged_at', null)
+    .order('created_at', { ascending: false })
+
+  const initialAlerts = (alertRows ?? []) as CriticalAlert[]
+  const criticalPatientIds: string[] = initialAlerts
+    .map((alert) => alert.patient_id)
+    .filter((id): id is string => id !== null)
+
   return (
-    <main className="min-h-screen bg-dialogue-bg p-6">
-      <h1 className="font-display-bold text-sectionTitle text-dialogue-text mb-4">
-        Patient Dashboard
-      </h1>
+    <main className="min-h-screen bg-ln-canvas p-6">
+      <CriticalAlertBanner pharmacistId={user.id} initialAlerts={initialAlerts} />
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">
+          Patient Dashboard
+        </h1>
+        <Link
+          href="/patient/new"
+          className="inline-flex items-center rounded-ln-md bg-ln-primary text-ln-canvas font-ln-text font-semibold text-cta uppercase tracking-wide px-6 py-3 hover:opacity-90 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ln-primary focus-visible:ring-offset-2 focus-visible:ring-offset-ln-canvas"
+        >
+          New patient
+        </Link>
+      </div>
       <DashboardRealtimeListener pharmacyId={pharmacyId} />
-      <PatientTriageList flagged={flagged} stable={stable} />
+      <PatientTriageList
+        flagged={flagged}
+        stable={stable}
+        criticalPatientIds={criticalPatientIds}
+      />
     </main>
   )
 }

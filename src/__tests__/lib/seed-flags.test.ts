@@ -14,6 +14,10 @@ function seedLog(partial: Pick<DailyLog, 'log_date' | 'systolic' | 'diastolic' |
     heart_rate: null,
     entered_via: 'text',
     created_at: `${partial.log_date}T20:00:00Z`,
+    monitoring_period_id: null,
+    logged_at_local: null,
+    adherence_skip_reason: null,
+    is_critical: false,
     ...partial,
   }
 }

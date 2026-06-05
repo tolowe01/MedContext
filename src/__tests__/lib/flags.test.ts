@@ -14,6 +14,10 @@ function makeLog(overrides: Partial<DailyLog>): DailyLog {
     symptom_note: null,
     entered_via: 'text',
     created_at: '2024-01-01T00:00:00Z',
+    monitoring_period_id: null,
+    logged_at_local: null,
+    adherence_skip_reason: null,
+    is_critical: false,
     ...overrides,
   }
 }

@@ -18,6 +18,26 @@ const config: Config = {
           gradientEnd: '#D3F1F5',
         },
         emergency: '#DC2626',
+        // Linear-inspired system (awesome-design-md/linear.app). Used by the
+        // pharmacist-initiated flow screens. Legacy screens keep `dialogue`.
+        ln: {
+          canvas: '#010102',
+          surface1: '#0f1011',
+          surface2: '#141516',
+          surface3: '#18191a',
+          surface4: '#191a1b',
+          hairline: '#23252a',
+          hairlineStrong: '#34343a',
+          hairlineTertiary: '#3e3e44',
+          ink: '#f7f8f8',
+          inkMuted: '#d0d6e0',
+          inkSubtle: '#8a8f98',
+          inkTertiary: '#62666d',
+          primary: '#5e6ad2',
+          primaryHover: '#828fff',
+          primaryFocus: '#5e69d1',
+          success: '#27a644',
+        },
       },
       borderRadius: {
         card: '24px',
@@ -25,6 +45,12 @@ const config: Config = {
         tile: '16px',
         button: '12px',
         chip: '8px',
+        // Linear radii scale
+        'ln-xs': '4px',
+        'ln-sm': '6px',
+        'ln-md': '8px',
+        'ln-lg': '12px',
+        'ln-xl': '16px',
       },
       spacing: {
         screenX: '16px',
@@ -45,6 +71,16 @@ const config: Config = {
         body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         'body-medium': ['var(--font-inter)', 'system-ui', 'sans-serif'],
         'body-bold': ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        // Linear voice: one continuous Inter cut (documented Linear substitute)
+        // for both display and text; negative tracking applied per-use.
+        'ln-display': ['var(--font-inter)', 'SF Pro Display', 'system-ui', 'sans-serif'],
+        'ln-text': ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        'ln-mono': ['ui-monospace', 'SF Mono', 'JetBrains Mono', 'Menlo', 'monospace'],
+      },
+      letterSpacing: {
+        'ln-display': '-0.022em',
+        'ln-tight': '-0.014em',
+        'ln-eyebrow': '0.03em',
       },
     },
   },
