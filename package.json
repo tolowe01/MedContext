@@ -9,6 +9,8 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:all": "vitest run && playwright test",
     "seed": "NODE_OPTIONS=--no-experimental-webstorage npx tsx --env-file=.env.local src/lib/seed.ts"
   },
   "dependencies": {
@@ -39,6 +41,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^20",
     "@types/react": "^19",
