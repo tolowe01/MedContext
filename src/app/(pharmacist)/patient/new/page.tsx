@@ -248,7 +248,7 @@ function NewPatientWizard() {
   ])
 
   return (
-    <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body px-6 py-12">
+    <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body py-12">
       <div className="mx-auto w-full max-w-2xl mc-rise">
         <p className="text-xs font-medium tracking-wide uppercase text-mc-neutral-400 mb-3">Onboarding</p>
         <h1 className="font-display text-3xl font-semibold -tracking-[0.022em] text-mc-neutral-900 mb-2">
@@ -268,7 +268,7 @@ export default function NewPatientPage() {
   return (
     <Suspense
       fallback={
-        <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body px-6 py-12 flex items-center justify-center">
+        <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body py-12 flex items-center justify-center">
           <p className="font-body text-sm text-mc-neutral-400 animate-pulse">Loading...</p>
         </main>
       }

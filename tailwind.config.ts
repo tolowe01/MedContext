@@ -74,15 +74,17 @@ const config: Config = {
         chip: '8px',
       },
       spacing: {
-        screenX: '16px',
-        screenTop: '48px',
+        // Fluid gutters: scale smoothly from phone to desktop instead of a fixed 16/48px.
+        screenX: 'clamp(1rem, 0.5rem + 2vw, 2rem)',
+        screenTop: 'clamp(1.5rem, 1rem + 2vw, 3rem)',
         card: '12px',
         tabBar: '80px',
       },
       fontSize: {
-        screenTitle: ['28px', { lineHeight: '1.2', fontWeight: '700' }],
-        sectionTitle: ['20px', { lineHeight: '1.3', fontWeight: '600' }],
-        body: ['15px', { lineHeight: '1.5' }],
+        // Fluid type via clamp(): min on small screens, scales up to a desktop cap.
+        screenTitle: ['clamp(1.5rem, 1.2rem + 1.5vw, 1.875rem)', { lineHeight: '1.2', fontWeight: '700' }],
+        sectionTitle: ['clamp(1.125rem, 1rem + 0.6vw, 1.375rem)', { lineHeight: '1.3', fontWeight: '600' }],
+        body: ['clamp(0.9375rem, 0.9rem + 0.2vw, 1rem)', { lineHeight: '1.5' }],
         tab: ['12px', { lineHeight: '1.4', fontWeight: '500' }],
         cta: ['14px', { lineHeight: '1', fontWeight: '700', letterSpacing: '0.05em' }],
       },

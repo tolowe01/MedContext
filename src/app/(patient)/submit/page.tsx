@@ -109,20 +109,20 @@ export default function SubmitPage() {
           </div>
         ) : (
           <div className="divide-y divide-mc-neutral-200">
-            <div className="grid grid-cols-4 px-5 py-2 bg-mc-surface-page/50">
-              <p className="text-xs font-body text-mc-neutral-400">Date</p>
-              <p className="text-xs font-body text-mc-neutral-400 text-center">SBP</p>
-              <p className="text-xs font-body text-mc-neutral-400 text-center">DBP</p>
-              <p className="text-xs font-body text-mc-neutral-400 text-center">Taken</p>
+            <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-2 px-5 py-2 bg-mc-surface-page/50">
+              <p className="text-xs sm:text-sm font-body text-mc-neutral-400">Date</p>
+              <p className="text-xs sm:text-sm font-body text-mc-neutral-400 text-center">SBP</p>
+              <p className="text-xs sm:text-sm font-body text-mc-neutral-400 text-center">DBP</p>
+              <p className="text-xs sm:text-sm font-body text-mc-neutral-400 text-center">Taken</p>
             </div>
             {logs.map((log) => (
-              <div key={log.id} className="grid grid-cols-4 px-5 py-3 items-center">
+              <div key={log.id} className="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-2 px-5 py-3 items-center">
                 <p className="font-body text-sm text-mc-neutral-900">{formatDate(log.log_date)}</p>
                 <p className="font-body text-sm text-mc-neutral-900 text-center">{log.systolic}</p>
                 <p className="font-body text-sm text-mc-neutral-900 text-center">{log.diastolic}</p>
                 <p className="font-body text-sm text-center">
                   {log.adherence_taken ? (
-                    <span className="text-green-400">Yes</span>
+                    <span className="text-mc-teal-600">Yes</span>
                   ) : (
                     <span className="text-mc-danger-600">No</span>
                   )}

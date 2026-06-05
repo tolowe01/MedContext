@@ -24,7 +24,7 @@ export default async function DashboardPage() {
 
   if (!profile?.pharmacy_id) {
     return (
-      <main className="min-h-screen bg-mc-surface-page p-6">
+      <main className="min-h-screen bg-mc-surface-page py-6">
         <h1 className="font-display font-semibold text-sectionTitle text-mc-neutral-900 mb-4">
           Patient Dashboard
         </h1>
@@ -89,7 +89,7 @@ export default async function DashboardPage() {
     .filter((id): id is string => id !== null)
 
   return (
-    <main className="min-h-screen bg-mc-surface-page p-6">
+    <main className="min-h-screen bg-mc-surface-page py-6">
       <CriticalAlertBanner pharmacistId={user.id} initialAlerts={initialAlerts} />
       <div className="flex items-center justify-between mb-4">
         <h1 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">

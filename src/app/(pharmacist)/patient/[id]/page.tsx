@@ -186,7 +186,7 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
   const highlightedLog = highlight ? logs.find((l) => l.id === highlight) ?? null : null
 
   return (
-    <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body p-6">
+    <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body py-6">
       <div className="mx-auto max-w-5xl mc-rise">
         <div className="flex items-center gap-3 mb-8 flex-wrap">
           <h1 className="font-display text-2xl font-semibold -tracking-[0.022em] text-mc-neutral-900">

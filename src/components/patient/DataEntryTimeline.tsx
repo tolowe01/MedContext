@@ -24,6 +24,7 @@ export default function DataEntryTimeline({ logs, totalDays = 7 }: DataEntryTime
       {days.map((day) => (
         <div key={day.dateStr} className="flex flex-col items-center gap-1.5">
           <div
+            role="img"
             aria-label={`${day.dateStr}: ${day.hasLog ? 'logged' : 'no log'}`}
             className={`w-8 h-8 rounded-full transition-colors ${
               day.hasLog

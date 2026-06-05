@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { z } from 'zod'
-import { Check, Copy } from 'lucide-react'
+import { Check, Copy, Mail } from 'lucide-react'
 import { createPatientAccount } from '@/actions/patient-onboarding'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -44,6 +44,7 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
   const [accessCode, setAccessCode] = useState<string | null>(null)
   const [createdPatientId, setCreatedPatientId] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [emailOpened, setEmailOpened] = useState(false)
 
   function updateField(field: keyof FormState, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }))
@@ -83,6 +84,24 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
     }
   }
 
+  function emailAccessCode() {
+    if (!accessCode) return
+    const origin = typeof window !== 'undefined' ? window.location.origin : ''
+    const subject = 'Your MedContext access code'
+    const body =
+      `Hello ${form.first_name},\r\n\r\n` +
+      `Your pharmacist has set up MedContext so you can track your blood pressure from home.\r\n\r\n` +
+      `Sign in: ${origin}/login\r\n` +
+      `Email: ${form.email}\r\n` +
+      `Access code (use this as your password): ${accessCode}\r\n\r\n` +
+      `After you sign in, you can begin your daily check-ins.\r\n`
+    const href = `mailto:${encodeURIComponent(form.email)}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`
+    setEmailOpened(true)
+    window.location.href = href
+  }
+
   if (accessCode && createdPatientId) {
     return (
       <div className="space-y-5">
@@ -90,28 +109,38 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
           Patient account created
         </h2>
         <p className="font-body text-sm text-mc-neutral-600">
-          Share this access code with the patient. They use it as their password to sign in.
+          Email the access code to the patient, or copy it to share another way. They use it as their
+          password to sign in.
         </p>
-        <div className="bg-mc-neutral-100 border border-mc-neutral-200 rounded-tile rounded-tile p-6 flex flex-col items-center gap-4">
+        <div className="bg-mc-neutral-100 border border-mc-neutral-200 rounded-tile p-6 flex flex-col items-center gap-4">
           <span className="font-mono text-3xl font-medium tracking-[0.25em] text-mc-primary-400">
             {accessCode}
           </span>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={copyCode}
-            className="gap-2 normal-case tracking-normal rounded-button bg-mc-surface-white text-mc-neutral-900 border-mc-neutral-200 hover:bg-mc-neutral-100 mc-focus"
-          >
-            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-            {copied ? 'Copied' : 'Copy code'}
-          </Button>
+          <div className="flex w-full gap-2">
+            <Button
+              type="button"
+              onClick={emailAccessCode}
+              className="flex-1 gap-2 normal-case tracking-normal rounded-button bg-mc-primary-400 text-white hover:bg-mc-primary-600 mc-focus"
+            >
+              {emailOpened ? <Check className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
+              {emailOpened ? 'Email drafted' : 'Email code to patient'}
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={copyCode}
+              className="gap-2 normal-case tracking-normal rounded-button bg-mc-surface-white text-mc-neutral-900 border-mc-neutral-200 hover:bg-mc-neutral-100 mc-focus"
+            >
+              {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+              {copied ? 'Copied' : 'Copy'}
+            </Button>
+          </div>
         </div>
         {error && <p className="text-emergency text-sm font-body">{error}</p>}
         <Button
           type="button"
           onClick={() => onComplete(createdPatientId)}
-          className="w-full normal-case tracking-normal rounded-button bg-mc-primary-400 text-white hover:bg-mc-primary-600 mc-focus"
+          className="w-full normal-case tracking-normal rounded-button bg-mc-surface-white text-mc-neutral-900 border border-mc-neutral-200 hover:bg-mc-neutral-100 mc-focus"
         >
           Continue to medication upload
         </Button>

@@ -39,7 +39,7 @@ export default function ConsentPage() {
       </p>
 
       <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card overflow-hidden mb-6">
-        <div className="overflow-y-auto max-h-[52vh] px-6 py-5 space-y-6">
+        <div className="overflow-y-auto max-h-[60vh] sm:max-h-[52vh] px-6 py-5 space-y-6">
           {CONSENT_PARAGRAPHS.map((section) => (
             <div key={section.heading}>
               <h2 className="font-display-semi text-sectionTitle text-mc-neutral-900 mb-1">

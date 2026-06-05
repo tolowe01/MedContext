@@ -1,7 +1,7 @@
 'use server'
 import { createClient } from '@/lib/supabase/server'
 import { createAdminClient } from '@/lib/supabase/admin'
-import { isValidPharmacyId } from '@/lib/pharmacies'
+import { findPharmacyByCode } from '@/lib/pharmacies'
 import { BASELINE_SCHEMA_VERSION } from '@/lib/questionnaire-schema'
 import { redirect } from 'next/navigation'
 import type { BaselineQuestionnaire, Sexe } from '@/lib/types'
@@ -15,7 +15,7 @@ export interface SignupInput {
   sexe: Sexe
   phone: string
   address: string
-  pharmacyId: string
+  accessCode: string // pharmacy enrollment code from the pharmacist
 }
 
 function generateAccessCode(): string {
@@ -32,9 +32,11 @@ export async function signup(input: SignupInput) {
   if (!input.email || !input.password) {
     return { error: 'Email and password are required.' }
   }
-  if (!isValidPharmacyId(input.pharmacyId)) {
-    return { error: 'Please select a valid pharmacy.' }
+  const pharmacy = findPharmacyByCode(input.accessCode)
+  if (!pharmacy) {
+    return { error: 'That access code is not valid. Ask your pharmacist for your code.' }
   }
+  const pharmacyId = pharmacy.id
 
   const admin = createAdminClient()
 
@@ -55,7 +57,7 @@ export async function signup(input: SignupInput) {
   const { error: profileError } = await admin.from('profiles').insert({
     id: userId,
     role: 'patient',
-    pharmacy_id: input.pharmacyId,
+    pharmacy_id: pharmacyId,
     first_name: input.firstName,
     last_name: input.lastName,
   })
@@ -70,7 +72,7 @@ export async function signup(input: SignupInput) {
   }
   const { error: patientError } = await admin.from('patients').insert({
     profile_id: userId,
-    pharmacy_id: input.pharmacyId,
+    pharmacy_id: pharmacyId,
     date_of_birth: input.dateOfBirth,
     access_code: generateAccessCode(),
     baseline_questionnaire: baseline,

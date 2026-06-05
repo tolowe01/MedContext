@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { logReading } from '@/actions/log-reading'
 import { DailyLog, LogReadingInput } from '@/lib/types'
@@ -199,21 +200,23 @@ export default function ChatIntake({ patientId, logs = [], streak = 0, onComplet
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-3 min-h-[40vh] max-h-[55vh] overflow-y-auto pb-2">
+      <div className="flex flex-col gap-3 min-h-[40vh] max-h-[60vh] sm:max-h-[55vh] landscape:max-h-[70vh] overflow-y-auto pb-2">
         {messages.map((msg, idx) => (
           <div
             key={idx}
             className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} mb-4`}
           >
             {msg.role === 'assistant' && (
-              <img 
-                src="/doctor-avatar.png" 
-                alt="Doctor Avatar" 
-                className="w-8 h-8 rounded-full object-cover shrink-0 mr-3 self-end" 
+              <Image
+                src="/doctor-avatar.png"
+                alt="Doctor avatar"
+                width={36}
+                height={36}
+                className="rounded-full object-cover shrink-0 mr-3 self-end"
               />
             )}
             <div
-              className={`max-w-[80%] rounded-card px-4 py-3 font-body text-body leading-relaxed ${
+              className={`max-w-[85%] sm:max-w-[75%] rounded-card px-4 py-3 font-body text-body leading-relaxed ${
                 msg.role === 'user'
                   ? 'bg-mc-primary-400 text-white'
                   : 'bg-mc-teal-50 border border-mc-teal-100 text-mc-neutral-900'
