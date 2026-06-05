@@ -58,7 +58,9 @@ export async function createPatientAccount(
   if (!parsed.success) {
     return { error: parsed.error.errors[0]?.message ?? 'Invalid input' }
   }
-  const { first_name, last_name, date_of_birth, email } = parsed.data
+  // first_name / last_name / email are collected so the pharmacist can email
+  // the code; the patient supplies their own identity when they claim it.
+  const { date_of_birth } = parsed.data
 
   const supabase = await createClient()
   const {
@@ -87,37 +89,13 @@ export async function createPatientAccount(
     return { error: 'Could not generate a unique access code, please try again' }
   }
 
-  const { data: created, error: authError } = await service.auth.admin.createUser({
-    email,
-    password: accessCode,
-    email_confirm: true,
-    user_metadata: { first_name, last_name },
-  })
-
-  if (authError) {
-    if (authError.message.includes('already')) {
-      return { error: 'A patient with this email already exists' }
-    }
-    return { error: getErrorMessage(authError) }
-  }
-  if (!created?.user) {
-    return { error: 'Could not create the patient account' }
-  }
-  const authUserId = created.user.id
-
-  const { error: profileError } = await service.from('profiles').insert({
-    id: authUserId,
-    role: 'patient',
-    pharmacy_id: pharmacyId,
-    first_name,
-    last_name,
-  })
-  if (profileError) return { error: getErrorMessage(profileError) }
-
+  // Create an UNCLAIMED patient record (no auth user, profile_id null). The
+  // patient claims it by entering this unique code at /signup, where they set
+  // their own email + password and supply their identity.
   const { data: patient, error: patientError } = await service
     .from('patients')
     .insert({
-      profile_id: authUserId,
+      profile_id: null,
       pharmacy_id: pharmacyId,
       date_of_birth,
       access_code: accessCode,

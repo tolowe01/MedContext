@@ -50,9 +50,13 @@ export default async function DashboardPage() {
     .eq('patients.pharmacy_id', pharmacyId)
     .order('submitted_at', { ascending: false })
 
-  const enriched: SubmissionWithPatientSummary[] = await Promise.all(
+  const enrichedRaw = await Promise.all(
     (submissions ?? []).map(async (row) => {
-      const patient = row.patients as Patient & { profiles: Profile }
+      const patient = row.patients as Patient & { profiles: Profile | null }
+      // Skip unclaimed patients (a pharmacist issued a code but the patient has
+      // not signed up yet, so there is no profile to show in triage).
+      if (!patient?.profiles) return null
+
       const patientWithProfile = {
         ...patient,
         profile: patient.profiles,
@@ -71,6 +75,10 @@ export default async function DashboardPage() {
 
       return { submission, patient: patientWithProfile, logs: dailyLogs, flags }
     })
+  )
+
+  const enriched: SubmissionWithPatientSummary[] = enrichedRaw.filter(
+    (x): x is SubmissionWithPatientSummary => x !== null
   )
 
   const flagged = enriched.filter((s) => s.flags.length > 0)

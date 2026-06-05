@@ -64,6 +64,24 @@ export default async function ProgressPage() {
           This week
         </p>
         <DataEntryTimeline logs={logs} totalDays={7} />
+
+        <div className="mt-6">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-xs font-body text-mc-neutral-600">{logCount} of 7 days</span>
+            <span className="text-xs font-body text-mc-neutral-400">
+              {Math.round((logCount / 7) * 100)}%
+            </span>
+          </div>
+          <div
+            className="h-2 w-full rounded-full bg-mc-neutral-200 overflow-hidden"
+            aria-label={`${logCount} of 7 days logged this week`}
+          >
+            <div
+              className="h-full rounded-full bg-mc-primary-400 transition-all duration-300"
+              style={{ width: `${Math.min(100, (logCount / 7) * 100)}%` }}
+            />
+          </div>
+        </div>
       </div>
 
       <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-5 mb-6">

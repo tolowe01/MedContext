@@ -5,8 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
 import Link from 'next/link'
-import { signup } from '@/actions/signup'
-import { findPharmacyByCode, type Pharmacy } from '@/lib/pharmacies'
+import { signup, verifyAccessCode } from '@/actions/signup'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -43,11 +42,13 @@ const SEXE_OPTIONS: { value: SignupFormData['sexe']; label: string }[] = [
 
 export default function SignupPage() {
   const [serverError, setServerError] = useState<string | null>(null)
-  // Access-code gate. The patient must enter the code their pharmacist gave
-  // them before the create-account form is shown. The code selects the pharmacy.
-  const [pharmacy, setPharmacy] = useState<Pharmacy | null>(null)
+  // Access-code gate. The patient enters the unique code their pharmacist
+  // issued; it is verified server-side before the create-account form is shown.
+  const [verified, setVerified] = useState(false)
+  const [pharmacyName, setPharmacyName] = useState<string | null>(null)
   const [codeInput, setCodeInput] = useState('')
   const [codeError, setCodeError] = useState<string | null>(null)
+  const [verifying, setVerifying] = useState(false)
 
   const {
     register,
@@ -58,21 +59,24 @@ export default function SignupPage() {
     resolver: zodResolver(signupSchema),
   })
 
-  function verifyCode(e: React.FormEvent) {
+  async function verifyCode(e: React.FormEvent) {
     e.preventDefault()
     setCodeError(null)
-    const match = findPharmacyByCode(codeInput)
-    if (!match) {
-      setCodeError('That code is not valid. Ask your pharmacist for your access code.')
+    setVerifying(true)
+    const result = await verifyAccessCode(codeInput)
+    setVerifying(false)
+    if ('error' in result) {
+      setCodeError(result.error)
       return
     }
-    setPharmacy(match)
+    setPharmacyName(result.pharmacyName)
+    setVerified(true)
   }
 
   async function onSubmit(data: SignupFormData) {
-    if (!pharmacy) return
+    if (!verified) return
     setServerError(null)
-    const result = await signup({ ...data, accessCode: pharmacy.enrollmentCode })
+    const result = await signup({ ...data, accessCode: codeInput })
     // On success the action redirects; we only get here on error.
     if (result?.error) {
       setServerError(result.error)
@@ -83,7 +87,7 @@ export default function SignupPage() {
     <main className="min-h-screen bg-mc-surface-page flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-sm">
         <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-cardLarge p-8 shadow-2xl">
-          {!pharmacy ? (
+          {!verified ? (
             <>
               <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-2 text-center">
                 Enter your access code
@@ -102,7 +106,7 @@ export default function SignupPage() {
                     id="accessCode"
                     autoComplete="one-time-code"
                     autoCapitalize="characters"
-                    placeholder="e.g. MCMTL1"
+                    placeholder="Enter your code"
                     value={codeInput}
                     onChange={(e) => {
                       setCodeInput(e.target.value)
@@ -115,8 +119,12 @@ export default function SignupPage() {
                   )}
                 </div>
 
-                <Button type="submit" className="w-full py-3 mt-2">
-                  Continue
+                <Button
+                  type="submit"
+                  disabled={verifying}
+                  className="w-full py-3 mt-2 disabled:opacity-50"
+                >
+                  {verifying ? 'Checking…' : 'Continue'}
                 </Button>
               </form>
 
@@ -139,12 +147,15 @@ export default function SignupPage() {
               <div className="bg-mc-primary-50 border border-mc-primary-100 rounded-button px-4 py-3 mb-6">
                 <p className="text-mc-neutral-600 font-body text-xs">
                   Enrolling with{' '}
-                  <span className="text-mc-neutral-900 font-body-bold">{pharmacy.name}</span>
+                  <span className="text-mc-neutral-900 font-body-bold">
+                    {pharmacyName ?? 'your pharmacy'}
+                  </span>
                 </p>
                 <button
                   type="button"
                   onClick={() => {
-                    setPharmacy(null)
+                    setVerified(false)
+                    setPharmacyName(null)
                     setServerError(null)
                   }}
                   className="text-mc-primary-400 underline underline-offset-2 text-xs font-body mt-1"

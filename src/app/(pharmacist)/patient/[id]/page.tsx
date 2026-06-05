@@ -244,14 +244,14 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
             )}
           </div>
 
-          {/* Panel 2 - Telus Health meds */}
+          {/* Panel 2 - PMS meds */}
           <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6 space-y-4">
             <div className="flex items-center gap-2 flex-wrap">
               <h2 className="font-display text-base font-semibold -tracking-[0.014em] text-mc-neutral-900">
                 Medications
               </h2>
               <Badge className="bg-mc-neutral-100 text-mc-neutral-400 text-xs font-medium px-2 py-0.5 rounded-full normal-case tracking-normal border-0">
-                Pulled from Telus Health
+                PMS (pharmacy management system)
               </Badge>
             </div>
             <ul className="space-y-3">

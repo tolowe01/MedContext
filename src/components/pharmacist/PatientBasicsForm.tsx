@@ -91,10 +91,9 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
     const body =
       `Hello ${form.first_name},\r\n\r\n` +
       `Your pharmacist has set up MedContext so you can track your blood pressure from home.\r\n\r\n` +
-      `Sign in: ${origin}/login\r\n` +
-      `Email: ${form.email}\r\n` +
-      `Access code (use this as your password): ${accessCode}\r\n\r\n` +
-      `After you sign in, you can begin your daily check-ins.\r\n`
+      `Create your account: ${origin}/signup\r\n` +
+      `Your access code: ${accessCode}\r\n\r\n` +
+      `Enter this code when you sign up, then set your own email and password.\r\n`
     const href = `mailto:${encodeURIComponent(form.email)}?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`
@@ -106,11 +105,11 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
     return (
       <div className="space-y-5">
         <h2 className="font-display text-xl font-medium -tracking-[0.014em] text-mc-neutral-900">
-          Patient account created
+          Patient added
         </h2>
         <p className="font-body text-sm text-mc-neutral-600">
-          Email the access code to the patient, or copy it to share another way. They use it as their
-          password to sign in.
+          Email this access code to the patient, or copy it to share another way. They enter it when
+          they create their account.
         </p>
         <div className="bg-mc-neutral-100 border border-mc-neutral-200 rounded-tile p-6 flex flex-col items-center gap-4">
           <span className="font-mono text-3xl font-medium tracking-[0.25em] text-mc-primary-400">
@@ -123,7 +122,7 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
               className="flex-1 gap-2 normal-case tracking-normal rounded-button bg-mc-primary-400 text-white hover:bg-mc-primary-600 mc-focus"
             >
               {emailOpened ? <Check className="h-4 w-4" /> : <Mail className="h-4 w-4" />}
-              {emailOpened ? 'Email drafted' : 'Email code to patient'}
+              {emailOpened ? 'Email sent' : 'Email code to patient'}
             </Button>
             <Button
               type="button"

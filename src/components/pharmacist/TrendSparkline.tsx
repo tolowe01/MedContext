@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import {
   LineChart,
   Line,
@@ -20,6 +21,7 @@ interface TrendSparklineProps {
 
 const SYSTOLIC_COLOR = '#3A9BD5'
 const DIASTOLIC_COLOR = '#7FB3D3'
+const HEART_RATE_COLOR = '#8B5CF6'
 const DOT_ALERT = '#DC2626'
 const DOT_OK = '#4A9B8E'
 
@@ -30,6 +32,7 @@ function buildData(logs: DailyLog[]) {
       date: l.log_date,
       systolic: l.systolic,
       diastolic: l.diastolic,
+      heart_rate: l.heart_rate,
     }))
 }
 
@@ -47,7 +50,16 @@ function ThresholdDot({ cx, cy, value, threshold }: DotProps) {
 }
 
 export default function TrendSparkline({ logs, mini = false }: TrendSparklineProps) {
+  // Recharts generates non-deterministic clipPath ids, which break SSR
+  // hydration. Render a same-size placeholder until mounted, then the chart.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   const data = buildData(logs)
+
+  if (!mounted) {
+    return mini ? <div className="w-20 h-6" aria-hidden /> : <div className="w-full h-[150px]" aria-hidden />
+  }
 
   if (mini) {
     return (
@@ -80,7 +92,7 @@ export default function TrendSparkline({ logs, mini = false }: TrendSparklinePro
     <ResponsiveContainer width="100%" height={150}>
       <LineChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" stroke="var(--color-neutral-200)" />
-        <YAxis domain={[60, 200]} tick={{ fontSize: 11, fill: '#94A3B8' }} width={36} />
+        <YAxis domain={[40, 200]} tick={{ fontSize: 11, fill: '#94A3B8' }} width={36} />
         <Tooltip
           contentStyle={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 8 }}
           labelStyle={{ color: '#1E293B', fontSize: 11 }}
@@ -110,6 +122,16 @@ export default function TrendSparkline({ logs, mini = false }: TrendSparklinePro
             <ThresholdDot key={props.index} cx={props.cx} cy={props.cy} value={props.value} threshold={90} />
           )}
           isAnimationActive={false}
+        />
+        <Line
+          type="monotone"
+          dataKey="heart_rate"
+          stroke={HEART_RATE_COLOR}
+          strokeWidth={2}
+          name="Heart rate"
+          dot={{ r: 2.5, fill: HEART_RATE_COLOR, stroke: 'none' }}
+          isAnimationActive={false}
+          connectNulls
         />
       </LineChart>
     </ResponsiveContainer>
