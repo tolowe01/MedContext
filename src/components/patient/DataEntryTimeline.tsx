@@ -1,5 +1,6 @@
 import { DailyLog } from '@/lib/types'
 import { format, addDays, parseISO } from 'date-fns'
+import { Check } from 'lucide-react'
 
 interface DataEntryTimelineProps {
   logs: DailyLog[]
@@ -34,10 +35,16 @@ export default function DataEntryTimeline({ logs, totalDays = 7 }: DataEntryTime
           <div
             role="img"
             aria-label={`${day.dateStr}: ${day.hasLog ? 'logged' : 'no log'}`}
-            className={`w-8 h-8 rounded-full transition-colors ${
-              day.hasLog ? 'bg-mc-teal-400' : 'bg-transparent border-2 border-mc-neutral-300'
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+              day.hasLog
+                ? 'bg-mc-teal-400 text-white scale-100'
+                : 'bg-transparent border-2 border-mc-neutral-300 scale-95'
             }`}
-          />
+          >
+            {day.hasLog && (
+              <Check className="w-4 h-4 stroke-[3.5] animate-check-pop" />
+            )}
+          </div>
           <span className="text-xs font-body text-mc-neutral-600">{day.dayLabel}</span>
         </div>
       ))}

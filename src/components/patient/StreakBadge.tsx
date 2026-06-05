@@ -1,3 +1,5 @@
+import { Check } from 'lucide-react'
+
 interface StreakBadgeProps {
   streak: number
 }
@@ -25,9 +27,9 @@ export default function StreakBadge({ streak }: StreakBadgeProps) {
 
   return (
     <span
-      className={`rounded-chip px-3 py-1 inline-flex items-center gap-1 font-body text-sm transition-colors ${getChipStyle()}`}
+      className={`rounded-chip px-3 py-1 inline-flex items-center gap-1.5 font-body text-sm transition-colors ${getChipStyle()}`}
     >
-      {streak >= 7 && <span aria-hidden>✓</span>}
+      {streak >= 7 && <Check className="w-3.5 h-3.5 stroke-[3] animate-check-pop" aria-hidden />}
       {streak >= 3 && streak < 7 && <span aria-hidden>↑</span>}
       {getLabel()}
     </span>
