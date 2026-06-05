@@ -113,25 +113,25 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
   }
 
   return (
-    <div className="bg-dialogue-surface border border-dialogue-border rounded-cardLarge p-6">
+    <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-cardLarge p-6">
       {/* Progress */}
       <div className="flex items-center justify-between mb-2">
-        <p className="font-body text-sm text-dialogue-textMuted">Health questionnaire</p>
-        <p className="font-body text-sm text-dialogue-textMuted">{progress}%</p>
+        <p className="font-body text-sm text-mc-neutral-400">Health questionnaire</p>
+        <p className="font-body text-sm text-mc-neutral-400">{progress}%</p>
       </div>
-      <div className="h-1.5 w-full rounded-full bg-dialogue-border overflow-hidden mb-8">
+      <div className="h-1.5 w-full rounded-full bg-mc-neutral-200 overflow-hidden mb-8">
         <div
-          className="h-full bg-dialogue-accent rounded-full transition-all duration-300"
+          className="h-full bg-mc-primary-400 rounded-full transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
 
       {/* Question */}
-      <h2 className="font-display-semi text-screenTitle text-dialogue-text mb-2 leading-tight">
+      <h2 className="font-display-semi text-screenTitle text-mc-neutral-900 mb-2 leading-tight">
         {step.question}
       </h2>
       {step.helper && (
-        <p className="font-body text-body text-dialogue-textMuted mb-6">{step.helper}</p>
+        <p className="font-body text-body text-mc-neutral-400 mb-6">{step.helper}</p>
       )}
       {!step.helper && <div className="mb-6" />}
 
@@ -167,7 +167,7 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
               className="pr-14 text-body"
             />
             {step.unit && (
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 font-body text-body text-dialogue-textMuted">
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 font-body text-body text-mc-neutral-400">
                 {step.unit}
               </span>
             )}
@@ -181,7 +181,7 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
             placeholder={step.placeholder ?? 'Type here…'}
             value={(answers[step.id] as string) ?? ''}
             onChange={(e) => setField(e.target.value)}
-            className="bg-dialogue-bg border-dialogue-border text-dialogue-text placeholder:text-dialogue-textMuted focus:border-dialogue-accent resize-none"
+            className="bg-mc-surface-page border-mc-neutral-200 text-mc-neutral-900 placeholder:text-mc-neutral-400 focus:border-mc-primary-400 resize-none"
           />
         )}
 
@@ -196,8 +196,8 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
         )}
 
         {step.kind === 'slider' && step.slider && (
-          <div className="bg-dialogue-bg border border-dialogue-border rounded-card p-5">
-            <p className="text-center font-display-semi text-sectionTitle text-dialogue-text mb-4">
+          <div className="bg-mc-surface-page border border-mc-neutral-200 rounded-card p-5">
+            <p className="text-center font-display-semi text-sectionTitle text-mc-neutral-900 mb-4">
               {sliderLabel((answers.weight_change as number) ?? 0, step.slider.unit)}
             </p>
             <Slider
@@ -208,7 +208,7 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
               step={step.slider.step}
               aria-label={step.question}
             />
-            <div className="flex justify-between mt-2 font-body text-xs text-dialogue-textMuted">
+            <div className="flex justify-between mt-2 font-body text-xs text-mc-neutral-400">
               <span>{step.slider.minLabel}</span>
               <span>{step.slider.midLabel}</span>
               <span>{step.slider.maxLabel}</span>
@@ -217,7 +217,7 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
         )}
       </div>
 
-      {error && <p className="text-red-400 text-sm font-body mt-3">{error}</p>}
+      {error && <p className="text-mc-danger-600 text-sm font-body mt-3">{error}</p>}
 
       {/* Continue for non-yesno kinds */}
       {step.kind !== 'yesno' && (
@@ -240,7 +240,7 @@ export default function QuestionnaireWizard({ sexe, onComplete }: QuestionnaireW
           type="button"
           onClick={handleBack}
           disabled={isSubmitting}
-          className="mt-5 font-body text-body text-dialogue-textMuted hover:text-dialogue-text transition-colors disabled:opacity-50"
+          className="mt-5 font-body text-body text-mc-neutral-400 hover:text-mc-neutral-900 transition-colors disabled:opacity-50"
         >
           Back
         </button>
@@ -264,18 +264,18 @@ function OptionCard({
       onClick={onClick}
       className={`w-full flex items-center gap-3 rounded-card border px-5 py-4 text-left transition-colors ${
         selected
-          ? 'border-dialogue-accent bg-dialogue-accent/10'
-          : 'border-dialogue-border bg-dialogue-bg hover:border-dialogue-accent/60'
+          ? 'border-mc-primary-400 bg-mc-primary-400/10'
+          : 'border-mc-neutral-200 bg-mc-surface-page hover:border-mc-primary-400/60'
       }`}
     >
       <span
         className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
-          selected ? 'border-dialogue-accent bg-dialogue-accent' : 'border-dialogue-border'
+          selected ? 'border-mc-primary-400 bg-mc-primary-400' : 'border-mc-neutral-200'
         }`}
       >
-        {selected && <Check className="h-4 w-4 text-dialogue-bg" />}
+        {selected && <Check className="h-4 w-4 text-white" />}
       </span>
-      <span className="font-body text-body text-dialogue-text">{label}</span>
+      <span className="font-body text-body text-mc-neutral-900">{label}</span>
     </button>
   )
 }

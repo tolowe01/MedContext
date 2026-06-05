@@ -21,11 +21,11 @@ export default async function QuestionnairePage() {
   const sexe: Sexe = baseline?.contact?.sexe ?? 'prefer_not_to_say'
 
   return (
-    <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
-      <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2">
+    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
+      <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-2">
         Tell us about yourself
       </h1>
-      <p className="font-body text-body text-dialogue-textMuted mb-6">
+      <p className="font-body text-body text-mc-neutral-400 mb-6">
         A few quick questions so your pharmacist has the full picture.
       </p>
 

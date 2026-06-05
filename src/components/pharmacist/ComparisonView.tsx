@@ -25,50 +25,50 @@ export default function ComparisonView({ patientLog, pharmacistReading }: Compar
 
   return (
     <div className="space-y-3">
-      <h3 className="font-display-semi text-sectionTitle text-dialogue-text">Reading Comparison</h3>
+      <h3 className="font-display-semi text-sectionTitle text-mc-neutral-900">Reading Comparison</h3>
 
       <div className="flex flex-col sm:flex-row gap-3">
         {patientLog ? (
-          <div className="flex-1 bg-dialogue-surface rounded-card p-3">
-            <p className="text-dialogue-textMuted text-xs font-body mb-1">Patient self-report</p>
-            <p className="text-dialogue-text font-body-bold text-cta">
+          <div className="flex-1 bg-mc-surface-white rounded-card p-3">
+            <p className="text-mc-neutral-400 text-xs font-body mb-1">Patient self-report</p>
+            <p className="text-mc-neutral-900 font-body-bold text-cta">
               {patientLog.systolic}/{patientLog.diastolic} mmHg
             </p>
-            <p className="text-dialogue-textMuted text-xs font-body mt-0.5">{patientLog.log_date}</p>
+            <p className="text-mc-neutral-400 text-xs font-body mt-0.5">{patientLog.log_date}</p>
           </div>
         ) : (
-          <div className="flex-1 bg-dialogue-surface rounded-card p-3 opacity-40">
-            <p className="text-dialogue-textMuted text-xs font-body">No patient log</p>
+          <div className="flex-1 bg-mc-surface-white rounded-card p-3 opacity-40">
+            <p className="text-mc-neutral-400 text-xs font-body">No patient log</p>
           </div>
         )}
 
         {pharmacistReading ? (
-          <div className="flex-1 bg-dialogue-surface rounded-card p-3">
-            <p className="text-dialogue-textMuted text-xs font-body mb-1">Pharmacist in-store</p>
-            <p className="text-dialogue-text font-body-bold text-cta">
+          <div className="flex-1 bg-mc-surface-white rounded-card p-3">
+            <p className="text-mc-neutral-400 text-xs font-body mb-1">Pharmacist in-store</p>
+            <p className="text-mc-neutral-900 font-body-bold text-cta">
               {pharmacistReading.systolic}/{pharmacistReading.diastolic} mmHg
             </p>
-            <p className="text-dialogue-textMuted text-xs font-body mt-0.5">
+            <p className="text-mc-neutral-400 text-xs font-body mt-0.5">
               {pharmacistReading.reading_date}
             </p>
           </div>
         ) : (
-          <div className="flex-1 bg-dialogue-surface rounded-card p-3 opacity-40">
-            <p className="text-dialogue-textMuted text-xs font-body">No in-store reading</p>
+          <div className="flex-1 bg-mc-surface-white rounded-card p-3 opacity-40">
+            <p className="text-mc-neutral-400 text-xs font-body">No in-store reading</p>
           </div>
         )}
       </div>
 
       {systolicDelta != null && diastolicDelta != null && (
-        <div className="bg-dialogue-chip rounded-button px-3 py-2">
-          <p className="text-dialogue-textMuted text-xs font-body">
+        <div className="bg-mc-neutral-100 rounded-button px-3 py-2">
+          <p className="text-mc-neutral-400 text-xs font-body">
             Delta — Systolic:{' '}
-            <span className="text-dialogue-text font-body-bold">
+            <span className="text-mc-neutral-900 font-body-bold">
               {formatDelta(systolicDelta)}
             </span>
             {' · '}
             Diastolic:{' '}
-            <span className="text-dialogue-text font-body-bold">
+            <span className="text-mc-neutral-900 font-body-bold">
               {formatDelta(diastolicDelta)}
             </span>
           </p>
@@ -76,8 +76,8 @@ export default function ComparisonView({ patientLog, pharmacistReading }: Compar
       )}
 
       {hasSignificantVariance && (
-        <div className="bg-amber-900/30 border border-amber-600/50 rounded-button px-3 py-2">
-          <p className="text-amber-300 text-sm font-body">
+        <div className="bg-mc-warning-50 border border-mc-warning-100 rounded-button px-3 py-2">
+          <p className="text-mc-warning-800 text-sm font-body">
             Significant variance — consider follow-up
           </p>
         </div>

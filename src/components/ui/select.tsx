@@ -16,14 +16,14 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex w-full items-center justify-between rounded-button border border-dialogue-border bg-dialogue-surface px-4 py-3 text-body font-body text-dialogue-text placeholder:text-dialogue-textMuted focus:outline-none focus:border-dialogue-accent focus:ring-1 focus:ring-dialogue-accent disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 transition-colors',
+      'flex w-full items-center justify-between rounded-button border border-mc-neutral-300 bg-mc-surface-white px-4 py-3 text-body font-body text-mc-neutral-900 placeholder:text-mc-neutral-400 focus:outline-none focus:border-mc-primary-400 focus:ring-1 focus:ring-mc-primary-200 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 transition-colors',
       className
     )}
     {...props}
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 text-dialogue-textMuted" />
+      <ChevronDown className="h-4 w-4 text-mc-neutral-400" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ))
@@ -37,7 +37,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-card border border-dialogue-border bg-dialogue-surface shadow-xl animate-in fade-in-0 zoom-in-95',
+        'relative z-50 max-h-96 min-w-[8rem] overflow-hidden rounded-button border border-mc-neutral-200 bg-mc-surface-white shadow-lg animate-in fade-in-0 zoom-in-95',
         position === 'popper' && 'translate-y-1',
         className
       )}
@@ -64,14 +64,14 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-pointer select-none items-center rounded-chip py-2 pl-8 pr-4 text-body font-body text-dialogue-text outline-none focus:bg-dialogue-border data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors',
+      'relative flex w-full cursor-pointer select-none items-center rounded-chip py-2 pl-8 pr-4 text-body font-body text-mc-neutral-900 outline-none focus:bg-mc-neutral-100 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 transition-colors',
       className
     )}
     {...props}
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-        <Check className="h-4 w-4 text-dialogue-accent" />
+        <Check className="h-4 w-4 text-mc-primary-400" />
       </SelectPrimitive.ItemIndicator>
     </span>
     <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>

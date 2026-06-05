@@ -4,18 +4,18 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-button font-body-bold text-cta uppercase tracking-wide transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dialogue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dialogue-bg disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center rounded-button font-body font-bold text-cta uppercase tracking-wide transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-page disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         default:
-          'bg-dialogue-accent text-dialogue-bg hover:opacity-90',
+          'bg-mc-primary-400 text-white hover:bg-mc-primary-600',
         outline:
-          'border border-dialogue-border text-dialogue-text bg-transparent hover:bg-dialogue-surface',
+          'border border-mc-neutral-200 text-mc-neutral-900 bg-transparent hover:bg-mc-neutral-100',
         ghost:
-          'text-dialogue-textMuted hover:text-dialogue-text hover:bg-dialogue-surface',
+          'text-mc-neutral-600 hover:text-mc-neutral-900 hover:bg-mc-neutral-100',
         destructive:
-          'bg-emergency text-white hover:opacity-90',
+          'bg-mc-danger-400 text-white hover:bg-mc-danger-600',
       },
       size: {
         default: 'h-12 px-6 py-3',

@@ -32,28 +32,28 @@ export default function InvitationCard({
   periodId,
 }: InvitationCardProps) {
   return (
-    <div className="bg-ln-surface1 border border-ln-hairline rounded-ln-xl p-8 flex flex-col gap-6">
+    <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-8 flex flex-col gap-6">
       <div className="flex flex-col gap-2">
-        <p className="font-ln-text text-body text-ln-inkMuted">
+        <p className="font-body text-body text-mc-neutral-600">
           You have been invited to a 7-day monitoring period by
         </p>
-        <p className="font-ln-display font-semibold text-sectionTitle text-ln-ink">{pharmacistName}</p>
+        <p className="font-display font-semibold text-sectionTitle text-mc-neutral-900">{pharmacistName}</p>
       </div>
 
       <div className="flex flex-col gap-3">
-        <p className="font-ln-text font-semibold text-cta text-ln-inkMuted uppercase tracking-wide">
+        <p className="font-body font-semibold text-cta text-mc-neutral-600 uppercase tracking-wide">
           Medications we will track
         </p>
         <ul className="flex flex-col gap-2">
           {medications.map((med, index) => (
             <li
               key={`${med.name}-${index}`}
-              className="flex items-start gap-3 bg-ln-surface2/10 border border-ln-hairline rounded-ln-lg px-4 py-3"
+              className="flex items-start gap-3 bg-mc-neutral-100/10 border border-mc-neutral-200 rounded-tile px-4 py-3"
             >
-              <Pill className="h-5 w-5 text-ln-primary shrink-0 mt-0.5" aria-hidden="true" />
+              <Pill className="h-5 w-5 text-mc-primary-400 shrink-0 mt-0.5" aria-hidden="true" />
               <div className="flex flex-col">
-                <span className="font-ln-text font-semibold text-body text-ln-ink">{med.name}</span>
-                <span className="font-ln-text text-sm text-ln-inkMuted">
+                <span className="font-body font-semibold text-body text-mc-neutral-900">{med.name}</span>
+                <span className="font-body text-sm text-mc-neutral-600">
                   {med.dose} · {med.frequency}
                 </span>
               </div>

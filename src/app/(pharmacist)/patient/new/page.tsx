@@ -36,19 +36,19 @@ function WizardProgress({ current }: { current: Step }) {
         return (
           <li key={step} className="flex items-center gap-2.5 flex-1 min-w-0">
             <span
-              className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-ln-text font-medium text-xs transition-colors ${
+              className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full font-body font-medium text-xs transition-colors ${
                 active
-                  ? 'bg-ln-primary text-white'
+                  ? 'bg-mc-primary-400 text-white'
                   : done
-                    ? 'bg-ln-surface3 text-ln-ink border border-ln-hairlineStrong'
-                    : 'bg-ln-surface1 text-ln-inkSubtle border border-ln-hairline'
+                    ? 'bg-mc-neutral-100 text-mc-neutral-900 border border-mc-neutral-300'
+                    : 'bg-mc-surface-white text-mc-neutral-400 border border-mc-neutral-200'
               }`}
             >
               {index + 1}
             </span>
             <span
-              className={`font-ln-text text-xs truncate hidden sm:inline ${
-                active ? 'text-ln-ink' : 'text-ln-inkSubtle'
+              className={`font-body text-xs truncate hidden sm:inline ${
+                active ? 'text-mc-neutral-900' : 'text-mc-neutral-400'
               }`}
             >
               {STEP_LABELS[step]}
@@ -57,7 +57,7 @@ function WizardProgress({ current }: { current: Step }) {
               <span
                 aria-hidden="true"
                 className={`hidden sm:block h-px flex-1 ${
-                  done ? 'bg-ln-hairlineStrong' : 'bg-ln-hairline'
+                  done ? 'bg-mc-neutral-200' : 'bg-mc-neutral-200'
                 }`}
               />
             )}
@@ -167,7 +167,7 @@ function NewPatientWizard() {
 
   const content = useMemo(() => {
     if (pharmacyError) {
-      return <p className="font-ln-text text-sm text-emergency">{pharmacyError}</p>
+      return <p className="font-body text-sm text-emergency">{pharmacyError}</p>
     }
 
     if (step === 'A') {
@@ -176,7 +176,7 @@ function NewPatientWizard() {
 
     if (!patientId) {
       return (
-        <p className="font-ln-text text-sm text-ln-inkMuted">
+        <p className="font-body text-sm text-mc-neutral-600">
           Please create the patient account first.
         </p>
       )
@@ -185,7 +185,7 @@ function NewPatientWizard() {
     if (step === 'B') {
       if (!pharmacyId) {
         return (
-          <p className="font-ln-text text-sm text-ln-inkSubtle animate-pulse">
+          <p className="font-body text-sm text-mc-neutral-400 animate-pulse">
             Loading your pharmacy...
           </p>
         )
@@ -202,7 +202,7 @@ function NewPatientWizard() {
     if (step === 'C') {
       if (!medicationListId) {
         return (
-          <p className="font-ln-text text-sm text-ln-inkMuted">
+          <p className="font-body text-sm text-mc-neutral-600">
             Please upload a medication list first.
           </p>
         )
@@ -220,7 +220,7 @@ function NewPatientWizard() {
 
     if (!medicationListId) {
       return (
-        <p className="font-ln-text text-sm text-ln-inkMuted">
+        <p className="font-body text-sm text-mc-neutral-600">
           Please confirm the medication list first.
         </p>
       )
@@ -248,17 +248,17 @@ function NewPatientWizard() {
   ])
 
   return (
-    <main className="min-h-screen bg-ln-canvas text-ln-ink font-ln-text px-6 py-12">
-      <div className="mx-auto w-full max-w-2xl ln-rise">
-        <p className="ln-eyebrow mb-3">Onboarding</p>
-        <h1 className="font-ln-display text-3xl font-semibold tracking-ln-display text-ln-ink mb-2">
+    <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body px-6 py-12">
+      <div className="mx-auto w-full max-w-2xl mc-rise">
+        <p className="text-xs font-medium tracking-wide uppercase text-mc-neutral-400 mb-3">Onboarding</p>
+        <h1 className="font-display text-3xl font-semibold -tracking-[0.022em] text-mc-neutral-900 mb-2">
           New patient
         </h1>
-        <p className="font-ln-text text-sm text-ln-inkMuted mb-10">
+        <p className="font-body text-sm text-mc-neutral-600 mb-10">
           Onboard a patient, capture their medications, and start monitoring.
         </p>
         <WizardProgress current={step} />
-        <div className="ln-panel rounded-ln-xl p-6">{content}</div>
+        <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-card p-6">{content}</div>
       </div>
     </main>
   )
@@ -268,8 +268,8 @@ export default function NewPatientPage() {
   return (
     <Suspense
       fallback={
-        <main className="min-h-screen bg-ln-canvas text-ln-ink font-ln-text px-6 py-12 flex items-center justify-center">
-          <p className="font-ln-text text-sm text-ln-inkSubtle animate-pulse">Loading...</p>
+        <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body px-6 py-12 flex items-center justify-center">
+          <p className="font-body text-sm text-mc-neutral-400 animate-pulse">Loading...</p>
         </main>
       }
     >

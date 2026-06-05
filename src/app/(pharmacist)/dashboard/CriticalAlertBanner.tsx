@@ -119,7 +119,7 @@ export default function CriticalAlertBanner({
         <div
           role="alert"
           aria-live="assertive"
-          className="fixed top-0 inset-x-0 z-50 bg-emergency text-white shadow-lg"
+          className="fixed top-0 inset-x-0 z-50 bg-mc-danger-50 border-l-4 border-mc-danger-400 shadow-lg"
         >
           <div className="mx-auto flex max-w-5xl items-center gap-4 px-6 py-4">
             <button
@@ -127,14 +127,14 @@ export default function CriticalAlertBanner({
               onClick={() =>
                 router.push(`/patient/${current.patient_id}?highlight=${current.daily_log_id}`)
               }
-              className="flex flex-1 items-center gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-emergency rounded-ln-md"
+              className="flex flex-1 items-center gap-3 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-danger-400 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-danger-50 rounded-button"
             >
-              <AlertTriangle className="h-6 w-6 shrink-0" aria-hidden="true" />
-              <span className="font-ln-text font-semibold text-body">
+              <AlertTriangle className="h-6 w-6 shrink-0 text-mc-danger-400" aria-hidden="true" />
+              <span className="font-body font-semibold text-body text-mc-danger-800">
                 CRITICAL READING: {current.patient_name ?? 'Patient'} {current.systolic}/
                 {current.diastolic}
                 {extraCount > 0 && (
-                  <span className="ml-2 font-ln-text opacity-90">+{extraCount} more</span>
+                  <span className="ml-2 font-body text-mc-danger-800 opacity-90">+{extraCount} more</span>
                 )}
               </span>
             </button>
@@ -144,7 +144,7 @@ export default function CriticalAlertBanner({
               variant="outline"
               size="sm"
               onClick={() => handleAcknowledge(current.id)}
-              className="shrink-0 border-white text-white hover:bg-white hover:text-emergency"
+              className="shrink-0 border-mc-danger-400 text-mc-danger-800 hover:bg-mc-danger-400 hover:text-white"
             >
               Acknowledge
             </Button>
@@ -156,7 +156,7 @@ export default function CriticalAlertBanner({
         <button
           type="button"
           onClick={armAudio}
-          className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-ln-sm bg-ln-surface1 border border-ln-hairline px-3 py-2 text-xs font-ln-text font-semibold text-ln-ink hover:bg-ln-hairline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ln-primary focus-visible:ring-offset-2 focus-visible:ring-offset-ln-canvas"
+          className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-chip bg-mc-surface-white border border-mc-neutral-200 px-3 py-2 text-xs font-body font-semibold text-mc-neutral-900 hover:bg-mc-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-page"
         >
           <Volume2 className="h-4 w-4" aria-hidden="true" />
           Enable alert sound

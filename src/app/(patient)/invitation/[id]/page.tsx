@@ -38,8 +38,8 @@ export default async function InvitationPage({ params }: InvitationPageProps) {
 
   if (!patient) {
     return (
-      <main className="min-h-screen bg-ln-canvas px-screenX pt-screenTop pb-20">
-        <p className="font-ln-text text-body text-ln-inkMuted">Patient record not found.</p>
+      <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
+        <p className="font-body text-body text-mc-neutral-600">Patient record not found.</p>
       </main>
     )
   }
@@ -84,8 +84,8 @@ export default async function InvitationPage({ params }: InvitationPageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-ln-canvas px-screenX pt-screenTop pb-20">
-      <h1 className="font-ln-display font-semibold text-screenTitle text-ln-ink mb-6">
+    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
+      <h1 className="font-display font-semibold text-screenTitle text-mc-neutral-900 mb-6">
         You are invited to start tracking
       </h1>
       <InvitationCard

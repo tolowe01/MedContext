@@ -79,8 +79,8 @@ export default function SubmitPage() {
 
   if (isLoadingLogs) {
     return (
-      <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20 flex items-center justify-center">
-        <p className="font-body text-body text-dialogue-textMuted animate-pulse">
+      <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20 flex items-center justify-center">
+        <p className="font-body text-body text-mc-neutral-400 animate-pulse">
           Loading your readings…
         </p>
       </main>
@@ -88,43 +88,43 @@ export default function SubmitPage() {
   }
 
   return (
-    <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
-      <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2">
+    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
+      <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-2">
         Submit your week
       </h1>
-      <p className="font-body text-body text-dialogue-textMuted mb-6">
+      <p className="font-body text-body text-mc-neutral-400 mb-6">
         Review your readings before sending them to your pharmacist.
       </p>
 
-      <div className="bg-dialogue-surface border border-dialogue-border rounded-card overflow-hidden mb-6">
-        <div className="px-5 py-4 border-b border-dialogue-border">
-          <p className="font-body-bold text-cta text-dialogue-textMuted uppercase tracking-wide">
+      <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card overflow-hidden mb-6">
+        <div className="px-5 py-4 border-b border-mc-neutral-200">
+          <p className="font-body-bold text-cta text-mc-neutral-400 uppercase tracking-wide">
             7-day summary
           </p>
         </div>
 
         {logs.length === 0 ? (
           <div className="px-5 py-6 text-center">
-            <p className="font-body text-body text-dialogue-textMuted">No readings found.</p>
+            <p className="font-body text-body text-mc-neutral-400">No readings found.</p>
           </div>
         ) : (
-          <div className="divide-y divide-dialogue-border">
-            <div className="grid grid-cols-4 px-5 py-2 bg-dialogue-bg/50">
-              <p className="text-xs font-body text-dialogue-textMuted">Date</p>
-              <p className="text-xs font-body text-dialogue-textMuted text-center">SBP</p>
-              <p className="text-xs font-body text-dialogue-textMuted text-center">DBP</p>
-              <p className="text-xs font-body text-dialogue-textMuted text-center">Taken</p>
+          <div className="divide-y divide-mc-neutral-200">
+            <div className="grid grid-cols-4 px-5 py-2 bg-mc-surface-page/50">
+              <p className="text-xs font-body text-mc-neutral-400">Date</p>
+              <p className="text-xs font-body text-mc-neutral-400 text-center">SBP</p>
+              <p className="text-xs font-body text-mc-neutral-400 text-center">DBP</p>
+              <p className="text-xs font-body text-mc-neutral-400 text-center">Taken</p>
             </div>
             {logs.map((log) => (
               <div key={log.id} className="grid grid-cols-4 px-5 py-3 items-center">
-                <p className="font-body text-sm text-dialogue-text">{formatDate(log.log_date)}</p>
-                <p className="font-body text-sm text-dialogue-text text-center">{log.systolic}</p>
-                <p className="font-body text-sm text-dialogue-text text-center">{log.diastolic}</p>
+                <p className="font-body text-sm text-mc-neutral-900">{formatDate(log.log_date)}</p>
+                <p className="font-body text-sm text-mc-neutral-900 text-center">{log.systolic}</p>
+                <p className="font-body text-sm text-mc-neutral-900 text-center">{log.diastolic}</p>
                 <p className="font-body text-sm text-center">
                   {log.adherence_taken ? (
                     <span className="text-green-400">Yes</span>
                   ) : (
-                    <span className="text-red-400">No</span>
+                    <span className="text-mc-danger-600">No</span>
                   )}
                 </p>
               </div>
@@ -134,15 +134,15 @@ export default function SubmitPage() {
       </div>
 
       {error && (
-        <div className="bg-red-900/30 border border-red-700/50 rounded-button px-4 py-3 mb-4">
-          <p className="text-red-300 text-sm font-body">{error}</p>
+        <div className="bg-mc-danger-50 border border-mc-danger-100 rounded-button px-4 py-3 mb-4">
+          <p className="text-mc-danger-800 text-sm font-body">{error}</p>
         </div>
       )}
 
       <Button
         onClick={handleSubmit}
         disabled={isSubmitting || logs.length === 0}
-        className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-4 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">

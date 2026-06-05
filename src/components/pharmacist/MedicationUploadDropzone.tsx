@@ -150,7 +150,7 @@ export default function MedicationUploadDropzone({
 
   return (
     <div className="space-y-4">
-      <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">
+      <h2 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">
         Upload medication list
       </h2>
 
@@ -158,17 +158,17 @@ export default function MedicationUploadDropzone({
         onDragOver={handleDragOver}
         onDragLeave={() => setDragActive(false)}
         onDrop={handleDrop}
-        className={`rounded-ln-xl border-2 border-dashed p-8 flex flex-col items-center text-center transition-colors ${
+        className={`rounded-card border-2 border-dashed p-8 flex flex-col items-center text-center transition-colors ${
           dragActive
-            ? 'border-ln-primary bg-ln-surface1'
-            : 'border-ln-hairline bg-ln-canvas'
+            ? 'border-mc-primary-400 bg-mc-surface-white'
+            : 'border-mc-neutral-200 bg-mc-surface-page'
         }`}
       >
-        <UploadCloud className="h-10 w-10 text-ln-primary mb-3" />
-        <p className="font-ln-text text-body text-ln-ink mb-1">
+        <UploadCloud className="h-10 w-10 text-mc-primary-400 mb-3" />
+        <p className="font-body text-body text-mc-neutral-900 mb-1">
           Drag and drop a PDF here
         </p>
-        <p className="font-ln-text text-sm text-ln-inkMuted mb-4">
+        <p className="font-body text-sm text-mc-neutral-600 mb-4">
           PDF only, up to 10MB
         </p>
         <Button
@@ -195,12 +195,12 @@ export default function MedicationUploadDropzone({
       </div>
 
       {phase === 'extracting' && (
-        <p className="font-ln-text text-sm text-ln-inkMuted animate-pulse">
+        <p className="font-body text-sm text-mc-neutral-600 animate-pulse">
           Reading the document and extracting medications...
         </p>
       )}
 
-      {error && <p className="text-emergency text-sm font-ln-text">{error}</p>}
+      {error && <p className="text-emergency text-sm font-body">{error}</p>}
     </div>
   )
 }

@@ -37,19 +37,19 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#1a1410] flex items-center justify-center px-4">
+    <main className="min-h-screen bg-mc-surface-page flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <div className="bg-[#251e18] border border-[#3a2e25] rounded-cardLarge p-8 shadow-2xl">
-          <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2 text-center">
+        <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-cardLarge p-8 shadow-2xl">
+          <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-2 text-center">
             Sign in
           </h1>
-          <p className="text-dialogue-textMuted font-body text-sm text-center mb-8">
+          <p className="text-mc-neutral-400 font-body text-sm text-center mb-8">
             Your pharmacist is waiting for you
           </p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="space-y-1.5">
-              <Label htmlFor="email" className="text-dialogue-text font-body text-sm">
+              <Label htmlFor="email" className="text-mc-neutral-900 font-body text-sm">
                 Email
               </Label>
               <Input
@@ -57,16 +57,16 @@ export default function LoginPage() {
                 type="email"
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="bg-[#1a1410] border-dialogue-border text-dialogue-text placeholder:text-dialogue-textMuted focus:border-dialogue-accent"
+                className="bg-mc-surface-page border-mc-neutral-200 text-mc-neutral-900 placeholder:text-mc-neutral-400 focus:border-mc-primary-400"
                 {...register('email')}
               />
               {errors.email && (
-                <p className="text-red-400 text-xs font-body mt-1">{errors.email.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body mt-1">{errors.email.message}</p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="password" className="text-dialogue-text font-body text-sm">
+              <Label htmlFor="password" className="text-mc-neutral-900 font-body text-sm">
                 Password
               </Label>
               <Input
@@ -74,32 +74,32 @@ export default function LoginPage() {
                 type="password"
                 autoComplete="current-password"
                 placeholder="••••••••"
-                className="bg-[#1a1410] border-dialogue-border text-dialogue-text placeholder:text-dialogue-textMuted focus:border-dialogue-accent"
+                className="bg-mc-surface-page border-mc-neutral-200 text-mc-neutral-900 placeholder:text-mc-neutral-400 focus:border-mc-primary-400"
                 {...register('password')}
               />
               {errors.password && (
-                <p className="text-red-400 text-xs font-body mt-1">{errors.password.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body mt-1">{errors.password.message}</p>
               )}
             </div>
 
             {serverError && (
-              <div className="bg-red-900/30 border border-red-700/50 rounded-button px-4 py-3">
-                <p className="text-red-300 text-sm font-body">{serverError}</p>
+              <div className="bg-mc-danger-50 border border-mc-danger-100 rounded-button px-4 py-3">
+                <p className="text-mc-danger-800 text-sm font-body">{serverError}</p>
               </div>
             )}
 
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-3 mt-2 transition-opacity disabled:opacity-50"
+              className="w-full bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-3 mt-2 transition-opacity disabled:opacity-50"
             >
               {isSubmitting ? 'Signing in…' : 'Sign in'}
             </Button>
           </form>
 
-          <p className="text-center text-sm text-dialogue-textMuted font-body mt-6">
+          <p className="text-center text-sm text-mc-neutral-400 font-body mt-6">
             New to MedContext?{' '}
-            <Link href="/signup" className="text-dialogue-accent underline underline-offset-2">
+            <Link href="/signup" className="text-mc-primary-400 underline underline-offset-2">
               Create an account
             </Link>
           </p>

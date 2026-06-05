@@ -16,13 +16,13 @@ interface DisclaimerCard {
 const DISCLAIMER_CARDS: DisclaimerCard[] = [
   {
     id: 'ai_not_professional',
-    icon: <Bot className="w-6 h-6 text-dialogue-accent" />,
+    icon: <Bot className="w-6 h-6 text-mc-primary-400" />,
     title: 'AI is not a healthcare professional',
     body: 'The AI assistant that collects your readings is a software tool. It does not diagnose conditions, interpret clinical results, or replace the judgment of your pharmacist or physician. All clinical decisions are made by your licensed pharmacist.',
   },
   {
     id: 'tool_limitations',
-    icon: <Info className="w-6 h-6 text-amber-400" />,
+    icon: <Info className="w-6 h-6 text-mc-warning-400" />,
     title: 'Limitations of this tool',
     body: 'MedContext is a monitoring aid, not a medical device. Reading accuracy depends on your own device and technique. This app does not continuously monitor your health — it captures only what you submit. If you feel unwell, contact a healthcare provider directly.',
   },
@@ -55,11 +55,11 @@ export default function DisclaimersPage() {
   }
 
   return (
-    <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
-      <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2">
+    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
+      <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-2">
         Before we start
       </h1>
-      <p className="font-body text-body text-dialogue-textMuted mb-6">
+      <p className="font-body text-body text-mc-neutral-400 mb-6">
         Please read and acknowledge each statement below.
       </p>
 
@@ -67,15 +67,15 @@ export default function DisclaimersPage() {
         {DISCLAIMER_CARDS.map((card) => (
           <div
             key={card.id}
-            className="bg-dialogue-surface rounded-card p-6 border border-dialogue-border"
+            className="bg-mc-surface-white rounded-card p-6 border border-mc-neutral-200"
           >
             <div className="flex items-start gap-4">
               <div className="mt-0.5 shrink-0">{card.icon}</div>
               <div className="flex-1">
-                <h2 className="font-display-semi text-sectionTitle text-dialogue-text mb-2">
+                <h2 className="font-display-semi text-sectionTitle text-mc-neutral-900 mb-2">
                   {card.title}
                 </h2>
-                <p className="font-body text-body text-dialogue-textMuted leading-relaxed mb-4">
+                <p className="font-body text-body text-mc-neutral-400 leading-relaxed mb-4">
                   {card.body}
                 </p>
                 <div className="flex items-center gap-3">
@@ -83,11 +83,11 @@ export default function DisclaimersPage() {
                     id={card.id}
                     checked={checked[card.id]}
                     onCheckedChange={(val) => handleCheck(card.id, val === true)}
-                    className="border-dialogue-border data-[state=checked]:bg-dialogue-accent data-[state=checked]:border-dialogue-accent"
+                    className="border-mc-neutral-200 data-[state=checked]:bg-mc-primary-400 data-[state=checked]:border-mc-primary-400"
                   />
                   <label
                     htmlFor={card.id}
-                    className="text-sm font-body text-dialogue-text cursor-pointer select-none"
+                    className="text-sm font-body text-mc-neutral-900 cursor-pointer select-none"
                   >
                     I understand and acknowledge this
                   </label>
@@ -101,7 +101,7 @@ export default function DisclaimersPage() {
       <Button
         onClick={handleContinue}
         disabled={!allChecked}
-        className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-4 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
       >
         Continue
       </Button>

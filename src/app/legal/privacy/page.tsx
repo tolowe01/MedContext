@@ -37,35 +37,35 @@ const SECTIONS = [
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
+    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
       <div className="max-w-2xl mx-auto">
-        <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2">
+        <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-2">
           Privacy Policy
         </h1>
-        <p className="font-body text-body text-dialogue-textMuted mb-8">
+        <p className="font-body text-body text-mc-neutral-400 mb-8">
           Plain language. No legal jargon. Last updated 2026.
         </p>
 
         <div className="space-y-6">
           {SECTIONS.map((section) => (
             <section key={section.heading}>
-              <h2 className="font-display-semi text-sectionTitle text-dialogue-text mb-1">
+              <h2 className="font-display-semi text-sectionTitle text-mc-neutral-900 mb-1">
                 {section.heading}
               </h2>
-              <p className="font-body text-body text-dialogue-textMuted leading-relaxed">
+              <p className="font-body text-body text-mc-neutral-400 leading-relaxed">
                 {section.body}
               </p>
             </section>
           ))}
         </div>
 
-        <div className="mt-10 pt-6 border-t border-dialogue-border">
-          <p className="font-body text-tab text-dialogue-textMuted">
+        <div className="mt-10 pt-6 border-t border-mc-neutral-200">
+          <p className="font-body text-tab text-mc-neutral-400">
             Français disponible bientôt · Protected under Québec Law 25 (ARPPIPS)
           </p>
           <Link
             href="/login"
-            className="inline-block mt-4 text-dialogue-accent font-body text-body underline underline-offset-2"
+            className="inline-block mt-4 text-mc-primary-400 font-body text-body underline underline-offset-2"
           >
             Back to sign in
           </Link>

@@ -18,7 +18,7 @@ interface TrendSparklineProps {
   mini?: boolean
 }
 
-const SYSTOLIC_COLOR = '#F29B79'
+const SYSTOLIC_COLOR = '#3A9BD5'
 const DIASTOLIC_COLOR = '#7FB3D3'
 const DOT_ALERT = '#DC2626'
 const DOT_OK = '#4A9B8E'
@@ -79,11 +79,11 @@ export default function TrendSparkline({ logs, mini = false }: TrendSparklinePro
   return (
     <ResponsiveContainer width="100%" height={150}>
       <LineChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
-        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-dialogue-border, #3a2e25)" />
-        <YAxis domain={[60, 200]} tick={{ fontSize: 11, fill: '#9a9090' }} width={36} />
+        <CartesianGrid strokeDasharray="3 3" stroke="var(--color-neutral-200)" />
+        <YAxis domain={[60, 200]} tick={{ fontSize: 11, fill: '#94A3B8' }} width={36} />
         <Tooltip
-          contentStyle={{ background: '#251e18', border: '1px solid #3a2e25', borderRadius: 8 }}
-          labelStyle={{ color: '#e8ddd5', fontSize: 11 }}
+          contentStyle={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: 8 }}
+          labelStyle={{ color: '#1E293B', fontSize: 11 }}
           itemStyle={{ fontSize: 11 }}
         />
         <Legend wrapperStyle={{ fontSize: 11 }} />

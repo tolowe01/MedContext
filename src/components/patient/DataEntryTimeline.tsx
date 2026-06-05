@@ -27,11 +27,11 @@ export default function DataEntryTimeline({ logs, totalDays = 7 }: DataEntryTime
             aria-label={`${day.dateStr}: ${day.hasLog ? 'logged' : 'no log'}`}
             className={`w-8 h-8 rounded-full transition-colors ${
               day.hasLog
-                ? 'bg-dialogue-accent'
-                : 'bg-transparent border-2 border-dialogue-border'
+                ? 'bg-mc-teal-400'
+                : 'bg-transparent border-2 border-mc-neutral-300'
             }`}
           />
-          <span className="text-xs font-body text-dialogue-textMuted">{day.dayLabel}</span>
+          <span className="text-xs font-body text-mc-neutral-600">{day.dayLabel}</span>
         </div>
       ))}
     </div>

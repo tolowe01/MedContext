@@ -215,12 +215,12 @@ export default function ChatIntake({ patientId, logs = [], streak = 0, onComplet
             <div
               className={`max-w-[80%] rounded-card px-4 py-3 font-body text-body leading-relaxed ${
                 msg.role === 'user'
-                  ? 'bg-dialogue-accent text-dialogue-bg'
-                  : 'bg-dialogue-surface border border-dialogue-border text-dialogue-text'
+                  ? 'bg-mc-primary-400 text-white'
+                  : 'bg-mc-teal-50 border border-mc-teal-100 text-mc-neutral-900'
               }`}
             >
               {msg.content || (isLoading && idx === messages.length - 1 ? (
-                <span className="animate-pulse text-dialogue-textMuted">…</span>
+                <span className="animate-pulse text-mc-neutral-400">…</span>
               ) : null)}
             </div>
           </div>
@@ -229,34 +229,34 @@ export default function ChatIntake({ patientId, logs = [], streak = 0, onComplet
       </div>
 
       {pendingReading && (
-        <div className="bg-dialogue-surface border border-dialogue-border rounded-card p-5">
-          <p className="font-body-bold text-cta text-dialogue-textMuted uppercase tracking-wide mb-3">
+        <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-5">
+          <p className="font-body-bold text-cta text-mc-neutral-400 uppercase tracking-wide mb-3">
             Confirm reading
           </p>
           <div className="grid grid-cols-2 gap-3 mb-4">
-            <div className="bg-dialogue-chip rounded-button px-3 py-2">
-              <p className="text-xs text-dialogue-textMuted font-body">Systolic</p>
-              <p className="font-display-semi text-sectionTitle text-dialogue-text">
+            <div className="bg-mc-neutral-100 rounded-button px-3 py-2">
+              <p className="text-xs text-mc-neutral-400 font-body">Systolic</p>
+              <p className="font-display-semi text-sectionTitle text-mc-neutral-900">
                 {pendingReading.systolic}
               </p>
             </div>
-            <div className="bg-dialogue-chip rounded-button px-3 py-2">
-              <p className="text-xs text-dialogue-textMuted font-body">Diastolic</p>
-              <p className="font-display-semi text-sectionTitle text-dialogue-text">
+            <div className="bg-mc-neutral-100 rounded-button px-3 py-2">
+              <p className="text-xs text-mc-neutral-400 font-body">Diastolic</p>
+              <p className="font-display-semi text-sectionTitle text-mc-neutral-900">
                 {pendingReading.diastolic}
               </p>
             </div>
             {pendingReading.heart_rate && (
-              <div className="bg-dialogue-chip rounded-button px-3 py-2">
-                <p className="text-xs text-dialogue-textMuted font-body">Heart rate</p>
-                <p className="font-display-semi text-sectionTitle text-dialogue-text">
+              <div className="bg-mc-neutral-100 rounded-button px-3 py-2">
+                <p className="text-xs text-mc-neutral-400 font-body">Heart rate</p>
+                <p className="font-display-semi text-sectionTitle text-mc-neutral-900">
                   {pendingReading.heart_rate}
                 </p>
               </div>
             )}
-            <div className="bg-dialogue-chip rounded-button px-3 py-2">
-              <p className="text-xs text-dialogue-textMuted font-body">Medication</p>
-              <p className="font-display-semi text-sectionTitle text-dialogue-text">
+            <div className="bg-mc-neutral-100 rounded-button px-3 py-2">
+              <p className="text-xs text-mc-neutral-400 font-body">Medication</p>
+              <p className="font-display-semi text-sectionTitle text-mc-neutral-900">
                 {pendingReading.adherence_taken ? 'Taken' : 'Not taken'}
               </p>
             </div>
@@ -265,14 +265,14 @@ export default function ChatIntake({ patientId, logs = [], streak = 0, onComplet
             <Button
               onClick={handleConfirm}
               disabled={isConfirming}
-              className="flex-1 bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-3"
+              className="flex-1 bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-3"
             >
               {isConfirming ? 'Saving…' : 'Confirm'}
             </Button>
             <Button
               onClick={handleEdit}
               variant="outline"
-              className="flex-1 border-dialogue-border text-dialogue-text font-cta text-cta rounded-button py-3 bg-transparent hover:bg-dialogue-chip"
+              className="flex-1 border-mc-neutral-200 text-mc-neutral-900 font-cta text-cta rounded-button py-3 bg-transparent hover:bg-mc-neutral-100"
             >
               Edit
             </Button>
@@ -283,12 +283,12 @@ export default function ChatIntake({ patientId, logs = [], streak = 0, onComplet
       {isDone ? (
         <Button
           onClick={() => router.push('/home')}
-          className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 mt-2"
+          className="w-full bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-4 mt-2"
         >
           Back to Homepage
         </Button>
       ) : !pendingReading && (
-        <div className="flex items-end gap-2 bg-dialogue-surface border border-dialogue-border rounded-card px-3 py-3">
+        <div className="flex items-end gap-2 bg-mc-surface-white border border-mc-neutral-200 rounded-card px-3 py-3">
           <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -296,7 +296,7 @@ export default function ChatIntake({ patientId, logs = [], streak = 0, onComplet
             placeholder="Type your BP reading…"
             disabled={isLoading}
             rows={1}
-            className="flex-1 resize-none border-0 bg-transparent text-dialogue-text placeholder:text-dialogue-textMuted focus-visible:ring-0 focus-visible:ring-offset-0 font-body text-body p-0 min-h-[24px]"
+            className="flex-1 resize-none border-0 bg-transparent text-mc-neutral-900 placeholder:text-mc-neutral-400 focus-visible:ring-0 focus-visible:ring-offset-0 font-body text-body p-0 min-h-[24px]"
           />
           <VoiceInputButton
             disabled={isLoading}
@@ -307,7 +307,7 @@ export default function ChatIntake({ patientId, logs = [], streak = 0, onComplet
             onClick={() => sendMessage(input, 'text')}
             disabled={isLoading || !input.trim()}
             aria-label="Send message"
-            className="flex items-center justify-center shrink-0 min-h-[44px] min-w-[44px] rounded-full bg-dialogue-accent disabled:opacity-40 disabled:cursor-not-allowed transition-opacity hover:bg-dialogue-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dialogue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dialogue-surface"
+            className="flex items-center justify-center shrink-0 min-h-[44px] min-w-[44px] rounded-full bg-mc-primary-400 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity hover:bg-mc-primary-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-white"
           >
             <Send className="w-4 h-4 text-white" />
           </button>

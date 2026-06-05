@@ -40,8 +40,8 @@ export default async function ProgressPage() {
 
   if (!patient) {
     return (
-      <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
-        <p className="font-body text-body text-dialogue-textMuted">Patient record not found.</p>
+      <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
+        <p className="font-body text-body text-mc-neutral-400">Patient record not found.</p>
       </main>
     )
   }
@@ -52,37 +52,37 @@ export default async function ProgressPage() {
   const daysRemaining = 7 - logCount
 
   return (
-    <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
-      <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-6">Your progress</h1>
+    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
+      <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-6">Your progress</h1>
 
       <div className="mb-4">
         <StreakBadge streak={logCount} />
       </div>
 
-      <div className="bg-dialogue-surface border border-dialogue-border rounded-card p-5 mb-4">
-        <p className="font-body-bold text-cta text-dialogue-textMuted uppercase tracking-wide mb-4">
+      <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-5 mb-4">
+        <p className="font-body-bold text-cta text-mc-neutral-400 uppercase tracking-wide mb-4">
           This week
         </p>
         <DataEntryTimeline logs={logs} totalDays={7} />
       </div>
 
-      <div className="bg-dialogue-surface border border-dialogue-border rounded-card p-5 mb-6">
+      <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-5 mb-6">
         <ConsistencyScore logs={logs} totalDays={7} />
       </div>
 
       {canSubmit ? (
         <Link
           href="/submit"
-          className="block w-full text-center bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity"
+          className="block w-full text-center bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-4 transition-opacity"
         >
           Submit your week
         </Link>
       ) : (
-        <div className="bg-dialogue-surface border border-dialogue-border rounded-card p-5 text-center">
-          <p className="font-body text-body text-dialogue-text mb-1">
+        <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-5 text-center">
+          <p className="font-body text-body text-mc-neutral-900 mb-1">
             {daysRemaining} more {daysRemaining === 1 ? 'day' : 'days'} until you can submit
           </p>
-          <p className="font-body text-sm text-dialogue-textMuted">
+          <p className="font-body text-sm text-mc-neutral-400">
             You need 7 consecutive days of readings to submit your week.
           </p>
         </div>

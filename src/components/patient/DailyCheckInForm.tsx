@@ -175,12 +175,12 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
 
   if (isComplete) {
     return (
-      <div className="bg-ln-surface1 border border-ln-hairline rounded-ln-xl p-8 flex flex-col items-center text-center gap-4">
-        <CheckCircle2 className="w-14 h-14 text-ln-primary" aria-hidden="true" />
-        <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">
+      <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-8 flex flex-col items-center text-center gap-4">
+        <CheckCircle2 className="w-14 h-14 text-mc-primary-400" aria-hidden="true" />
+        <h2 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">
           Your check-in is saved
         </h2>
-        <p className="font-ln-text text-body text-ln-inkMuted leading-relaxed">
+        <p className="font-body text-body text-mc-neutral-600 leading-relaxed">
           Thank you for checking in today. See you tomorrow.
         </p>
         <StreakBadge streak={1} />
@@ -197,8 +197,8 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
       className="flex flex-col gap-6"
       noValidate
     >
-      <fieldset className="bg-ln-surface1 border border-ln-hairline rounded-ln-lg p-5 flex flex-col gap-4">
-        <legend className="font-ln-text font-semibold text-cta text-ln-inkMuted uppercase tracking-wide">
+      <fieldset className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile p-5 flex flex-col gap-4">
+        <legend className="font-body font-semibold text-cta text-mc-neutral-600 uppercase tracking-wide">
           Your reading
         </legend>
 
@@ -218,7 +218,7 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
               aria-invalid={Boolean(errors.systolic)}
             />
             {errors.systolic && (
-              <p className="font-ln-text text-sm text-emergency">{errors.systolic}</p>
+              <p className="font-body text-sm text-emergency">{errors.systolic}</p>
             )}
           </div>
 
@@ -237,7 +237,7 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
               aria-invalid={Boolean(errors.diastolic)}
             />
             {errors.diastolic && (
-              <p className="font-ln-text text-sm text-emergency">{errors.diastolic}</p>
+              <p className="font-body text-sm text-emergency">{errors.diastolic}</p>
             )}
           </div>
 
@@ -256,7 +256,7 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
               aria-invalid={Boolean(errors.heartRate)}
             />
             {errors.heartRate && (
-              <p className="font-ln-text text-sm text-emergency">{errors.heartRate}</p>
+              <p className="font-body text-sm text-emergency">{errors.heartRate}</p>
             )}
           </div>
 
@@ -271,14 +271,14 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
               aria-invalid={Boolean(errors.timeOfReading)}
             />
             {errors.timeOfReading && (
-              <p className="font-ln-text text-sm text-emergency">{errors.timeOfReading}</p>
+              <p className="font-body text-sm text-emergency">{errors.timeOfReading}</p>
             )}
           </div>
         </div>
       </fieldset>
 
-      <fieldset className="bg-ln-surface1 border border-ln-hairline rounded-ln-lg p-5 flex flex-col gap-4">
-        <legend className="font-ln-text font-semibold text-cta text-ln-inkMuted uppercase tracking-wide">
+      <fieldset className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile p-5 flex flex-col gap-4">
+        <legend className="font-body font-semibold text-cta text-mc-neutral-600 uppercase tracking-wide">
           Did you take your medication today?
         </legend>
         <div className="grid grid-cols-2 gap-3">
@@ -302,8 +302,8 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
       </fieldset>
 
       {adherenceTaken === true && (
-        <fieldset className="bg-ln-surface1 border border-ln-hairline rounded-ln-lg p-5 flex flex-col gap-4">
-          <legend className="font-ln-text font-semibold text-cta text-ln-inkMuted uppercase tracking-wide">
+        <fieldset className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile p-5 flex flex-col gap-4">
+          <legend className="font-body font-semibold text-cta text-mc-neutral-600 uppercase tracking-wide">
             Did you notice any of these? (optional)
           </legend>
 
@@ -320,7 +320,7 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
                         toggleSideEffect(option.code, value === true)
                       }
                     />
-                    <span className="font-ln-text text-body text-ln-ink">{option.label}</span>
+                    <span className="font-body text-body text-mc-neutral-900">{option.label}</span>
                   </label>
 
                   {checked && option.code !== 'other' && option.allowsSeverity && (
@@ -355,11 +355,11 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
                         aria-invalid={Boolean(errors[`sideEffect.${option.code}.text`])}
                       />
                       {errors[`sideEffect.${option.code}.text`] && (
-                        <p className="font-ln-text text-sm text-emergency">
+                        <p className="font-body text-sm text-emergency">
                           {errors[`sideEffect.${option.code}.text`]}
                         </p>
                       )}
-                      <span className="font-ln-text text-xs text-ln-inkMuted self-end">
+                      <span className="font-body text-xs text-mc-neutral-600 self-end">
                         {(entry?.text ?? '').length}/{MAX_NOTE}
                       </span>
                     </div>
@@ -371,22 +371,22 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
 
           <div
             role="note"
-            className="border-2 border-emergency/60 bg-emergency/10 rounded-ln-lg p-4 flex flex-col gap-2"
+            className="border-2 border-emergency/60 bg-emergency/10 rounded-tile p-4 flex flex-col gap-2"
           >
             <div className="flex items-center gap-2">
               <AlertTriangle className="h-4 w-4 text-emergency shrink-0" aria-hidden="true" />
-              <p className="font-ln-text font-semibold text-body text-ln-ink">
+              <p className="font-body font-semibold text-body text-mc-neutral-900">
                 If you have any of these, get help now
               </p>
             </div>
-            <ul className="font-ln-text text-body text-ln-ink leading-relaxed list-disc pl-5 flex flex-col gap-1">
+            <ul className="font-body text-body text-mc-neutral-900 leading-relaxed list-disc pl-5 flex flex-col gap-1">
               <li>Swelling of your lips, tongue, or throat, or trouble breathing or swallowing</li>
               <li>Chest pain</li>
               <li>Weakness on one side of your body or trouble speaking</li>
             </ul>
             <a
               href="tel:911"
-              className="inline-flex items-center gap-2 self-start rounded-ln-md bg-emergency px-5 py-3 font-ln-text font-semibold text-cta uppercase tracking-wide text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ln-surface1"
+              className="inline-flex items-center gap-2 self-start rounded-button bg-emergency px-5 py-3 font-body font-semibold text-cta uppercase tracking-wide text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-page"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call 911
@@ -396,8 +396,8 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
       )}
 
       {adherenceTaken === false && (
-        <fieldset className="bg-ln-surface1 border border-ln-hairline rounded-ln-lg p-5 flex flex-col gap-2">
-          <legend className="font-ln-text font-semibold text-cta text-ln-inkMuted uppercase tracking-wide">
+        <fieldset className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile p-5 flex flex-col gap-2">
+          <legend className="font-body font-semibold text-cta text-mc-neutral-600 uppercase tracking-wide">
             Anything you want to add? (optional)
           </legend>
           <Textarea
@@ -406,7 +406,7 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
             maxLength={MAX_NOTE}
             placeholder="For example, you ran out, or it was a busy day"
           />
-          <span className="font-ln-text text-xs text-ln-inkMuted self-end">
+          <span className="font-body text-xs text-mc-neutral-600 self-end">
             {skipReason.length}/{MAX_NOTE}
           </span>
         </fieldset>
@@ -415,14 +415,14 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
       {alreadyLogged && (
         <p
           role="status"
-          className="font-ln-text text-body text-ln-inkMuted bg-ln-surface2/10 border border-ln-hairline rounded-ln-lg p-4"
+          className="font-body text-body text-mc-neutral-600 bg-mc-neutral-100/10 border border-mc-neutral-200 rounded-tile p-4"
         >
           You have already checked in today. See you tomorrow.
         </p>
       )}
 
       {formError && (
-        <p role="alert" className="font-ln-text text-body text-emergency">
+        <p role="alert" className="font-body text-body text-emergency">
           {formError}
         </p>
       )}

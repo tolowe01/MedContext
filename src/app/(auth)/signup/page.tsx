@@ -64,95 +64,95 @@ export default function SignupPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#1a1410] flex items-center justify-center px-4 py-10">
+    <main className="min-h-screen bg-mc-surface-page flex items-center justify-center px-4 py-10">
       <div className="w-full max-w-sm">
-        <div className="bg-[#251e18] border border-[#3a2e25] rounded-cardLarge p-8 shadow-2xl">
-          <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2 text-center">
+        <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-cardLarge p-8 shadow-2xl">
+          <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-2 text-center">
             Create your account
           </h1>
-          <p className="text-dialogue-textMuted font-body text-sm text-center mb-8">
+          <p className="text-mc-neutral-400 font-body text-sm text-center mb-8">
             A few details so your pharmacist can support you
           </p>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label htmlFor="firstName" className="text-dialogue-text">First name</Label>
+                <Label htmlFor="firstName" className="text-mc-neutral-900">First name</Label>
                 <Input
                   id="firstName"
                   autoComplete="given-name"
-                  className="bg-[#1a1410]"
+                  className="bg-mc-surface-page"
                   {...register('firstName')}
                 />
                 {errors.firstName && (
-                  <p className="text-red-400 text-xs font-body">{errors.firstName.message}</p>
+                  <p className="text-mc-danger-600 text-xs font-body">{errors.firstName.message}</p>
                 )}
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="lastName" className="text-dialogue-text">Last name</Label>
+                <Label htmlFor="lastName" className="text-mc-neutral-900">Last name</Label>
                 <Input
                   id="lastName"
                   autoComplete="family-name"
-                  className="bg-[#1a1410]"
+                  className="bg-mc-surface-page"
                   {...register('lastName')}
                 />
                 {errors.lastName && (
-                  <p className="text-red-400 text-xs font-body">{errors.lastName.message}</p>
+                  <p className="text-mc-danger-600 text-xs font-body">{errors.lastName.message}</p>
                 )}
               </div>
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="email" className="text-dialogue-text">Email</Label>
+              <Label htmlFor="email" className="text-mc-neutral-900">Email</Label>
               <Input
                 id="email"
                 type="email"
                 autoComplete="email"
                 placeholder="you@example.com"
-                className="bg-[#1a1410]"
+                className="bg-mc-surface-page"
                 {...register('email')}
               />
               {errors.email && (
-                <p className="text-red-400 text-xs font-body">{errors.email.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body">{errors.email.message}</p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="password" className="text-dialogue-text">Password</Label>
+              <Label htmlFor="password" className="text-mc-neutral-900">Password</Label>
               <Input
                 id="password"
                 type="password"
                 autoComplete="new-password"
                 placeholder="••••••••"
-                className="bg-[#1a1410]"
+                className="bg-mc-surface-page"
                 {...register('password')}
               />
               {errors.password && (
-                <p className="text-red-400 text-xs font-body">{errors.password.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body">{errors.password.message}</p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="dateOfBirth" className="text-dialogue-text">Date of birth</Label>
+              <Label htmlFor="dateOfBirth" className="text-mc-neutral-900">Date of birth</Label>
               <Input
                 id="dateOfBirth"
                 type="date"
-                className="bg-[#1a1410]"
+                className="bg-mc-surface-page"
                 {...register('dateOfBirth')}
               />
               {errors.dateOfBirth && (
-                <p className="text-red-400 text-xs font-body">{errors.dateOfBirth.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body">{errors.dateOfBirth.message}</p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="sexe" className="text-dialogue-text">Sex</Label>
+              <Label htmlFor="sexe" className="text-mc-neutral-900">Sex</Label>
               <Controller
                 name="sexe"
                 control={control}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger id="sexe" className="bg-[#1a1410]">
+                    <SelectTrigger id="sexe" className="bg-mc-surface-page">
                       <SelectValue placeholder="Select…" />
                     </SelectTrigger>
                     <SelectContent>
@@ -166,47 +166,47 @@ export default function SignupPage() {
                 )}
               />
               {errors.sexe && (
-                <p className="text-red-400 text-xs font-body">{errors.sexe.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body">{errors.sexe.message}</p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="phone" className="text-dialogue-text">Phone number</Label>
+              <Label htmlFor="phone" className="text-mc-neutral-900">Phone number</Label>
               <Input
                 id="phone"
                 type="tel"
                 autoComplete="tel"
                 placeholder="(514) 555-0123"
-                className="bg-[#1a1410]"
+                className="bg-mc-surface-page"
                 {...register('phone')}
               />
               {errors.phone && (
-                <p className="text-red-400 text-xs font-body">{errors.phone.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body">{errors.phone.message}</p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="address" className="text-dialogue-text">Address</Label>
+              <Label htmlFor="address" className="text-mc-neutral-900">Address</Label>
               <Input
                 id="address"
                 autoComplete="street-address"
                 placeholder="123 Rue Sainte-Catherine, Montréal"
-                className="bg-[#1a1410]"
+                className="bg-mc-surface-page"
                 {...register('address')}
               />
               {errors.address && (
-                <p className="text-red-400 text-xs font-body">{errors.address.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body">{errors.address.message}</p>
               )}
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="pharmacyId" className="text-dialogue-text">Your pharmacy</Label>
+              <Label htmlFor="pharmacyId" className="text-mc-neutral-900">Your pharmacy</Label>
               <Controller
                 name="pharmacyId"
                 control={control}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger id="pharmacyId" className="bg-[#1a1410]">
+                    <SelectTrigger id="pharmacyId" className="bg-mc-surface-page">
                       <SelectValue placeholder="Select your pharmacy" />
                     </SelectTrigger>
                     <SelectContent>
@@ -220,13 +220,13 @@ export default function SignupPage() {
                 )}
               />
               {errors.pharmacyId && (
-                <p className="text-red-400 text-xs font-body">{errors.pharmacyId.message}</p>
+                <p className="text-mc-danger-600 text-xs font-body">{errors.pharmacyId.message}</p>
               )}
             </div>
 
             {serverError && (
-              <div className="bg-red-900/30 border border-red-700/50 rounded-button px-4 py-3">
-                <p className="text-red-300 text-sm font-body">{serverError}</p>
+              <div className="bg-mc-danger-50 border border-mc-danger-100 rounded-button px-4 py-3">
+                <p className="text-mc-danger-800 text-sm font-body">{serverError}</p>
               </div>
             )}
 
@@ -239,9 +239,9 @@ export default function SignupPage() {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-dialogue-textMuted font-body mt-6">
+          <p className="text-center text-sm text-mc-neutral-400 font-body mt-6">
             Already have an account?{' '}
-            <Link href="/login" className="text-dialogue-accent underline underline-offset-2">
+            <Link href="/login" className="text-mc-primary-400 underline underline-offset-2">
               Sign in
             </Link>
           </p>

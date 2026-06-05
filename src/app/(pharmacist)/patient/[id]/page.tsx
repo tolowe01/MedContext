@@ -40,10 +40,10 @@ const STATUS_LABELS: Record<MonitoringStatus, string> = {
 function statusDotClass(status: MonitoringStatus): string {
   if (status === 'critical_alert' || status === 'escalated') return 'bg-emergency'
   if (status === 'submitted' || status === 'approved' || status === 'monitor_extended')
-    return 'bg-ln-primary'
+    return 'bg-mc-primary-400'
   if (status === 'consultation_scheduled' || status === 'consultation_completed')
-    return 'bg-ln-inkSubtle'
-  return 'bg-ln-inkTertiary'
+    return 'bg-mc-neutral-400'
+  return 'bg-mc-neutral-400'
 }
 
 function getAge(dateOfBirth: string): number {
@@ -186,14 +186,14 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
   const highlightedLog = highlight ? logs.find((l) => l.id === highlight) ?? null : null
 
   return (
-    <main className="min-h-screen bg-ln-canvas text-ln-ink font-ln-text p-6">
-      <div className="mx-auto max-w-5xl ln-rise">
+    <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body p-6">
+      <div className="mx-auto max-w-5xl mc-rise">
         <div className="flex items-center gap-3 mb-8 flex-wrap">
-          <h1 className="font-ln-display text-2xl font-semibold tracking-ln-display text-ln-ink">
+          <h1 className="font-display text-2xl font-semibold -tracking-[0.022em] text-mc-neutral-900">
             {fullName}
           </h1>
           {period && (
-            <Badge className="bg-ln-surface2 text-ln-inkMuted rounded-full text-xs font-medium px-2.5 py-1 inline-flex items-center gap-1.5 normal-case tracking-normal border-0">
+            <Badge className="bg-mc-neutral-100 text-mc-neutral-600 rounded-full text-xs font-medium px-2.5 py-1 inline-flex items-center gap-1.5 normal-case tracking-normal border-0">
               <span
                 className={`h-1.5 w-1.5 rounded-full ${statusDotClass(period.status)}`}
                 aria-hidden
@@ -205,24 +205,24 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Panel 1 - Profile + Questionnaire */}
-          <div className="ln-panel rounded-ln-lg p-6 space-y-4">
+          <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6 space-y-4">
             <div>
-              <h2 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink mb-1">
+              <h2 className="font-display text-base font-semibold -tracking-[0.014em] text-mc-neutral-900 mb-1">
                 Profile
               </h2>
-              <p className="text-ln-inkSubtle text-sm">
+              <p className="text-mc-neutral-400 text-sm">
                 Age {age} · {patient.diagnosis}
               </p>
             </div>
 
             {allergies.length > 0 && (
               <div>
-                <p className="ln-eyebrow mb-2">Allergies</p>
+                <p className="text-xs font-medium tracking-wide uppercase text-mc-neutral-400 mb-2">Allergies</p>
                 <div className="flex flex-wrap gap-1.5">
                   {allergies.map((allergy: string) => (
                     <span
                       key={allergy}
-                      className="bg-ln-surface2 border border-ln-hairline text-ln-inkMuted text-xs px-2 py-0.5 rounded-ln-sm"
+                      className="bg-mc-neutral-100 border border-mc-neutral-200 text-mc-neutral-600 text-xs px-2 py-0.5 rounded-chip"
                     >
                       {allergy}
                     </span>
@@ -235,8 +235,8 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
               <div className="space-y-2.5">
                 {otherFields.map((field) => (
                   <div key={field.id}>
-                    <p className="text-ln-inkSubtle text-xs">{field.label}</p>
-                    <p className="text-ln-ink text-sm">{bq[field.id]}</p>
+                    <p className="text-mc-neutral-400 text-xs">{field.label}</p>
+                    <p className="text-mc-neutral-900 text-sm">{bq[field.id]}</p>
                   </div>
                 ))}
               </div>
@@ -244,22 +244,22 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
           </div>
 
           {/* Panel 2 - Telus Health meds */}
-          <div className="ln-panel rounded-ln-lg p-6 space-y-4">
+          <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6 space-y-4">
             <div className="flex items-center gap-2 flex-wrap">
-              <h2 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink">
+              <h2 className="font-display text-base font-semibold -tracking-[0.014em] text-mc-neutral-900">
                 Medications
               </h2>
-              <Badge className="bg-ln-surface2 text-ln-inkSubtle text-xs font-medium px-2 py-0.5 rounded-full normal-case tracking-normal border-0">
+              <Badge className="bg-mc-neutral-100 text-mc-neutral-400 text-xs font-medium px-2 py-0.5 rounded-full normal-case tracking-normal border-0">
                 Pulled from Telus Health
               </Badge>
             </div>
             <ul className="space-y-3">
               {TELUS_MEDS.map((med) => (
                 <li key={med.name} className="flex flex-col gap-0.5">
-                  <span className="text-ln-ink text-sm font-medium">
+                  <span className="text-mc-neutral-900 text-sm font-medium">
                     {med.name} {med.dose}
                   </span>
-                  <span className="text-ln-inkSubtle text-sm">
+                  <span className="text-mc-neutral-400 text-sm">
                     {med.frequency}, {med.timing}
                   </span>
                 </li>
@@ -268,7 +268,7 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
           </div>
 
           {/* Panel 3 - AI Synthesis */}
-          <div className="ln-panel rounded-ln-lg p-6">
+          <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6">
             {activeSubmission ? (
               <AISynthesisPanel
                 submissionId={activeSubmission.id}
@@ -277,18 +277,18 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
               />
             ) : (
               <div>
-                <h2 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink mb-2">
+                <h2 className="font-display text-base font-semibold -tracking-[0.014em] text-mc-neutral-900 mb-2">
                   AI Summary
                 </h2>
-                <p className="text-ln-inkSubtle text-sm">No pending submission to review.</p>
+                <p className="text-mc-neutral-400 text-sm">No pending submission to review.</p>
               </div>
             )}
           </div>
 
           {/* Panel 4 - 7-day Trends */}
-          <div className="ln-panel rounded-ln-lg p-6 space-y-5">
+          <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6 space-y-5">
             <div>
-              <h2 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink mb-3">
+              <h2 className="font-display text-base font-semibold -tracking-[0.014em] text-mc-neutral-900 mb-3">
                 7-Day Trends
               </h2>
               {highlightedLog && (

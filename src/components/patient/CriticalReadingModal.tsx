@@ -36,25 +36,25 @@ export default function CriticalReadingModal({ pharmacyPhone }: CriticalReadingM
 
           <DialogTitle className="text-screenTitle">This reading is very high</DialogTitle>
 
-          <p className="font-ln-text text-body text-ln-ink leading-relaxed">
+          <p className="font-body text-body text-mc-neutral-900 leading-relaxed">
             The blood pressure you just entered is in a range that can be dangerous. This is not
             medical advice, and the number could be affected by how you measured it. To be safe,
             please get help now.
           </p>
 
-          <p className="font-ln-text text-body text-ln-ink leading-relaxed">
+          <p className="font-body text-body text-mc-neutral-900 leading-relaxed">
             If you have chest pain, trouble breathing, a severe headache, weakness on one side, or
             trouble speaking, call 911 right away.
           </p>
 
-          <p className="font-ln-text text-sm text-ln-inkMuted leading-relaxed">
+          <p className="font-body text-sm text-mc-neutral-600 leading-relaxed">
             Your reading has been saved and your pharmacist has been notified.
           </p>
 
           <div className="flex w-full flex-col gap-3 mt-2">
             <a
               href="tel:911"
-              className="inline-flex w-full items-center justify-center gap-2 rounded-ln-md bg-emergency px-6 py-4 font-ln-text font-semibold text-cta uppercase tracking-wide text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ln-surface1"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-button bg-emergency px-6 py-4 font-body font-semibold text-cta uppercase tracking-wide text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-page"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call 911
@@ -62,7 +62,7 @@ export default function CriticalReadingModal({ pharmacyPhone }: CriticalReadingM
 
             <a
               href={`tel:${pharmacyPhone}`}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-ln-md border border-ln-hairline bg-transparent px-6 py-4 font-ln-text font-semibold text-cta uppercase tracking-wide text-ln-ink transition-colors hover:bg-ln-surface2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ln-primary focus-visible:ring-offset-2 focus-visible:ring-offset-ln-surface1"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-button border border-mc-neutral-200 bg-transparent px-6 py-4 font-body font-semibold text-cta uppercase tracking-wide text-mc-neutral-900 transition-colors hover:bg-mc-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-page"
             >
               <Phone className="h-4 w-4" aria-hidden="true" />
               Call my pharmacist
@@ -71,7 +71,7 @@ export default function CriticalReadingModal({ pharmacyPhone }: CriticalReadingM
             <button
               type="button"
               onClick={handleClose}
-              className="w-full rounded-ln-md px-6 py-3 font-ln-text text-body text-ln-inkMuted transition-colors hover:text-ln-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ln-primary focus-visible:ring-offset-2 focus-visible:ring-offset-ln-surface1"
+              className="w-full rounded-button px-6 py-3 font-body text-body text-mc-neutral-600 transition-colors hover:text-mc-neutral-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-page"
             >
               I have done this, close
             </button>

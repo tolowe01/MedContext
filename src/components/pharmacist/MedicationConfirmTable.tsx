@@ -81,13 +81,13 @@ export default function MedicationConfirmTable({
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between gap-3">
-        <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">
+        <h2 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">
           Confirm medications
         </h2>
         <button
           type="button"
           onClick={onReplace}
-          className="inline-flex items-center gap-1.5 font-ln-text text-sm text-ln-primary hover:underline"
+          className="inline-flex items-center gap-1.5 font-body text-sm text-mc-primary-400 hover:underline"
         >
           <RefreshCw className="h-4 w-4" />
           Replace file and re-extract
@@ -95,8 +95,8 @@ export default function MedicationConfirmTable({
       </div>
 
       {startedEmpty && (
-        <div className="bg-ln-surface1 border border-ln-hairline rounded-ln-lg px-4 py-3">
-          <p className="font-ln-text text-sm text-ln-ink">
+        <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile px-4 py-3">
+          <p className="font-body text-sm text-mc-neutral-900">
             We could not read this file automatically. Add medications manually below.
           </p>
         </div>
@@ -106,10 +106,10 @@ export default function MedicationConfirmTable({
         {rows.map((row, index) => (
           <div
             key={index}
-            className="bg-ln-surface1 border border-ln-hairline rounded-ln-lg p-4 space-y-3"
+            className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile p-4 space-y-3"
           >
             <div className="flex items-center justify-between">
-              <span className="font-ln-text font-medium text-sm text-ln-inkMuted">
+              <span className="font-body font-medium text-sm text-mc-neutral-600">
                 Medication {index + 1}
               </span>
               <div className="flex items-center gap-2">
@@ -117,7 +117,7 @@ export default function MedicationConfirmTable({
                 <button
                   type="button"
                   onClick={() => removeRow(index)}
-                  className="text-ln-inkMuted hover:text-emergency transition-colors"
+                  className="text-mc-neutral-600 hover:text-emergency transition-colors"
                   aria-label={`Remove medication ${index + 1}`}
                 >
                   <Trash2 className="h-4 w-4" />
@@ -167,7 +167,7 @@ export default function MedicationConfirmTable({
             </div>
 
             {row.notes.trim().length > 0 && (
-              <p className="font-ln-text text-sm text-ln-inkMuted italic">{row.notes}</p>
+              <p className="font-body text-sm text-mc-neutral-600 italic">{row.notes}</p>
             )}
           </div>
         ))}
@@ -179,17 +179,17 @@ export default function MedicationConfirmTable({
       </Button>
 
       {rawExtraction.trim().length > 0 && (
-        <details className="bg-ln-surface1 border border-ln-hairline rounded-ln-lg p-4">
-          <summary className="font-ln-text text-sm text-ln-inkMuted cursor-pointer">
+        <details className="bg-mc-surface-white border border-mc-neutral-200 rounded-tile p-4">
+          <summary className="font-body text-sm text-mc-neutral-600 cursor-pointer">
             Show raw AI extraction
           </summary>
-          <pre className="mt-3 whitespace-pre-wrap break-words font-ln-text text-xs text-ln-inkMuted">
+          <pre className="mt-3 whitespace-pre-wrap break-words font-body text-xs text-mc-neutral-600">
             {rawExtraction}
           </pre>
         </details>
       )}
 
-      {error && <p className="text-emergency text-sm font-ln-text">{error}</p>}
+      {error && <p className="text-emergency text-sm font-body">{error}</p>}
 
       <Button type="button" onClick={handleConfirm} disabled={submitting} className="w-full">
         {submitting ? 'Saving...' : 'Confirm medications'}

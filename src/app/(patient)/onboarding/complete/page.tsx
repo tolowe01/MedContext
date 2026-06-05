@@ -15,21 +15,21 @@ export default function OnboardingCompletePage() {
   }
 
   return (
-    <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20 flex flex-col items-center justify-center text-center">
+    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20 flex flex-col items-center justify-center text-center">
       <LottiePharmacist loop className="w-48 h-48 mx-auto mb-6" />
 
-      <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-4">
+      <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-4">
         Hi, I&apos;m your pharmacist&apos;s assistant.
       </h1>
 
-      <p className="font-body text-body text-dialogue-textMuted max-w-sm leading-relaxed mb-10">
+      <p className="font-body text-body text-mc-neutral-400 max-w-sm leading-relaxed mb-10">
         Each evening I&apos;ll ask you for a blood pressure reading and whether you took your
         medication. You can type or speak. Your data is reviewed by a real licensed pharmacist.
       </p>
 
       <Button
         onClick={handleContinue}
-        className="w-full max-w-xs bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity"
+        className="w-full max-w-xs bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-4 transition-opacity"
       >
         Get started
       </Button>

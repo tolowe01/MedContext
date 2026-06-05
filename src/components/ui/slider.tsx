@@ -14,7 +14,7 @@ export interface SliderProps {
 }
 
 /**
- * Lightweight range slider styled to the dialogue theme.
+ * Lightweight range slider styled to the MedContext theme.
  * Uses a native <input type="range"> so it adds no dependency.
  */
 export function Slider({
@@ -35,7 +35,7 @@ export function Slider({
       step={step}
       onChange={(e) => onChange(Number(e.target.value))}
       className={cn(
-        'w-full h-2 rounded-full appearance-none cursor-pointer bg-dialogue-border accent-[#F29B79]',
+        'w-full h-2 rounded-full appearance-none cursor-pointer bg-mc-neutral-200 accent-mc-primary-400',
         className
       )}
       {...props}

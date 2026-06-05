@@ -76,7 +76,7 @@ export default function MonitoringPeriodForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">
+      <h2 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">
         Set up monitoring period
       </h2>
 
@@ -114,7 +114,7 @@ export default function MonitoringPeriodForm({
         />
       </div>
 
-      {error && <p className="text-emergency text-sm font-ln-text">{error}</p>}
+      {error && <p className="text-emergency text-sm font-body">{error}</p>}
 
       <Button type="submit" disabled={submitting} className="w-full">
         {submitting ? 'Creating...' : 'Start monitoring'}

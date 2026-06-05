@@ -5,12 +5,12 @@ interface StreakBadgeProps {
 export default function StreakBadge({ streak }: StreakBadgeProps) {
   function getChipStyle(): string {
     if (streak >= 7) {
-      return 'bg-dialogue-accent text-dialogue-bg'
+      return 'bg-mc-teal-400 text-white'
     }
     if (streak >= 3) {
-      return 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+      return 'bg-mc-teal-50 text-mc-teal-800 border border-mc-teal-100'
     }
-    return 'bg-dialogue-chip text-dialogue-textMuted border border-dialogue-border'
+    return 'bg-mc-neutral-100 text-mc-neutral-600 border border-mc-neutral-200'
   }
 
   function getLabel(): string {

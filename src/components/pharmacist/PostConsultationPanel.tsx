@@ -54,28 +54,28 @@ export default function PostConsultationPanel({
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">
+        <h3 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">
           Consultation scheduled
         </h3>
-        <p className="text-ln-inkMuted font-ln-text text-sm mt-1">
+        <p className="text-mc-neutral-600 font-body text-sm mt-1">
           {formatScheduledFor(consultation.scheduled_for)}
         </p>
       </div>
 
       {error && (
-        <div className="bg-red-900/30 border border-red-700/50 rounded-ln-md px-3 py-2">
-          <p className="text-red-300 text-sm font-ln-text">{error}</p>
+        <div className="bg-mc-danger-50 border border-mc-danger-100 rounded-button px-3 py-2">
+          <p className="text-mc-danger-800 text-sm font-body">{error}</p>
         </div>
       )}
 
       <div className="space-y-2">
-        <Label className="text-ln-ink font-ln-text text-sm">Consultation notes</Label>
+        <Label className="text-mc-neutral-900 font-body text-sm">Consultation notes</Label>
         <Textarea
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={5}
           placeholder="Summarize what was discussed and the plan."
-          className="bg-ln-surface1 border-ln-hairline text-ln-ink font-ln-text text-body resize-none"
+          className="bg-mc-surface-white border-mc-neutral-200 text-mc-neutral-900 font-body text-body resize-none"
         />
       </div>
 
@@ -84,7 +84,7 @@ export default function PostConsultationPanel({
           onClick={handleExtend}
           disabled={submitting}
           variant="outline"
-          className="w-full rounded-ln-md font-ln-text text-sm normal-case tracking-normal disabled:opacity-50"
+          className="w-full rounded-button font-body text-sm normal-case tracking-normal disabled:opacity-50"
         >
           {submitting ? 'Saving...' : 'Complete and extend monitoring 7 more days'}
         </Button>
@@ -98,7 +98,7 @@ export default function PostConsultationPanel({
             <Button
               variant="destructive"
               disabled={submitting}
-              className="w-full rounded-ln-md font-ln-text text-sm normal-case tracking-normal disabled:opacity-50"
+              className="w-full rounded-button font-body text-sm normal-case tracking-normal disabled:opacity-50"
             >
               Complete and escalate to physician
             </Button>

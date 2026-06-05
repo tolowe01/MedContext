@@ -69,10 +69,10 @@ function DecisionSummary({
 
   return (
     <div>
-      <h3 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink">
+      <h3 className="font-display text-base font-semibold -tracking-[0.014em] text-mc-neutral-900">
         {headline}
       </h3>
-      <p className="text-ln-inkSubtle text-sm mt-1">{detail}</p>
+      <p className="text-mc-neutral-400 text-sm mt-1">{detail}</p>
     </div>
   )
 }
@@ -119,11 +119,11 @@ export default function DecisionPanel({
 
   if (view.kind === 'monitoring') {
     return (
-      <div className="ln-panel rounded-ln-lg p-6">
-        <h3 className="font-ln-display text-base font-semibold tracking-ln-tight text-ln-ink">
+      <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6">
+        <h3 className="font-display text-base font-semibold -tracking-[0.014em] text-mc-neutral-900">
           Monitoring in progress
         </h3>
-        <p className="text-ln-inkSubtle text-sm mt-1">
+        <p className="text-mc-neutral-400 text-sm mt-1">
           The patient is still logging readings. A decision becomes available once the period is
           submitted.
         </p>
@@ -133,7 +133,7 @@ export default function DecisionPanel({
 
   if (view.kind === 'summary') {
     return (
-      <div className="ln-panel rounded-ln-lg p-6">
+      <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6">
         <DecisionSummary period={period} medications={medications} />
       </div>
     )
@@ -142,15 +142,15 @@ export default function DecisionPanel({
   if (view.kind === 'post_consultation') {
     if (!consultation) {
       return (
-        <div className="ln-panel rounded-ln-lg p-6">
-          <p className="text-ln-inkSubtle text-sm">
+        <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6">
+          <p className="text-mc-neutral-400 text-sm">
             A consultation is scheduled but its details could not be loaded.
           </p>
         </div>
       )
     }
     return (
-      <div className="ln-panel rounded-ln-lg p-6">
+      <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm rounded-tile p-6">
         <PostConsultationPanel
           consultation={consultation}
           period={period}
@@ -162,18 +162,18 @@ export default function DecisionPanel({
 
   // view.kind === 'decision'
   return (
-    <div className="bg-ln-surface1 rounded-ln-lg p-5 space-y-4">
-      <h3 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">Decision</h3>
+    <div className="bg-mc-surface-white rounded-tile p-5 space-y-4">
+      <h3 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">Decision</h3>
 
       {error && (
-        <div className="bg-red-900/30 border border-red-700/50 rounded-ln-md px-3 py-2">
-          <p className="text-red-300 text-sm font-ln-text">{error}</p>
+        <div className="bg-mc-danger-50 border border-mc-danger-100 rounded-button px-3 py-2">
+          <p className="text-mc-danger-800 text-sm font-body">{error}</p>
         </div>
       )}
 
       {view.showAcknowledge && unackedAlert && (
-        <div className="bg-emergency/15 border border-emergency/40 rounded-ln-md px-4 py-3 flex items-center justify-between gap-3">
-          <p className="text-ln-ink font-ln-text text-sm">
+        <div className="bg-emergency/15 border border-emergency/40 rounded-button px-4 py-3 flex items-center justify-between gap-3">
+          <p className="text-mc-neutral-900 font-body text-sm">
             Critical reading: {unackedAlert.systolic}/{unackedAlert.diastolic}. Acknowledge before
             deciding.
           </p>
@@ -182,7 +182,7 @@ export default function DecisionPanel({
             disabled={submitting}
             variant="destructive"
             size="sm"
-            className="rounded-ln-md shrink-0 disabled:opacity-50"
+            className="rounded-button shrink-0 disabled:opacity-50"
           >
             {submitting ? 'Saving...' : 'Acknowledge'}
           </Button>
@@ -195,31 +195,31 @@ export default function DecisionPanel({
           <DialogTrigger asChild>
             <Button
               size="lg"
-              className="w-full rounded-ln-md normal-case tracking-normal"
+              className="w-full rounded-button normal-case tracking-normal"
             >
               Approve
             </Button>
           </DialogTrigger>
-          <DialogContent className="bg-ln-surface1 border border-ln-hairline">
+          <DialogContent className="bg-mc-surface-white border border-mc-neutral-200">
             <DialogHeader>
-              <DialogTitle className="text-ln-ink font-ln-display font-semibold text-sectionTitle">
+              <DialogTitle className="text-mc-neutral-900 font-display font-semibold text-sectionTitle">
                 Send positive message
               </DialogTitle>
             </DialogHeader>
             <div className="space-y-3">
-              <Label className="text-ln-ink font-ln-text text-sm">Message</Label>
+              <Label className="text-mc-neutral-900 font-body text-sm">Message</Label>
               <Textarea
                 value={approvalMessage}
                 onChange={(e) => setApprovalMessage(e.target.value)}
                 rows={6}
-                className="bg-ln-canvas border-ln-hairline text-ln-ink font-ln-text text-body resize-none"
+                className="bg-mc-surface-page border-mc-neutral-200 text-mc-neutral-900 font-body text-body resize-none"
               />
             </div>
             <DialogFooter className="gap-2">
               <Button
                 onClick={handleApprove}
                 disabled={submitting}
-                className="rounded-ln-md disabled:opacity-50"
+                className="rounded-button disabled:opacity-50"
               >
                 {submitting ? 'Sending...' : 'Approve and send'}
               </Button>
@@ -227,7 +227,7 @@ export default function DecisionPanel({
                 variant="ghost"
                 onClick={() => setApproveOpen(false)}
                 disabled={submitting}
-                className="text-ln-inkMuted"
+                className="text-mc-neutral-600"
               >
                 Cancel
               </Button>
@@ -242,7 +242,7 @@ export default function DecisionPanel({
             <Button
               size="lg"
               variant="outline"
-              className="w-full rounded-ln-md normal-case tracking-normal"
+              className="w-full rounded-button normal-case tracking-normal"
             >
               Request consultation
             </Button>
@@ -258,7 +258,7 @@ export default function DecisionPanel({
             <Button
               size="lg"
               variant="destructive"
-              className="w-full rounded-ln-md normal-case tracking-normal"
+              className="w-full rounded-button normal-case tracking-normal"
             >
               Escalate
             </Button>

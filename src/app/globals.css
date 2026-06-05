@@ -4,7 +4,70 @@
 
 @layer base {
   :root {
-    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+    /* Primary — Trust Blue */
+    --color-primary-50:  #E8F4FD;
+    --color-primary-100: #C5E2F8;
+    --color-primary-200: #90C7F2;
+    --color-primary-400: #3A9BD5;
+    --color-primary-600: #1A6FA8;
+    --color-primary-800: #0D4E7A;
+    --color-primary-900: #06324F;
+
+    /* Secondary — Teal */
+    --color-teal-50:  #E0F5F0;
+    --color-teal-100: #A8E4D8;
+    --color-teal-200: #5DC9B5;
+    --color-teal-400: #1EAD94;
+    --color-teal-600: #128272;
+    --color-teal-800: #0A5B51;
+    --color-teal-900: #053B35;
+
+    /* Severity — Critical */
+    --color-danger-50:  #FEF2F2;
+    --color-danger-100: #FECACA;
+    --color-danger-400: #DC2626;
+    --color-danger-600: #B91C1C;
+    --color-danger-800: #991B1B;
+    --color-danger-900: #7F1D1D;
+
+    /* Severity — Medium */
+    --color-warning-50:  #FFFBEB;
+    --color-warning-100: #FDE68A;
+    --color-warning-400: #D97706;
+    --color-warning-600: #B45309;
+    --color-warning-800: #92400E;
+    --color-warning-900: #78350F;
+
+    /* Severity — Low */
+    --color-caution-50:  #FFFDF0;
+    --color-caution-100: #FEF08A;
+    --color-caution-400: #CA8A04;
+    --color-caution-600: #A16207;
+    --color-caution-800: #854D0E;
+    --color-caution-900: #713F12;
+
+    /* Neutral — Slate */
+    --color-neutral-50:  #F8FAFC;
+    --color-neutral-100: #F1F5F9;
+    --color-neutral-200: #E2E8F0;
+    --color-neutral-300: #CBD5E1;
+    --color-neutral-400: #94A3B8;
+    --color-neutral-600: #475569;
+    --color-neutral-900: #1E293B;
+
+    /* Surfaces */
+    --color-surface-white: #FFFFFF;
+    --color-surface-page:  #F8FAFC;
+    --color-surface-panel: #F1F5F9;
+
+    /* Typography */
+    --text-primary:    #1E293B;
+    --text-secondary:  #475569;
+    --text-muted:      #94A3B8;
+    --text-on-dark:    #FFFFFF;
+    --text-link:       #3A9BD5;
+    --text-link-hover: #1A6FA8;
+
     --font-inter: 'Inter', system-ui, sans-serif;
   }
 
@@ -20,14 +83,14 @@
   }
 
   body {
-    background-color: #211F1F;
-    color: #F6EEE6;
+    background-color: var(--color-surface-page);
+    color: var(--text-primary);
     font-family: var(--font-inter), system-ui, sans-serif;
   }
 
   ::selection {
-    background-color: #F29B79;
-    color: #211F1F;
+    background-color: var(--color-primary-200);
+    color: var(--text-primary);
   }
 
   ::-webkit-scrollbar {
@@ -35,11 +98,11 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #211F1F;
+    background: var(--color-neutral-100);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #4A4847;
+    background: var(--color-neutral-300);
     border-radius: 3px;
   }
 }
@@ -60,43 +123,14 @@
     border: 2px solid #dc2626;
   }
 
-  /* Linear-inspired helpers for the pharmacist-initiated flow screens. */
-
-  /* Instant, accessible focus ring (Linear: 2px primaryFocus at ~50%). */
-  .ln-focus:focus-visible {
-    outline: 2px solid rgba(94, 105, 210, 0.55);
+  /* Focus ring utility */
+  .mc-focus:focus-visible {
+    outline: 2px solid var(--color-primary-200);
     outline-offset: 2px;
   }
 
-  /* Lifted panel: surface-1 on canvas, hairline border, faint top-edge highlight
-     that gives the dark surface its "pixel rendered" feel (no drop shadows). */
-  .ln-panel {
-    background-color: #0f1011;
-    border: 1px solid #23252a;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
-  }
-  .ln-panel-2 {
-    background-color: #141516;
-    border: 1px solid #34343a;
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-  }
-
-  /* Hairline divider rule. */
-  .ln-rule {
-    border-color: #23252a;
-  }
-
-  /* Eyebrow / taxonomy label: positive tracking, subtle ink. */
-  .ln-eyebrow {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #8a8f98;
-  }
-
-  /* Staggered page-load reveal (Linear restraint: opacity + small translate). */
-  @keyframes ln-rise {
+  /* Staggered page-load reveal */
+  @keyframes mc-rise {
     from {
       opacity: 0;
       transform: translateY(6px);
@@ -106,8 +140,8 @@
       transform: translateY(0);
     }
   }
-  .ln-rise {
-    animation: ln-rise 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .mc-rise {
+    animation: mc-rise 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }
 

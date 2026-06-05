@@ -26,9 +26,9 @@ const INITIAL_FORM: FormState = {
   email: '',
 }
 
-const labelClass = 'text-ln-inkMuted text-sm font-ln-text'
+const labelClass = 'text-mc-neutral-600 text-sm font-body'
 const inputClass =
-  'bg-ln-surface1 border border-ln-hairline rounded-ln-md text-ln-ink placeholder:text-ln-inkSubtle ln-focus'
+  'bg-mc-surface-white border border-mc-neutral-200 rounded-button text-mc-neutral-900 placeholder:text-mc-neutral-400 mc-focus'
 
 const formSchema = z.object({
   first_name: z.string().trim().min(1, 'First name is required'),
@@ -86,14 +86,14 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
   if (accessCode && createdPatientId) {
     return (
       <div className="space-y-5">
-        <h2 className="font-ln-display text-xl font-medium tracking-ln-tight text-ln-ink">
+        <h2 className="font-display text-xl font-medium -tracking-[0.014em] text-mc-neutral-900">
           Patient account created
         </h2>
-        <p className="font-ln-text text-sm text-ln-inkMuted">
+        <p className="font-body text-sm text-mc-neutral-600">
           Share this access code with the patient. They use it as their password to sign in.
         </p>
-        <div className="ln-panel-2 rounded-ln-lg p-6 flex flex-col items-center gap-4">
-          <span className="font-ln-mono text-3xl font-medium tracking-[0.25em] text-ln-primary">
+        <div className="bg-mc-neutral-100 border border-mc-neutral-200 rounded-tile rounded-tile p-6 flex flex-col items-center gap-4">
+          <span className="font-mono text-3xl font-medium tracking-[0.25em] text-mc-primary-400">
             {accessCode}
           </span>
           <Button
@@ -101,17 +101,17 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
             variant="outline"
             size="sm"
             onClick={copyCode}
-            className="gap-2 normal-case tracking-normal rounded-ln-md bg-ln-surface1 text-ln-ink border-ln-hairline hover:bg-ln-surface2 ln-focus"
+            className="gap-2 normal-case tracking-normal rounded-button bg-mc-surface-white text-mc-neutral-900 border-mc-neutral-200 hover:bg-mc-neutral-100 mc-focus"
           >
             {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
             {copied ? 'Copied' : 'Copy code'}
           </Button>
         </div>
-        {error && <p className="text-emergency text-sm font-ln-text">{error}</p>}
+        {error && <p className="text-emergency text-sm font-body">{error}</p>}
         <Button
           type="button"
           onClick={() => onComplete(createdPatientId)}
-          className="w-full normal-case tracking-normal rounded-ln-md bg-ln-primary text-white hover:bg-ln-primaryHover ln-focus"
+          className="w-full normal-case tracking-normal rounded-button bg-mc-primary-400 text-white hover:bg-mc-primary-600 mc-focus"
         >
           Continue to medication upload
         </Button>
@@ -121,7 +121,7 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
-      <h2 className="font-ln-display text-xl font-medium tracking-ln-tight text-ln-ink">
+      <h2 className="font-display text-xl font-medium -tracking-[0.014em] text-mc-neutral-900">
         Patient basics
       </h2>
 
@@ -186,12 +186,12 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
         />
       </div>
 
-      {error && <p className="text-emergency text-sm font-ln-text">{error}</p>}
+      {error && <p className="text-emergency text-sm font-body">{error}</p>}
 
       <Button
         type="submit"
         disabled={submitting}
-        className="w-full normal-case tracking-normal rounded-ln-md bg-ln-primary text-white hover:bg-ln-primaryHover ln-focus"
+        className="w-full normal-case tracking-normal rounded-button bg-mc-primary-400 text-white hover:bg-mc-primary-600 mc-focus"
       >
         {submitting ? 'Creating account...' : 'Create patient account'}
       </Button>

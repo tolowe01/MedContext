@@ -30,35 +30,35 @@ const CONSENT_PARAGRAPHS = [
 
 export default function ConsentPage() {
   return (
-    <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
-      <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-2">
+    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
+      <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-2">
         Your data, your rights
       </h1>
-      <p className="font-body text-body text-dialogue-textMuted mb-6">
+      <p className="font-body text-body text-mc-neutral-400 mb-6">
         Please read this before continuing. We keep it plain — no legal jargon.
       </p>
 
-      <div className="bg-dialogue-surface border border-dialogue-border rounded-card overflow-hidden mb-6">
+      <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card overflow-hidden mb-6">
         <div className="overflow-y-auto max-h-[52vh] px-6 py-5 space-y-6">
           {CONSENT_PARAGRAPHS.map((section) => (
             <div key={section.heading}>
-              <h2 className="font-display-semi text-sectionTitle text-dialogue-text mb-1">
+              <h2 className="font-display-semi text-sectionTitle text-mc-neutral-900 mb-1">
                 {section.heading}
               </h2>
-              <p className="font-body text-body text-dialogue-textMuted leading-relaxed">
+              <p className="font-body text-body text-mc-neutral-400 leading-relaxed">
                 {section.body}
               </p>
             </div>
           ))}
 
-          <div className="border-t border-dialogue-border pt-5">
-            <p className="font-body text-sm text-dialogue-textMuted">
+          <div className="border-t border-mc-neutral-200 pt-5">
+            <p className="font-body text-sm text-mc-neutral-400">
               For our full privacy policy, visit{' '}
               <a
                 href="/legal/privacy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-dialogue-accent underline underline-offset-2"
+                className="text-mc-primary-400 underline underline-offset-2"
               >
                 our privacy policy
               </a>
@@ -71,13 +71,13 @@ export default function ConsentPage() {
       <form action={recordConsent}>
         <Button
           type="submit"
-          className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity"
+          className="w-full bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-4 transition-opacity"
         >
           I agree — continue
         </Button>
       </form>
 
-      <p className="text-center text-xs text-dialogue-textMuted font-body mt-4 px-4">
+      <p className="text-center text-xs text-mc-neutral-400 font-body mt-4 px-4">
         By continuing you confirm you have read the above and consent to data collection as described.
       </p>
     </main>

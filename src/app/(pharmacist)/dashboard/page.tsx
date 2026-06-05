@@ -24,11 +24,11 @@ export default async function DashboardPage() {
 
   if (!profile?.pharmacy_id) {
     return (
-      <main className="min-h-screen bg-ln-canvas p-6">
-        <h1 className="font-ln-display font-semibold text-sectionTitle text-ln-ink mb-4">
+      <main className="min-h-screen bg-mc-surface-page p-6">
+        <h1 className="font-display font-semibold text-sectionTitle text-mc-neutral-900 mb-4">
           Patient Dashboard
         </h1>
-        <p className="text-ln-inkMuted font-ln-text">No pharmacy associated with your account.</p>
+        <p className="text-mc-neutral-600 font-body">No pharmacy associated with your account.</p>
       </main>
     )
   }
@@ -89,15 +89,15 @@ export default async function DashboardPage() {
     .filter((id): id is string => id !== null)
 
   return (
-    <main className="min-h-screen bg-ln-canvas p-6">
+    <main className="min-h-screen bg-mc-surface-page p-6">
       <CriticalAlertBanner pharmacistId={user.id} initialAlerts={initialAlerts} />
       <div className="flex items-center justify-between mb-4">
-        <h1 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">
+        <h1 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">
           Patient Dashboard
         </h1>
         <Link
           href="/patient/new"
-          className="inline-flex items-center rounded-ln-md bg-ln-primary text-ln-canvas font-ln-text font-semibold text-cta uppercase tracking-wide px-6 py-3 hover:opacity-90 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ln-primary focus-visible:ring-offset-2 focus-visible:ring-offset-ln-canvas"
+          className="inline-flex items-center rounded-button bg-mc-primary-400 text-white font-body font-semibold text-cta uppercase tracking-wide px-6 py-3 hover:opacity-90 transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-page"
         >
           New patient
         </Link>

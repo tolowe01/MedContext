@@ -77,25 +77,25 @@ export default function EscalationSheet({
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
-      <SheetContent className="bg-ln-canvas border-l border-ln-hairline overflow-y-auto">
+      <SheetContent className="bg-mc-surface-page border-l border-mc-neutral-200 overflow-y-auto">
         <SheetHeader>
-          <SheetTitle className="text-ln-ink font-ln-display font-semibold text-sectionTitle">
+          <SheetTitle className="text-mc-neutral-900 font-display font-semibold text-sectionTitle">
             Escalate to {doctor}
           </SheetTitle>
         </SheetHeader>
 
         <div className="space-y-5">
           <div>
-            <p className="text-ln-inkMuted font-ln-text text-sm mb-2">
+            <p className="text-mc-neutral-600 font-body text-sm mb-2">
               The following will be shared with {doctor}:
             </p>
             <ul className="space-y-1.5">
               {SHARED_ITEMS.map((item) => (
                 <li
                   key={item}
-                  className="text-ln-ink font-ln-text text-sm flex items-start gap-2"
+                  className="text-mc-neutral-900 font-body text-sm flex items-start gap-2"
                 >
-                  <span className="text-ln-primary" aria-hidden>
+                  <span className="text-mc-primary-400" aria-hidden>
                     &bull;
                   </span>
                   <span>{item}</span>
@@ -105,13 +105,13 @@ export default function EscalationSheet({
           </div>
 
           {error && (
-            <div className="bg-red-900/30 border border-red-700/50 rounded-ln-md px-3 py-2">
-              <p className="text-red-300 text-sm font-ln-text">{error}</p>
+            <div className="bg-mc-danger-50 border border-mc-danger-100 rounded-button px-3 py-2">
+              <p className="text-mc-danger-800 text-sm font-body">{error}</p>
             </div>
           )}
 
           <div className="space-y-2">
-            <Label className="text-ln-ink font-ln-text text-sm">
+            <Label className="text-mc-neutral-900 font-body text-sm">
               Reason for escalation (required)
             </Label>
             <Textarea
@@ -119,7 +119,7 @@ export default function EscalationSheet({
               onChange={(e) => setReason(e.target.value)}
               rows={5}
               placeholder="Describe why this patient needs physician review."
-              className="bg-ln-surface1 border-ln-hairline text-ln-ink font-ln-text text-body resize-none"
+              className="bg-mc-surface-white border-mc-neutral-200 text-mc-neutral-900 font-body text-body resize-none"
             />
           </div>
         </div>
@@ -129,7 +129,7 @@ export default function EscalationSheet({
             onClick={handleConfirm}
             disabled={submitting || !trimmedReason}
             variant="destructive"
-            className="rounded-ln-md disabled:opacity-50"
+            className="rounded-button disabled:opacity-50"
           >
             {submitting ? 'Escalating...' : 'Confirm escalation'}
           </Button>
@@ -137,7 +137,7 @@ export default function EscalationSheet({
             variant="ghost"
             onClick={() => setOpen(false)}
             disabled={submitting}
-            className="text-ln-inkMuted"
+            className="text-mc-neutral-600"
           >
             Cancel
           </Button>

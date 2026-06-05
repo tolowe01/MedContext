@@ -46,19 +46,19 @@ export default function AISynthesisPanel({
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
-        <h3 className="font-display-semi text-sectionTitle text-dialogue-text">
-          AI Summary <span className="font-body text-sm text-dialogue-textMuted">(editable)</span>
+        <h3 className="font-display-semi text-sectionTitle text-mc-neutral-900">
+          AI Summary <span className="font-body text-sm text-mc-neutral-400">(editable)</span>
         </h3>
         <div className="relative group">
-          <span className="text-dialogue-textMuted text-sm cursor-help select-none" aria-label="Info">
+          <span className="text-mc-neutral-400 text-sm cursor-help select-none" aria-label="Info">
             ⓘ
           </span>
-          <div className="absolute left-6 top-0 z-10 hidden group-hover:block bg-dialogue-surface border border-dialogue-border rounded-button px-3 py-2 text-xs text-dialogue-textMuted w-56 shadow-lg">
+          <div className="absolute left-6 top-0 z-10 hidden group-hover:block bg-mc-surface-white border border-mc-neutral-200 rounded-button px-3 py-2 text-xs text-mc-neutral-400 w-56 shadow-lg">
             The pharmacist&apos;s own notes take precedence
           </div>
         </div>
         {isEdited && (
-          <Badge className="bg-dialogue-chip text-dialogue-accent text-xs font-body-bold">
+          <Badge className="bg-mc-neutral-100 text-mc-primary-400 text-xs font-body-bold">
             Edited
           </Badge>
         )}
@@ -71,19 +71,19 @@ export default function AISynthesisPanel({
           setSaved(false)
         }}
         rows={6}
-        className="bg-dialogue-bg border-dialogue-border text-dialogue-text font-body text-body resize-none focus:border-dialogue-accent"
+        className="bg-mc-surface-page border-mc-neutral-200 text-mc-neutral-900 font-body text-body resize-none focus:border-mc-primary-400"
         placeholder="AI synthesis will appear here…"
       />
 
       {saveError && (
-        <p className="text-red-400 text-sm font-body">{saveError}</p>
+        <p className="text-mc-danger-600 text-sm font-body">{saveError}</p>
       )}
 
       <div className="flex items-center gap-3">
         <Button
           onClick={handleSave}
           disabled={saving}
-          className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
+          className="bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button disabled:opacity-50"
         >
           {saving ? 'Saving…' : 'Save edits'}
         </Button>

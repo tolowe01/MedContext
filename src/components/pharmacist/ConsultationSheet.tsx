@@ -59,37 +59,37 @@ export default function ConsultationSheet({ periodId, onDone, trigger }: Consult
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>{trigger}</SheetTrigger>
-      <SheetContent className="bg-ln-canvas border-l border-ln-hairline">
+      <SheetContent className="bg-mc-surface-page border-l border-mc-neutral-200">
         <SheetHeader>
-          <SheetTitle className="text-ln-ink font-ln-display font-semibold text-sectionTitle">
+          <SheetTitle className="text-mc-neutral-900 font-display font-semibold text-sectionTitle">
             Schedule consultation
           </SheetTitle>
         </SheetHeader>
 
         <div className="space-y-4">
           {error && (
-            <div className="bg-red-900/30 border border-red-700/50 rounded-ln-md px-3 py-2">
-              <p className="text-red-300 text-sm font-ln-text">{error}</p>
+            <div className="bg-mc-danger-50 border border-mc-danger-100 rounded-button px-3 py-2">
+              <p className="text-mc-danger-800 text-sm font-body">{error}</p>
             </div>
           )}
 
           <div className="space-y-2">
-            <Label className="text-ln-ink font-ln-text text-sm">Date</Label>
+            <Label className="text-mc-neutral-900 font-body text-sm">Date</Label>
             <Input
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              className="bg-ln-surface1 border-ln-hairline text-ln-ink"
+              className="bg-mc-surface-white border-mc-neutral-200 text-mc-neutral-900"
             />
           </div>
 
           <div className="space-y-2">
-            <Label className="text-ln-ink font-ln-text text-sm">Time</Label>
+            <Label className="text-mc-neutral-900 font-body text-sm">Time</Label>
             <Input
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
-              className="bg-ln-surface1 border-ln-hairline text-ln-ink"
+              className="bg-mc-surface-white border-mc-neutral-200 text-mc-neutral-900"
             />
           </div>
         </div>
@@ -98,7 +98,7 @@ export default function ConsultationSheet({ periodId, onDone, trigger }: Consult
           <Button
             onClick={handleConfirm}
             disabled={submitting || !canSubmit}
-            className="rounded-ln-md disabled:opacity-50"
+            className="rounded-button disabled:opacity-50"
           >
             {submitting ? 'Scheduling...' : 'Schedule consultation'}
           </Button>
@@ -106,7 +106,7 @@ export default function ConsultationSheet({ periodId, onDone, trigger }: Consult
             variant="ghost"
             onClick={() => setOpen(false)}
             disabled={submitting}
-            className="text-ln-inkMuted"
+            className="text-mc-neutral-600"
           >
             Cancel
           </Button>

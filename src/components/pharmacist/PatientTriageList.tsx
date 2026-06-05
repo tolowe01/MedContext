@@ -29,9 +29,9 @@ function getAge(dateOfBirth: string): number {
 }
 
 const SEVERITY_CHIP_CLASSES: Record<string, string> = {
-  high: 'bg-red-600 text-white text-xs px-2 py-0.5 rounded-ln-sm font-ln-text font-semibold',
-  medium: 'bg-ln-primary text-ln-canvas text-xs px-2 py-0.5 rounded-ln-sm font-ln-text font-semibold',
-  low: 'bg-ln-surface2 text-ln-inkMuted text-xs px-2 py-0.5 rounded-ln-sm font-ln-text',
+  high: 'bg-mc-danger-400 text-white text-xs px-2 py-0.5 rounded-chip font-body font-semibold',
+  medium: 'bg-mc-warning-400 text-white text-xs px-2 py-0.5 rounded-chip font-body font-semibold',
+  low: 'bg-mc-caution-400 text-white text-xs px-2 py-0.5 rounded-chip font-body font-semibold',
 }
 
 const FLAG_LABELS: Record<string, string> = {
@@ -57,25 +57,25 @@ function PatientRow({
   return (
     <Link
       href={`/patient/${patient.id}`}
-      className="block rounded-ln-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ln-primary focus-visible:ring-offset-2 focus-visible:ring-offset-ln-canvas"
+      className="block rounded-tile focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-page"
     >
       <div
-        className={`bg-ln-surface1 rounded-ln-lg p-4 flex items-center gap-4 hover:bg-ln-hairline transition-colors cursor-pointer ${
+        className={`bg-mc-surface-white rounded-tile p-4 flex items-center gap-4 hover:bg-mc-neutral-100 transition-colors cursor-pointer ${
           isCritical ? 'animate-pulse-border' : ''
         }`}
       >
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <p className="font-ln-text font-semibold text-cta text-ln-ink truncate">
+            <p className="font-body font-semibold text-cta text-mc-neutral-900 truncate">
               {name}, {age}
             </p>
             {isCritical && (
-              <span className="bg-emergency text-white text-xs px-2 py-0.5 rounded-ln-sm font-ln-text font-semibold shrink-0">
+              <span className="bg-emergency text-white text-xs px-2 py-0.5 rounded-chip font-body font-semibold shrink-0">
                 CRITICAL
               </span>
             )}
           </div>
-          <p className="font-ln-text text-sm text-ln-inkMuted mt-0.5">{submittedAgo}</p>
+          <p className="font-body text-sm text-mc-neutral-600 mt-0.5">{submittedAgo}</p>
           {flags.length > 0 && (
             <div className="flex flex-wrap gap-1.5 mt-2">
               {flags.map((f) => (
@@ -118,15 +118,15 @@ export default function PatientTriageList({
     <div className="space-y-8">
       <section>
         <div className="flex items-center gap-2 mb-3">
-          <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">Flagged</h2>
+          <h2 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">Flagged</h2>
           {sortedFlagged.length > 0 && (
-            <span className="bg-ln-primary text-ln-canvas text-xs font-ln-text font-semibold px-2 py-0.5 rounded-ln-sm">
+            <span className="bg-mc-primary-400 text-white text-xs font-body font-semibold px-2 py-0.5 rounded-chip">
               {sortedFlagged.length}
             </span>
           )}
         </div>
         {sortedFlagged.length === 0 ? (
-          <p className="text-ln-inkMuted font-ln-text text-sm">No flagged patients.</p>
+          <p className="text-mc-neutral-600 font-body text-sm">No flagged patients.</p>
         ) : (
           <div className="space-y-3">
             {sortedFlagged.map((item) => (
@@ -141,9 +141,9 @@ export default function PatientTriageList({
       </section>
 
       <section>
-        <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink mb-3">Stable</h2>
+        <h2 className="font-display font-semibold text-sectionTitle text-mc-neutral-900 mb-3">Stable</h2>
         {stable.length === 0 ? (
-          <p className="text-ln-inkMuted font-ln-text text-sm">No stable patients.</p>
+          <p className="text-mc-neutral-600 font-body text-sm">No stable patients.</p>
         ) : (
           <div className="space-y-3">
             {stable.map((item) => (

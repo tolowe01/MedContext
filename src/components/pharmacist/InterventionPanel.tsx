@@ -51,11 +51,11 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
 
   if (isComplete) {
     return (
-      <div className="bg-dialogue-surface rounded-card p-4">
+      <div className="bg-mc-surface-white rounded-card p-4">
         <p className="text-teal-400 font-body-bold text-cta">Review complete</p>
-        <p className="text-dialogue-textMuted font-body text-sm mt-1">
+        <p className="text-mc-neutral-400 font-body text-sm mt-1">
           Status:{' '}
-          <span className="text-dialogue-text capitalize">{currentStatus.replace('_', ' ')}</span>
+          <span className="text-mc-neutral-900 capitalize">{currentStatus.replace('_', ' ')}</span>
         </p>
       </div>
     )
@@ -63,11 +63,11 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
 
   return (
     <div className="space-y-3">
-      <h3 className="font-display-semi text-sectionTitle text-dialogue-text">Interventions</h3>
+      <h3 className="font-display-semi text-sectionTitle text-mc-neutral-900">Interventions</h3>
 
       {error && (
-        <div className="bg-red-900/30 border border-red-700/50 rounded-button px-3 py-2">
-          <p className="text-red-300 text-sm font-body">{error}</p>
+        <div className="bg-mc-danger-50 border border-mc-danger-100 rounded-button px-3 py-2">
+          <p className="text-mc-danger-800 text-sm font-body">{error}</p>
         </div>
       )}
 
@@ -77,24 +77,24 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
           <SheetTrigger asChild>
             <Button
               variant="outline"
-              className="w-full border-dialogue-border text-dialogue-text hover:bg-dialogue-surface font-body text-sm rounded-button"
+              className="w-full border-mc-neutral-200 text-mc-neutral-900 hover:bg-mc-surface-white font-body text-sm rounded-button"
             >
               Approve — send positive message
             </Button>
           </SheetTrigger>
-          <SheetContent className="bg-dialogue-bg border-dialogue-border">
+          <SheetContent className="bg-mc-surface-page border-mc-neutral-200">
             <SheetHeader>
-              <SheetTitle className="text-dialogue-text font-display-semi text-sectionTitle">
+              <SheetTitle className="text-mc-neutral-900 font-display-semi text-sectionTitle">
                 Send positive message
               </SheetTitle>
             </SheetHeader>
             <div className="py-4 space-y-3">
-              <Label className="text-dialogue-text font-body text-sm">Message (optional)</Label>
+              <Label className="text-mc-neutral-900 font-body text-sm">Message (optional)</Label>
               <Textarea
                 value={approvalMessage}
                 onChange={(e) => setApprovalMessage(e.target.value)}
                 rows={5}
-                className="bg-dialogue-surface border-dialogue-border text-dialogue-text font-body text-body resize-none"
+                className="bg-mc-surface-white border-mc-neutral-200 text-mc-neutral-900 font-body text-body resize-none"
               />
             </div>
             <SheetFooter className="gap-2">
@@ -102,13 +102,13 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
                 <Button
                   onClick={() => submit('approval', { message: approvalMessage })}
                   disabled={submitting}
-                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
+                  className="bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button disabled:opacity-50"
                 >
                   {submitting ? 'Sending…' : 'Send'}
                 </Button>
               </SheetClose>
               <SheetClose asChild>
-                <Button variant="ghost" className="text-dialogue-textMuted">
+                <Button variant="ghost" className="text-mc-neutral-400">
                   Cancel
                 </Button>
               </SheetClose>
@@ -121,24 +121,24 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
           <SheetTrigger asChild>
             <Button
               variant="outline"
-              className="w-full border-dialogue-border text-dialogue-text hover:bg-dialogue-surface font-body text-sm rounded-button"
+              className="w-full border-mc-neutral-200 text-mc-neutral-900 hover:bg-mc-surface-white font-body text-sm rounded-button"
             >
               Schedule phone call
             </Button>
           </SheetTrigger>
-          <SheetContent className="bg-dialogue-bg border-dialogue-border">
+          <SheetContent className="bg-mc-surface-page border-mc-neutral-200">
             <SheetHeader>
-              <SheetTitle className="text-dialogue-text font-display-semi text-sectionTitle">
+              <SheetTitle className="text-mc-neutral-900 font-display-semi text-sectionTitle">
                 Schedule phone call
               </SheetTitle>
             </SheetHeader>
             <div className="py-4 space-y-3">
-              <Label className="text-dialogue-text font-body text-sm">Preferred call time</Label>
+              <Label className="text-mc-neutral-900 font-body text-sm">Preferred call time</Label>
               <Input
                 type="time"
                 value={phoneTime}
                 onChange={(e) => setPhoneTime(e.target.value)}
-                className="bg-dialogue-surface border-dialogue-border text-dialogue-text"
+                className="bg-mc-surface-white border-mc-neutral-200 text-mc-neutral-900"
               />
             </div>
             <SheetFooter className="gap-2">
@@ -146,13 +146,13 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
                 <Button
                   onClick={() => submit('phone_call', { phone_time: phoneTime })}
                   disabled={submitting}
-                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
+                  className="bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button disabled:opacity-50"
                 >
                   {submitting ? 'Scheduling…' : 'Schedule'}
                 </Button>
               </SheetClose>
               <SheetClose asChild>
-                <Button variant="ghost" className="text-dialogue-textMuted">
+                <Button variant="ghost" className="text-mc-neutral-400">
                   Cancel
                 </Button>
               </SheetClose>
@@ -165,25 +165,25 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
           <SheetTrigger asChild>
             <Button
               variant="outline"
-              className="w-full border-dialogue-border text-dialogue-text hover:bg-dialogue-surface font-body text-sm rounded-button"
+              className="w-full border-mc-neutral-200 text-mc-neutral-900 hover:bg-mc-surface-white font-body text-sm rounded-button"
             >
               Send clinical note
             </Button>
           </SheetTrigger>
-          <SheetContent className="bg-dialogue-bg border-dialogue-border">
+          <SheetContent className="bg-mc-surface-page border-mc-neutral-200">
             <SheetHeader>
-              <SheetTitle className="text-dialogue-text font-display-semi text-sectionTitle">
+              <SheetTitle className="text-mc-neutral-900 font-display-semi text-sectionTitle">
                 Clinical note
               </SheetTitle>
             </SheetHeader>
             <div className="py-4 space-y-3">
-              <Label className="text-dialogue-text font-body text-sm">Note</Label>
+              <Label className="text-mc-neutral-900 font-body text-sm">Note</Label>
               <Textarea
                 value={clinicalNote}
                 onChange={(e) => setClinicalNote(e.target.value)}
                 rows={6}
                 placeholder="Enter clinical note…"
-                className="bg-dialogue-surface border-dialogue-border text-dialogue-text font-body text-body resize-none"
+                className="bg-mc-surface-white border-mc-neutral-200 text-mc-neutral-900 font-body text-body resize-none"
               />
             </div>
             <SheetFooter className="gap-2">
@@ -191,13 +191,13 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
                 <Button
                   onClick={() => submit('clinical_note', { note_text: clinicalNote })}
                   disabled={submitting || !clinicalNote.trim()}
-                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
+                  className="bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button disabled:opacity-50"
                 >
                   {submitting ? 'Sending…' : 'Send note'}
                 </Button>
               </SheetClose>
               <SheetClose asChild>
-                <Button variant="ghost" className="text-dialogue-textMuted">
+                <Button variant="ghost" className="text-mc-neutral-400">
                   Cancel
                 </Button>
               </SheetClose>
@@ -210,24 +210,24 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
           <SheetTrigger asChild>
             <Button
               variant="outline"
-              className="w-full border-dialogue-border text-dialogue-text hover:bg-dialogue-surface font-body text-sm rounded-button"
+              className="w-full border-mc-neutral-200 text-mc-neutral-900 hover:bg-mc-surface-white font-body text-sm rounded-button"
             >
               Invite to in-person appointment
             </Button>
           </SheetTrigger>
-          <SheetContent className="bg-dialogue-bg border-dialogue-border">
+          <SheetContent className="bg-mc-surface-page border-mc-neutral-200">
             <SheetHeader>
-              <SheetTitle className="text-dialogue-text font-display-semi text-sectionTitle">
+              <SheetTitle className="text-mc-neutral-900 font-display-semi text-sectionTitle">
                 In-person appointment
               </SheetTitle>
             </SheetHeader>
             <div className="py-4 space-y-3">
-              <Label className="text-dialogue-text font-body text-sm">Appointment date</Label>
+              <Label className="text-mc-neutral-900 font-body text-sm">Appointment date</Label>
               <Input
                 type="date"
                 value={appointmentDate}
                 onChange={(e) => setAppointmentDate(e.target.value)}
-                className="bg-dialogue-surface border-dialogue-border text-dialogue-text"
+                className="bg-mc-surface-white border-mc-neutral-200 text-mc-neutral-900"
               />
             </div>
             <SheetFooter className="gap-2">
@@ -235,13 +235,13 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
                 <Button
                   onClick={() => submit('in_person', { appointment_date: appointmentDate })}
                   disabled={submitting || !appointmentDate}
-                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
+                  className="bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button disabled:opacity-50"
                 >
                   {submitting ? 'Sending…' : 'Send invite'}
                 </Button>
               </SheetClose>
               <SheetClose asChild>
-                <Button variant="ghost" className="text-dialogue-textMuted">
+                <Button variant="ghost" className="text-mc-neutral-400">
                   Cancel
                 </Button>
               </SheetClose>

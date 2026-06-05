@@ -92,14 +92,14 @@ export default function VoiceInputButton({ onTranscript, disabled = false }: Voi
       onClick={handleClick}
       disabled={disabled}
       aria-label={isRecording ? 'Stop recording' : 'Start voice input'}
-      className={`flex items-center justify-center shrink-0 min-h-[44px] min-w-[44px] rounded-full border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dialogue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dialogue-surface ${
+      className={`flex items-center justify-center shrink-0 min-h-[44px] min-w-[44px] rounded-full border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 focus-visible:ring-offset-2 focus-visible:ring-offset-mc-surface-white ${
         isRecording
-          ? 'border-emergency bg-red-900/30 animate-pulse'
-          : 'bg-dialogue-surface border-dialogue-border hover:border-dialogue-accent'
+          ? 'border-emergency bg-mc-danger-50 animate-pulse'
+          : 'bg-mc-surface-white border-mc-neutral-200 hover:border-mc-primary-400'
       } disabled:opacity-40 disabled:cursor-not-allowed`}
     >
       <Mic
-        className={`w-4 h-4 ${isRecording ? 'text-red-400' : 'text-dialogue-textMuted'}`}
+        className={`w-4 h-4 ${isRecording ? 'text-mc-danger-600' : 'text-mc-neutral-400'}`}
       />
     </button>
   )

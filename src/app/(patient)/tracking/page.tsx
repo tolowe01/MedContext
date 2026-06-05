@@ -78,7 +78,7 @@ async function getMedNames(medicationListId: string | null): Promise<string[]> {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <main className="min-h-screen bg-ln-canvas text-ln-ink font-ln-text px-screenX pt-screenTop pb-20">
+    <main className="min-h-screen bg-mc-surface-page text-mc-neutral-900 font-body px-screenX pt-screenTop pb-20">
       <div className="mx-auto w-full max-w-2xl">{children}</div>
     </main>
   )
@@ -104,7 +104,7 @@ export default async function TrackingPage() {
   if (!patient) {
     return (
       <Shell>
-        <p className="text-lg text-ln-inkMuted">Patient record not found.</p>
+        <p className="text-lg text-mc-neutral-600">Patient record not found.</p>
       </Shell>
     )
   }
@@ -135,12 +135,12 @@ export default async function TrackingPage() {
 
     return (
       <Shell>
-        <p className="ln-eyebrow mb-3">Tracking</p>
-        <div className="ln-panel ln-rise rounded-ln-lg p-8 flex flex-col items-center text-center gap-3">
-          <h2 className="font-ln-display text-2xl font-semibold tracking-ln-tight text-ln-ink">
+        <p className="text-xs font-medium tracking-wide uppercase text-mc-neutral-400 mb-3">Tracking</p>
+        <div className="bg-mc-surface-white border border-mc-neutral-200 shadow-sm mc-rise rounded-tile p-8 flex flex-col items-center text-center gap-3">
+          <h2 className="font-display text-2xl font-semibold -tracking-[0.014em] text-mc-neutral-900">
             No active monitoring right now
           </h2>
-          <p className="text-lg text-ln-inkMuted leading-relaxed max-w-md">
+          <p className="text-lg text-mc-neutral-600 leading-relaxed max-w-md">
             When your pharmacist starts a monitoring period for you, it will appear here and you can
             begin your daily check-ins.
           </p>
@@ -158,21 +158,21 @@ export default async function TrackingPage() {
     const streak = computeStreak(recentLogs)
     return (
       <Shell>
-        <h1 className="font-ln-display font-semibold text-screenTitle text-ln-ink mb-6">
+        <h1 className="font-display font-semibold text-screenTitle text-mc-neutral-900 mb-6">
           Today is done
         </h1>
-        <div className="bg-ln-surface1 border border-ln-hairline rounded-ln-xl p-8 flex flex-col gap-6">
+        <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-8 flex flex-col gap-6">
           <div className="flex flex-col items-center text-center gap-3">
-            <h2 className="font-ln-display font-semibold text-sectionTitle text-ln-ink">
+            <h2 className="font-display font-semibold text-sectionTitle text-mc-neutral-900">
               You have checked in today
             </h2>
-            <p className="font-ln-text text-body text-ln-inkMuted leading-relaxed">
+            <p className="font-body text-body text-mc-neutral-600 leading-relaxed">
               Thank you for showing up. See you tomorrow.
             </p>
             <StreakBadge streak={streak} />
           </div>
           <div>
-            <p className="font-ln-text font-semibold text-cta text-ln-inkMuted uppercase tracking-wide mb-3">
+            <p className="font-body font-semibold text-cta text-mc-neutral-600 uppercase tracking-wide mb-3">
               This week
             </p>
             <DataEntryTimeline logs={recentLogs} />
@@ -186,7 +186,7 @@ export default async function TrackingPage() {
 
   return (
     <Shell>
-      <h1 className="font-ln-display font-semibold text-screenTitle text-ln-ink mb-6">
+      <h1 className="font-display font-semibold text-screenTitle text-mc-neutral-900 mb-6">
         Daily check-in
       </h1>
       <DailyCheckInForm pharmacyPhone={PLACEHOLDER_PHARMACY_PHONE} medNames={medNames} />
