@@ -207,7 +207,7 @@ export default function DailyCheckInForm({ pharmacyPhone, medNames }: DailyCheck
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/guides/bp-technique.png"
+              src="/guides/bp-technique.jpg"
               alt="Optimal blood pressure measuring technique: sit with back supported, bare arm supported at heart level, feet flat on the floor, rest before measuring, and take three readings a minute apart then average them."
               className="w-full rounded-card border border-mc-neutral-200"
             />
