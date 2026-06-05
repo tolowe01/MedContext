@@ -1,20 +1,13 @@
-import { logout } from '@/actions/auth'
-import { Button } from '@/components/ui/button'
+import LogoutButton from '@/components/shared/LogoutButton'
 
 export default function PharmacistLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <nav className="bg-dialogue-nav px-6 py-4 flex justify-between items-center border-b border-dialogue-border">
-        <span className="font-display-bold text-sectionTitle text-dialogue-text">MedContext</span>
-        <form action={logout}>
-          <Button
-            type="submit"
-            variant="ghost"
-            className="text-dialogue-textMuted hover:text-dialogue-text font-body text-cta"
-          >
-            Log out
-          </Button>
-        </form>
+      <nav className="bg-ln-canvas px-6 py-3 flex justify-between items-center border-b border-ln-hairline">
+        <span className="font-ln-display font-semibold text-ln-ink tracking-ln-tight">
+          MedContext
+        </span>
+        <LogoutButton />
       </nav>
       {children}
     </>
