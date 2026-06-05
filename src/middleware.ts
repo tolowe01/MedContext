@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
     return supabaseResponse
   }
 
-  if (pathname === '/' || pathname === '/login') {
+  if (pathname === '/' || pathname === '/login' || pathname === '/signup') {
     if (user) {
       const { data: profile } = await supabase
         .from('profiles')

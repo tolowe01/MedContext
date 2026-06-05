@@ -2,6 +2,42 @@ export type UserRole = 'patient' | 'pharmacist'
 export type SubmissionStatus = 'submitted' | 'reviewed' | 'follow_up'
 export type InterventionKind = 'approval' | 'phone_call' | 'in_person' | 'clinical_note'
 
+export type Sexe = 'female' | 'male' | 'intersex' | 'prefer_not_to_say'
+
+/** Contact / identity fields captured during signup (stored in JSONB). */
+export interface QuestionnaireContact {
+  sexe: Sexe
+  phone: string
+  address: string
+}
+
+/** Health answers captured by the onboarding questionnaire wizard. */
+export interface QuestionnaireHealth {
+  allergies: { has: boolean; details: string | null }
+  weight_kg: number | null
+  height_cm: number | null
+  /** Signed change in kg since the last pharmacy visit (from the slider). */
+  weight_change_kg: number
+  pregnancy: {
+    applicable: boolean
+    is_pregnant: boolean | null
+    due_date: string | null
+    breastfeeding: boolean | null
+  }
+  other_medications: { taking: boolean; details: string | null }
+  health_changes: { changed: boolean; details: string | null }
+}
+
+/**
+ * Shape of `patients.baseline_questionnaire` (JSONB).
+ * `contact` is written at signup; `health` is merged in by the wizard.
+ */
+export interface BaselineQuestionnaire {
+  schema_version: string
+  contact: QuestionnaireContact
+  health?: QuestionnaireHealth
+}
+
 export interface Profile {
   id: string
   role: 'patient' | 'pharmacist'
@@ -18,6 +54,9 @@ export interface Patient {
   date_of_birth: string
   access_code: string
   diagnosis: string
+  // Legacy flat shape is preserved for the pharmacist detail page; new
+  // onboarding writes the richer `BaselineQuestionnaire` shape (see below),
+  // read back via an explicit cast where needed.
   baseline_questionnaire: Record<string, string> | null
   questionnaire_schema_version: string
   created_at: string

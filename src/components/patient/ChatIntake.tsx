@@ -17,7 +17,34 @@ interface Message {
 interface ChatIntakeProps {
   patientId: string
   logs?: DailyLog[]
+  /** Consecutive days logged before today; used for the celebration message. */
+  streak?: number
   onComplete?: (logs: DailyLog[]) => void
+}
+
+/** Encouragement is about effort/consistency only — never about health values. */
+function celebrationMessage(streakDays: number): string {
+  if (streakDays >= 7) {
+    return "Amazing — that's 7 days in a row! You completed the full week. Thank you so much for showing up every day. 🎉"
+  }
+  if (streakDays >= 2) {
+    return `Logged! 🎉 That's ${streakDays} days in a row — wonderful job staying consistent. See you tomorrow.`
+  }
+  return 'Logged — thank you so much for checking in today! 🎉 Great job. See you tomorrow.'
+}
+
+function notifyStreak(streakDays: number) {
+  if (typeof window === 'undefined' || typeof Notification === 'undefined') return
+  if (Notification.permission !== 'granted') return
+  try {
+    const body =
+      streakDays >= 2
+        ? `You've logged ${streakDays} days in a row. Great job!`
+        : 'Thanks for checking in today. Great job!'
+    new Notification('MedContext', { body })
+  } catch {
+    // Notifications are best-effort.
+  }
 }
 
 const INITIAL_MESSAGE: Message = {
@@ -26,7 +53,7 @@ const INITIAL_MESSAGE: Message = {
     "Good evening. Ready to log today's reading? You can type your numbers or hold the mic to speak.",
 }
 
-export default function ChatIntake({ patientId, logs = [], onComplete }: ChatIntakeProps) {
+export default function ChatIntake({ patientId, logs = [], streak = 0, onComplete }: ChatIntakeProps) {
   const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE])
   const [input, setInput] = useState('')
@@ -34,6 +61,7 @@ export default function ChatIntake({ patientId, logs = [], onComplete }: ChatInt
   const [pendingReading, setPendingReading] = useState<LogReadingInput | null>(null)
   const [enteredVia, setEnteredVia] = useState<'text' | 'voice'>('text')
   const [isConfirming, setIsConfirming] = useState(false)
+  const [isDone, setIsDone] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -140,10 +168,16 @@ export default function ChatIntake({ patientId, logs = [], onComplete }: ChatInt
         return
       }
       setPendingReading(null)
+      const newStreak = streak + 1
+      setMessages((prev) => [
+        ...prev,
+        { role: 'assistant', content: celebrationMessage(newStreak) },
+      ])
+      notifyStreak(newStreak)
       if (onComplete) {
         onComplete(logs)
       } else {
-        router.refresh()
+        setIsDone(true)
       }
     } catch {
       // allow re-try; pendingReading stays so user can confirm again
@@ -169,8 +203,15 @@ export default function ChatIntake({ patientId, logs = [], onComplete }: ChatInt
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} mb-4`}
           >
+            {msg.role === 'assistant' && (
+              <img 
+                src="/doctor-avatar.png" 
+                alt="Doctor Avatar" 
+                className="w-8 h-8 rounded-full object-cover shrink-0 mr-3 self-end" 
+              />
+            )}
             <div
               className={`max-w-[80%] rounded-card px-4 py-3 font-body text-body leading-relaxed ${
                 msg.role === 'user'
@@ -239,7 +280,14 @@ export default function ChatIntake({ patientId, logs = [], onComplete }: ChatInt
         </div>
       )}
 
-      {!pendingReading && (
+      {isDone ? (
+        <Button
+          onClick={() => router.push('/home')}
+          className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 mt-2"
+        >
+          Back to Homepage
+        </Button>
+      ) : !pendingReading && (
         <div className="flex items-end gap-2 bg-dialogue-surface border border-dialogue-border rounded-card px-3 py-3">
           <Textarea
             value={input}
