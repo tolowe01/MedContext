@@ -241,7 +241,7 @@ export default function DecisionPanel({
           trigger={
             <Button
               size="lg"
-              variant="outline"
+              variant="tinted"
               className="w-full rounded-button normal-case tracking-normal"
             >
               Request consultation

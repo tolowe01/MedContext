@@ -73,8 +73,8 @@ export default async function HomePage() {
 
   if (!patient) {
     return (
-      <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
-        <p className="font-body text-body text-mc-neutral-400">Patient record not found.</p>
+      <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
+        <p className="font-body text-body text-dialogue-textMuted">Patient record not found.</p>
       </main>
     )
   }
@@ -93,8 +93,8 @@ export default async function HomePage() {
   const streak = computeStreak(recentLogs)
 
   return (
-    <main className="min-h-screen bg-mc-surface-page px-screenX pt-screenTop pb-20">
-      <h1 className="font-display-bold text-screenTitle text-mc-neutral-900 mb-6">
+    <main className="min-h-screen bg-dialogue-bg px-screenX pt-screenTop pb-20">
+      <h1 className="font-display-bold text-screenTitle text-dialogue-text mb-6">
         Patient Dashboard
       </h1>
 
@@ -103,36 +103,36 @@ export default async function HomePage() {
       </div>
 
       {!todayLog ? (
-        <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-5 mb-6 text-center">
-          <p className="font-body text-mc-neutral-900 mb-4">You haven't logged your reading today.</p>
+        <div className="bg-dialogue-surface border border-dialogue-border rounded-card p-5 mb-6 text-center">
+          <p className="font-body text-dialogue-text mb-4">You haven't logged your reading today.</p>
           <Link
             href="/tracking"
-            className="inline-block bg-mc-primary-400 hover:bg-mc-primary-600 text-white font-cta text-cta rounded-button py-3 px-6"
+            className="inline-block bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-3 px-6"
           >
             Start Evening Check-in
           </Link>
         </div>
       ) : (
-        <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-5 mb-4">
-          <p className="font-body-bold text-cta text-mc-neutral-400 uppercase tracking-wide mb-3">
+        <div className="bg-dialogue-surface border border-dialogue-border rounded-card p-5 mb-4">
+          <p className="font-body-bold text-cta text-dialogue-textMuted uppercase tracking-wide mb-3">
             Today&apos;s entry
           </p>
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <p className="text-mc-neutral-400 text-xs font-body mb-0.5">Systolic</p>
-              <p className="font-display-bold text-sectionTitle text-mc-neutral-900">
+              <p className="text-dialogue-textMuted text-xs font-body mb-0.5">Systolic</p>
+              <p className="font-display-bold text-sectionTitle text-dialogue-text">
                 {todayLog.systolic}
               </p>
             </div>
             <div>
-              <p className="text-mc-neutral-400 text-xs font-body mb-0.5">Diastolic</p>
-              <p className="font-display-bold text-sectionTitle text-mc-neutral-900">
+              <p className="text-dialogue-textMuted text-xs font-body mb-0.5">Diastolic</p>
+              <p className="font-display-bold text-sectionTitle text-dialogue-text">
                 {todayLog.diastolic}
               </p>
             </div>
             <div>
-              <p className="text-mc-neutral-400 text-xs font-body mb-0.5">Medication</p>
-              <p className="font-display-bold text-sectionTitle text-mc-neutral-900">
+              <p className="text-dialogue-textMuted text-xs font-body mb-0.5">Medication</p>
+              <p className="font-display-bold text-sectionTitle text-dialogue-text">
                 {todayLog.adherence_taken ? '✓' : '✗'}
               </p>
             </div>
@@ -140,8 +140,8 @@ export default async function HomePage() {
         </div>
       )}
 
-      <div className="bg-mc-surface-white border border-mc-neutral-200 rounded-card p-5 mb-6">
-        <p className="font-body-bold text-cta text-mc-neutral-400 uppercase tracking-wide mb-3">
+      <div className="bg-dialogue-surface border border-dialogue-border rounded-card p-5 mb-6">
+        <p className="font-body-bold text-cta text-dialogue-textMuted uppercase tracking-wide mb-3">
           This week
         </p>
         <DataEntryTimeline logs={recentLogs} totalDays={7} />
@@ -149,7 +149,7 @@ export default async function HomePage() {
 
       <Link
         href="/progress"
-        className="block w-full text-center bg-mc-neutral-100 border border-mc-neutral-200 text-mc-neutral-900 font-cta text-cta rounded-button py-4 transition-opacity hover:opacity-80"
+        className="block w-full text-center bg-dialogue-chip border border-dialogue-border text-dialogue-text font-cta text-cta rounded-button py-4 transition-opacity hover:opacity-80"
       >
         View progress
       </Link>

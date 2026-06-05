@@ -83,7 +83,7 @@ export default function PostConsultationPanel({
         <Button
           onClick={handleExtend}
           disabled={submitting}
-          variant="outline"
+          variant="tinted"
           className="w-full rounded-button font-body text-sm normal-case tracking-normal disabled:opacity-50"
         >
           {submitting ? 'Saving...' : 'Complete and extend monitoring 7 more days'}

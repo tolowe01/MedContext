@@ -16,6 +16,8 @@ const buttonVariants = cva(
           'text-mc-neutral-600 hover:text-mc-neutral-900 hover:bg-mc-neutral-100',
         destructive:
           'bg-mc-danger-400 text-white hover:bg-mc-danger-600',
+        tinted:
+          'bg-mc-primary-50 border border-mc-primary-200 text-mc-primary-800 hover:bg-mc-primary-100 hover:text-mc-primary-900',
       },
       size: {
         default: 'h-12 px-6 py-3',

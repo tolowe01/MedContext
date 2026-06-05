@@ -4,7 +4,6 @@ import { Badge } from '@/components/ui/badge'
 import TrendSparkline from '@/components/pharmacist/TrendSparkline'
 import AISynthesisPanel from '@/components/pharmacist/AISynthesisPanel'
 import VerifiedReadingClientWrapper from './VerifiedReadingClientWrapper'
-import InterventionPanel from '@/components/pharmacist/InterventionPanel'
 import DecisionPanel from '@/components/pharmacist/DecisionPanel'
 import type {
   DailyLog,
@@ -168,7 +167,9 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
   }
 
   const age = getAge(patient.date_of_birth)
-  const fullName = `${profile.first_name} ${profile.last_name}`
+  const fullName = profile
+    ? `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || 'Unnamed Patient'
+    : 'Unknown Patient'
   const bq = patient.baseline_questionnaire ?? {}
 
   const allergies = bq.allergies
@@ -305,13 +306,6 @@ export default async function PatientPage({ params, searchParams }: PatientPageP
               latestPatientLog={latestPatientLog}
               initialVerifiedReading={latestVerified}
             />
-
-            {activeSubmission && (
-              <InterventionPanel
-                submissionId={activeSubmission.id}
-                currentStatus={activeSubmission.status}
-              />
-            )}
           </div>
         </div>
 

@@ -51,7 +51,9 @@ function PatientRow({
   const { submission, patient, logs, flags } = item
   const { profile } = patient
   const age = getAge(patient.date_of_birth)
-  const name = `${profile.first_name} ${profile.last_name}`
+  const name = profile
+    ? `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || 'Unnamed Patient'
+    : 'Unknown Patient'
   const submittedAgo = formatDistanceToNow(new Date(submission.submitted_at), { addSuffix: true })
 
   return (

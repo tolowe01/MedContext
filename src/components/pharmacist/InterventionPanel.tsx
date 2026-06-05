@@ -76,8 +76,8 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
         <Sheet>
           <SheetTrigger asChild>
             <Button
-              variant="outline"
-              className="w-full border-mc-neutral-200 text-mc-neutral-900 hover:bg-mc-surface-white font-body text-sm rounded-button"
+              variant="tinted"
+              className="w-full font-body text-sm rounded-button normal-case tracking-normal"
             >
               Approve — send positive message
             </Button>
@@ -120,8 +120,8 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
         <Sheet>
           <SheetTrigger asChild>
             <Button
-              variant="outline"
-              className="w-full border-mc-neutral-200 text-mc-neutral-900 hover:bg-mc-surface-white font-body text-sm rounded-button"
+              variant="tinted"
+              className="w-full font-body text-sm rounded-button normal-case tracking-normal"
             >
               Schedule phone call
             </Button>
@@ -164,8 +164,8 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
         <Sheet>
           <SheetTrigger asChild>
             <Button
-              variant="outline"
-              className="w-full border-mc-neutral-200 text-mc-neutral-900 hover:bg-mc-surface-white font-body text-sm rounded-button"
+              variant="tinted"
+              className="w-full font-body text-sm rounded-button normal-case tracking-normal"
             >
               Send clinical note
             </Button>
@@ -209,8 +209,8 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
         <Sheet>
           <SheetTrigger asChild>
             <Button
-              variant="outline"
-              className="w-full border-mc-neutral-200 text-mc-neutral-900 hover:bg-mc-surface-white font-body text-sm rounded-button"
+              variant="tinted"
+              className="w-full font-body text-sm rounded-button normal-case tracking-normal"
             >
               Invite to in-person appointment
             </Button>
