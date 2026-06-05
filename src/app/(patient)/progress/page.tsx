@@ -73,7 +73,7 @@ export default async function ProgressPage() {
       {canSubmit ? (
         <Link
           href="/submit"
-          className="block w-full text-center bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button py-4 transition-opacity"
+          className="block w-full text-center bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity"
         >
           Submit your week
         </Link>

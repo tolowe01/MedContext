@@ -28,7 +28,7 @@ const DISCLAIMER_CARDS: DisclaimerCard[] = [
   },
   {
     id: 'emergency_911',
-    icon: <PhoneCall className="w-6 h-6 text-bg-emergency" />,
+    icon: <PhoneCall className="w-6 h-6 text-emergency" />,
     title: 'In an emergency, call 911',
     body: 'If you experience chest pain, difficulty breathing, sudden severe headache, weakness on one side of your body, or any other emergency, call 911 immediately. Do not use this app in place of emergency services.',
   },
@@ -101,7 +101,7 @@ export default function DisclaimersPage() {
       <Button
         onClick={handleContinue}
         disabled={!allChecked}
-        className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button py-4 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
       >
         Continue
       </Button>

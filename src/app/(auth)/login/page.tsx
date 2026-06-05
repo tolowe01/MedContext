@@ -90,7 +90,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button py-3 mt-2 transition-opacity disabled:opacity-50"
+              className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-3 mt-2 transition-opacity disabled:opacity-50"
             >
               {isSubmitting ? 'Signing in…' : 'Sign in'}
             </Button>

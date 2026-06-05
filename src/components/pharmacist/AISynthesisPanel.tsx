@@ -83,7 +83,7 @@ export default function AISynthesisPanel({
         <Button
           onClick={handleSave}
           disabled={saving}
-          className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button disabled:opacity-50"
+          className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
         >
           {saving ? 'Saving…' : 'Save edits'}
         </Button>

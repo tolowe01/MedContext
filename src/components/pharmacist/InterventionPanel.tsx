@@ -102,7 +102,7 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
                 <Button
                   onClick={() => submit('approval', { message: approvalMessage })}
                   disabled={submitting}
-                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button disabled:opacity-50"
+                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
                 >
                   {submitting ? 'Sending…' : 'Send'}
                 </Button>
@@ -146,7 +146,7 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
                 <Button
                   onClick={() => submit('phone_call', { phone_time: phoneTime })}
                   disabled={submitting}
-                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button disabled:opacity-50"
+                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
                 >
                   {submitting ? 'Scheduling…' : 'Schedule'}
                 </Button>
@@ -191,7 +191,7 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
                 <Button
                   onClick={() => submit('clinical_note', { note_text: clinicalNote })}
                   disabled={submitting || !clinicalNote.trim()}
-                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button disabled:opacity-50"
+                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
                 >
                   {submitting ? 'Sending…' : 'Send note'}
                 </Button>
@@ -235,7 +235,7 @@ export default function InterventionPanel({ submissionId, currentStatus }: Inter
                 <Button
                   onClick={() => submit('in_person', { appointment_date: appointmentDate })}
                   disabled={submitting || !appointmentDate}
-                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button disabled:opacity-50"
+                  className="bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button disabled:opacity-50"
                 >
                   {submitting ? 'Sending…' : 'Send invite'}
                 </Button>

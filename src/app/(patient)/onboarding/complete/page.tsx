@@ -29,7 +29,7 @@ export default function OnboardingCompletePage() {
 
       <Button
         onClick={handleContinue}
-        className="w-full max-w-xs bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button py-4 transition-opacity"
+        className="w-full max-w-xs bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity"
       >
         Get started
       </Button>

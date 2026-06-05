@@ -142,7 +142,7 @@ export default function SubmitPage() {
       <Button
         onClick={handleSubmit}
         disabled={isSubmitting || logs.length === 0}
-        className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button py-4 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+        className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">

@@ -29,7 +29,7 @@ function getAge(dateOfBirth: string): number {
 
 const SEVERITY_CHIP_CLASSES: Record<string, string> = {
   high: 'bg-red-600 text-white text-xs px-2 py-0.5 rounded-chip font-body-bold',
-  medium: 'bg-dialogue-accent text-white text-xs px-2 py-0.5 rounded-chip font-body-bold',
+  medium: 'bg-dialogue-accent text-dialogue-bg text-xs px-2 py-0.5 rounded-chip font-body-bold',
   low: 'bg-dialogue-chip text-dialogue-textMuted text-xs px-2 py-0.5 rounded-chip font-body',
 }
 
@@ -48,7 +48,10 @@ function PatientRow({ item }: { item: SubmissionWithPatientSummary }) {
   const submittedAgo = formatDistanceToNow(new Date(submission.submitted_at), { addSuffix: true })
 
   return (
-    <Link href={`/patient/${patient.id}`}>
+    <Link
+      href={`/patient/${patient.id}`}
+      className="block rounded-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dialogue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dialogue-bg"
+    >
       <div className="bg-dialogue-surface rounded-card p-4 flex items-center gap-4 hover:bg-dialogue-border transition-colors cursor-pointer">
         <div className="flex-1 min-w-0">
           <p className="font-body-bold text-cta text-dialogue-text truncate">
@@ -80,7 +83,7 @@ export default function PatientTriageList({ flagged, stable }: PatientTriageList
         <div className="flex items-center gap-2 mb-3">
           <h2 className="font-display-semi text-sectionTitle text-dialogue-text">Flagged</h2>
           {flagged.length > 0 && (
-            <span className="bg-dialogue-accent text-white text-xs font-body-bold px-2 py-0.5 rounded-chip">
+            <span className="bg-dialogue-accent text-dialogue-bg text-xs font-body-bold px-2 py-0.5 rounded-chip">
               {flagged.length}
             </span>
           )}

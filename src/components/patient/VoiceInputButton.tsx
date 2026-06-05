@@ -92,9 +92,9 @@ export default function VoiceInputButton({ onTranscript, disabled = false }: Voi
       onClick={handleClick}
       disabled={disabled}
       aria-label={isRecording ? 'Stop recording' : 'Start voice input'}
-      className={`rounded-full p-3 border transition-all ${
+      className={`flex items-center justify-center shrink-0 min-h-[44px] min-w-[44px] rounded-full border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dialogue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dialogue-surface ${
         isRecording
-          ? 'border-bg-emergency bg-red-900/30 animate-pulse'
+          ? 'border-emergency bg-red-900/30 animate-pulse'
           : 'bg-dialogue-surface border-dialogue-border hover:border-dialogue-accent'
       } disabled:opacity-40 disabled:cursor-not-allowed`}
     >

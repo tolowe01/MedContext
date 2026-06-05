@@ -174,7 +174,7 @@ export default function ChatIntake({ patientId, logs = [], onComplete }: ChatInt
             <div
               className={`max-w-[80%] rounded-card px-4 py-3 font-body text-body leading-relaxed ${
                 msg.role === 'user'
-                  ? 'bg-dialogue-accent text-white'
+                  ? 'bg-dialogue-accent text-dialogue-bg'
                   : 'bg-dialogue-surface border border-dialogue-border text-dialogue-text'
               }`}
             >
@@ -224,7 +224,7 @@ export default function ChatIntake({ patientId, logs = [], onComplete }: ChatInt
             <Button
               onClick={handleConfirm}
               disabled={isConfirming}
-              className="flex-1 bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button py-3"
+              className="flex-1 bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-3"
             >
               {isConfirming ? 'Saving…' : 'Confirm'}
             </Button>
@@ -258,7 +258,8 @@ export default function ChatIntake({ patientId, logs = [], onComplete }: ChatInt
             type="button"
             onClick={() => sendMessage(input, 'text')}
             disabled={isLoading || !input.trim()}
-            className="rounded-full p-2 bg-dialogue-accent disabled:opacity-40 disabled:cursor-not-allowed transition-opacity hover:bg-dialogue-accent/90"
+            aria-label="Send message"
+            className="flex items-center justify-center shrink-0 min-h-[44px] min-w-[44px] rounded-full bg-dialogue-accent disabled:opacity-40 disabled:cursor-not-allowed transition-opacity hover:bg-dialogue-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-dialogue-accent focus-visible:ring-offset-2 focus-visible:ring-offset-dialogue-surface"
           >
             <Send className="w-4 h-4 text-white" />
           </button>

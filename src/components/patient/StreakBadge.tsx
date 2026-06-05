@@ -5,7 +5,7 @@ interface StreakBadgeProps {
 export default function StreakBadge({ streak }: StreakBadgeProps) {
   function getChipStyle(): string {
     if (streak >= 7) {
-      return 'bg-dialogue-accent text-white'
+      return 'bg-dialogue-accent text-dialogue-bg'
     }
     if (streak >= 3) {
       return 'bg-amber-500/20 text-amber-400 border border-amber-500/30'

@@ -88,7 +88,7 @@ export default function DynamicQuestionnaire({ onSubmit, isLoading = false }: Dy
       <Button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-white font-cta text-cta rounded-button py-4 mt-2 transition-opacity disabled:opacity-50"
+        className="w-full bg-dialogue-accent hover:bg-dialogue-accent/90 text-dialogue-bg font-cta text-cta rounded-button py-4 mt-2 transition-opacity disabled:opacity-50"
       >
         {isLoading ? 'Saving…' : 'Save and continue'}
       </Button>
