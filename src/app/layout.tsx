@@ -8,7 +8,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'MedContext',
+  title: 'MedX',
   description: 'Blood pressure tracking for pharmacist review',
 }
 

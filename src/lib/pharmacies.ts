@@ -17,9 +17,9 @@ export interface Pharmacy {
 }
 
 export const PHARMACIES: Pharmacy[] = [
-  { id: '00000000-0000-0000-0000-000000000001', name: 'MedContext Pharmacy — Montréal (Centre-ville)' },
-  { id: '00000000-0000-0000-0000-000000000002', name: 'MedContext Pharmacy — Québec (Sainte-Foy)' },
-  { id: '00000000-0000-0000-0000-000000000003', name: 'MedContext Pharmacy — Laval' },
+  { id: '00000000-0000-0000-0000-000000000001', name: 'MedX Pharmacy — Montréal (Centre-ville)' },
+  { id: '00000000-0000-0000-0000-000000000002', name: 'MedX Pharmacy — Québec (Sainte-Foy)' },
+  { id: '00000000-0000-0000-0000-000000000003', name: 'MedX Pharmacy — Laval' },
 ]
 
 export function isValidPharmacyId(id: string): boolean {

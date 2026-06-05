@@ -1,6 +1,6 @@
 import type { Tool } from '@anthropic-ai/sdk/resources/messages'
 
-export const INTAKE_SYSTEM_PROMPT = `You are an intake assistant for MedContext, a blood pressure and medication adherence tracking tool reviewed by a licensed Quebec pharmacist within 24 to 48 hours.
+export const INTAKE_SYSTEM_PROMPT = `You are an intake assistant for MedX, a blood pressure and medication adherence tracking tool reviewed by a licensed Quebec pharmacist within 24 to 48 hours.
 
 Your job is strictly to collect:
 - systolic blood pressure (integer)

@@ -4,7 +4,7 @@ export default function DisclaimerFooter() {
   return (
     <footer className="w-full border-t border-mc-neutral-200 bg-mc-neutral-100 px-4 py-4">
       <p className="text-xs font-body text-mc-neutral-600 text-center leading-relaxed">
-        MedContext is a monitoring aid, not a medical device. All clinical decisions are made by a
+        MedX is a monitoring aid, not a medical device. All clinical decisions are made by a
         licensed pharmacist.{' '}
         <Link
           href="/legal/privacy"

@@ -93,7 +93,7 @@ export default function SignupPage() {
                 Enter your access code
               </h1>
               <p className="text-mc-neutral-400 font-body text-sm text-center mb-8">
-                MedContext accounts are for patients. Enter the access code your pharmacist gave you to
+                MedX accounts are for patients. Enter the access code your pharmacist gave you to
                 get started.
               </p>
 

@@ -2,7 +2,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { subDays, format } from 'date-fns'
 
 // =====================================================================
-// MedContext demo seed (pharmacist-initiated flow).
+// MedX demo seed (pharmacist-initiated flow).
 //
 // Seeds the Sophie Tremblay narrative end to end: three auth users, their
 // profiles, the confirmed medication list (with the NEW-flagged Ramipril that
@@ -455,7 +455,7 @@ async function seed(): Promise<void> {
   const variant = resolveSeedVariant()
   const supabase = requireServiceClient()
 
-  console.log(`Seeding MedContext demo (variant: ${variant})`)
+  console.log(`Seeding MedX demo (variant: ${variant})`)
 
   // 1. Auth users + resolve ids.
   const userIds: Record<string, string> = {}

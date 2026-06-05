@@ -11,7 +11,7 @@ export default function PatientLayout({ children }: { children: React.ReactNode 
       <header className="sticky top-0 z-40 bg-mc-surface-white border-b border-mc-neutral-200">
         <div className="mx-auto w-full max-w-xl px-screenX py-2.5 flex items-center justify-between">
           <span className="font-display font-semibold text-sm text-mc-neutral-900 tracking-tight">
-            MedContext
+            MedX
           </span>
           <div className="flex items-center gap-2">
             <nav className="hidden md:flex items-center gap-1">

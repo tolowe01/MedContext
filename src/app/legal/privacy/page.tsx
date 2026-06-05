@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Privacy Policy — MedContext',
+  title: 'Privacy Policy — MedX',
 }
 
 const SECTIONS = [
@@ -19,7 +19,7 @@ const SECTIONS = [
   },
   {
     heading: 'Who sees your data',
-    body: 'Only your assigned licensed pharmacist and the MedContext platform team (for technical support) can access your records. Row-Level Security isolates your data so no other patient or pharmacy can read it. Your data is never sold, shared with insurers, or used for advertising.',
+    body: 'Only your assigned licensed pharmacist and the MedX platform team (for technical support) can access your records. Row-Level Security isolates your data so no other patient or pharmacy can read it. Your data is never sold, shared with insurers, or used for advertising.',
   },
   {
     heading: 'How long we keep it',
@@ -27,11 +27,11 @@ const SECTIONS = [
   },
   {
     heading: 'Your rights',
-    body: 'Under Law 25 you have the right to access your data, request corrections, withdraw consent, and request deletion. To exercise any of these rights, contact your pharmacist or email privacy@medcontext.ca.',
+    body: 'Under Law 25 you have the right to access your data, request corrections, withdraw consent, and request deletion. To exercise any of these rights, contact your pharmacist or email privacy@medx.ca.',
   },
   {
     heading: 'Not a medical device',
-    body: 'MedContext is an intake and tracking tool. It does not diagnose, treat, or make clinical decisions. All clinical decisions are made by a licensed Québec pharmacist. In an emergency, call 911.',
+    body: 'MedX is an intake and tracking tool. It does not diagnose, treat, or make clinical decisions. All clinical decisions are made by a licensed Québec pharmacist. In an emergency, call 911.',
   },
 ]
 

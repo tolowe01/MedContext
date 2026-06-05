@@ -42,7 +42,7 @@ function notifyStreak(streakDays: number) {
       streakDays >= 2
         ? `You've logged ${streakDays} days in a row. Great job!`
         : 'Thanks for checking in today. Great job!'
-    new Notification('MedContext', { body })
+    new Notification('MedX', { body })
   } catch {
     // Notifications are best-effort.
   }

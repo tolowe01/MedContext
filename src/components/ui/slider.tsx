@@ -14,7 +14,7 @@ export interface SliderProps {
 }
 
 /**
- * Lightweight range slider styled to the MedContext theme.
+ * Lightweight range slider styled to the MedX theme.
  * Uses a native <input type="range"> so it adds no dependency.
  */
 export function Slider({

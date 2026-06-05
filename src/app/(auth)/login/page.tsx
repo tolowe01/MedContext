@@ -98,7 +98,7 @@ export default function LoginPage() {
           </form>
 
           <p className="text-center text-sm text-mc-neutral-400 font-body mt-6">
-            New to MedContext?{' '}
+            New to MedX?{' '}
             <Link href="/signup" className="text-mc-primary-400 underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mc-primary-200 rounded">
               Create an account
             </Link>

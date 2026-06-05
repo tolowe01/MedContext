@@ -24,7 +24,7 @@ const DISCLAIMER_CARDS: DisclaimerCard[] = [
     id: 'tool_limitations',
     icon: <Info className="w-6 h-6 text-mc-warning-400" />,
     title: 'Limitations of this tool',
-    body: 'MedContext is a monitoring aid, not a medical device. Reading accuracy depends on your own device and technique. This app does not continuously monitor your health — it captures only what you submit. If you feel unwell, contact a healthcare provider directly.',
+    body: 'MedX is a monitoring aid, not a medical device. Reading accuracy depends on your own device and technique. This app does not continuously monitor your health — it captures only what you submit. If you feel unwell, contact a healthcare provider directly.',
   },
   {
     id: 'emergency_911',

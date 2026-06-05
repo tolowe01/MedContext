@@ -148,7 +148,7 @@ function ReviewContent() {
               clinical_note: 'Your pharmacist left a note.',
               in_person: 'Your pharmacist scheduled an appointment.',
             }
-            new Notification('MedContext', {
+            new Notification('MedX', {
               body: kindLabels[newIntervention.kind] ?? 'Your pharmacist responded.',
               icon: '/icon-192.png',
             })

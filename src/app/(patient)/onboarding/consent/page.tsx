@@ -12,7 +12,7 @@ const CONSENT_PARAGRAPHS = [
   },
   {
     heading: 'Who sees your data',
-    body: 'Only your assigned licensed pharmacist and the MedContext platform team (for technical support) can access your records. Your data is never sold, shared with insurers, or used for advertising.',
+    body: 'Only your assigned licensed pharmacist and the MedX platform team (for technical support) can access your records. Your data is never sold, shared with insurers, or used for advertising.',
   },
   {
     heading: 'How long we keep it',
@@ -20,7 +20,7 @@ const CONSENT_PARAGRAPHS = [
   },
   {
     heading: 'Your rights under Law 25 (Québec)',
-    body: 'Under Québec\'s Act respecting the protection of personal information in the private sector (Law 25), you have the right to access your data, request corrections, withdraw consent at any time, and request deletion. To exercise any of these rights, contact your pharmacist or email privacy@medcontext.ca.',
+    body: 'Under Québec\'s Act respecting the protection of personal information in the private sector (Law 25), you have the right to access your data, request corrections, withdraw consent at any time, and request deletion. To exercise any of these rights, contact your pharmacist or email privacy@medx.ca.',
   },
   {
     heading: 'Withdrawing consent',

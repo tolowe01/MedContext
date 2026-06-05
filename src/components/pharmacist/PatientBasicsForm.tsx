@@ -87,10 +87,10 @@ export default function PatientBasicsForm({ onComplete }: PatientBasicsFormProps
   function emailAccessCode() {
     if (!accessCode) return
     const origin = typeof window !== 'undefined' ? window.location.origin : ''
-    const subject = 'Your MedContext access code'
+    const subject = 'Your MedX access code'
     const body =
       `Hello ${form.first_name},\r\n\r\n` +
-      `Your pharmacist has set up MedContext so you can track your blood pressure from home.\r\n\r\n` +
+      `Your pharmacist has set up MedX so you can track your blood pressure from home.\r\n\r\n` +
       `Create your account: ${origin}/signup\r\n` +
       `Your access code: ${accessCode}\r\n\r\n` +
       `Enter this code when you sign up, then set your own email and password.\r\n`
